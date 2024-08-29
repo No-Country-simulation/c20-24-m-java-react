@@ -12,7 +12,7 @@ public interface RecipeService {
 
     List<RecipeDto> listRecipe();
 
-    RecipeDto updateRecipe(Long id, RecipeDto Recipe);
+    RecipeDto updateRecipe(Long id, RecipeDto RecipeUpDate);
 
     void deleteRecipe(Long id);
 

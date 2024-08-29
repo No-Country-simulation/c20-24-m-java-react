@@ -34,17 +34,28 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<RecipeDto> listRecipe() {
-        return null;
+        List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();
+        return RecipeMapper.entityListToDtoList(recipes);
     }
 
     @Override
-    public RecipeDto updateRecipe(Long id, RecipeDto Recipe) {
-        return null;
+    @Transactional
+    public RecipeDto updateRecipe(Long id, RecipeDto RecipeUpDate) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundExepcion("This Recipe Does Not Exist with that ID: " + id));
+        recipe.setTitle(RecipeUpDate.title());
+        recipe.setDescription(RecipeUpDate.description());
+        recipe.setIngredients(RecipeUpDate.ingredients());
+        recipe.setInstructions(RecipeUpDate.instructions());
+        recipe.setDateCreation(RecipeUpDate.dateCreation());
+        return RecipeMapper.entityToDto(recipeRepository.save(recipe));
     }
 
     @Override
+    @Transactional
     public void deleteRecipe(Long id) {
-
+        Recipe recipe = recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundExepcion("This Recipe Does Not Exist with that ID: " + id));
+        recipeRepository.delete(recipe);
     }
 }

@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "Recipes", description = "Manage all endpoints about Recipes")
 @RestController
 @RequestMapping("/recipes")
@@ -59,7 +61,7 @@ public class RecipeController {
                     }),
             @ApiResponse(responseCode = "403", description = "Forbidden access to this resource", content = {
                     @Content}),
-            @ApiResponse(responseCode = "404", description = "Recipe not found", content = {
+            @ApiResponse(responseCode = "404", description = "Recipe  not found", content = {
                     @Content}),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
                     @Content})
@@ -74,6 +76,72 @@ public class RecipeController {
         }
     }
 
+    @Operation(
+            summary = "List all recipes.",
+            description = "Retrieves a list of all recipes."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "recipes list successfully generated",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = RecipeDto.class))
+                    }),
+            @ApiResponse(responseCode = "403", description = "Forbidden access to this resource", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                    @Content})
+    })
+    @GetMapping("/list")
+    public ResponseEntity<List<RecipeDto>> listRecipes() {
+        List<RecipeDto> recipeDtoList = recipeService.listRecipe();
+        return ResponseEntity.ok(recipeDtoList);
+    }
 
+    @Operation(
+            summary = "Update a recipe.",
+            description = "Updates an existing recipe with the provided details."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "Recipe updated successfully",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = RecipeDto.class))
+                    }),
+            @ApiResponse(responseCode = "403", description = "Forbidden access to this resource", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "404", description = "Recipe not found", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                    @Content})
+    })
+    @PutMapping("/update/{id}")
+    public ResponseEntity<RecipeDto> updateRecipe(@PathVariable("id") Long id, @RequestBody RecipeDto updateRecipe) {
+        RecipeDto recipeDto = recipeService.updateRecipe(id, updateRecipe);
+        return ResponseEntity.ok(recipeDto);
+    }
+
+    @Operation(
+            summary = "Delete a recipe.",
+            description = "Deletes a recipe by its unique identifier."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "Recipe deleted successfully",
+                    content = {
+                            @Content}),
+            @ApiResponse(responseCode = "403", description = "Forbidden access to this resource", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "404", description = "Recipe not found", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                    @Content})
+    })
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteRecipe(@PathVariable("id") Long id) {
+        recipeService.deleteRecipe(id);
+        return ResponseEntity.ok("The Promotion was eliminated");
+    }
 
 }
