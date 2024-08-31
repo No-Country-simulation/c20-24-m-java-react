@@ -14,8 +14,8 @@ export default function Home() {
           <span className="text-black text-2xl font-bold m-1 text-center ">
             Descubre y comparte
           </span>
-           las mejores recetas caseras. !Únete a nuestra
-          comunidad y empieza a cocinar con nosotros!
+          las mejores recetas caseras. !Únete a nuestra comunidad y empieza a
+          cocinar con nosotros!
         </p>
       </div>
 
@@ -28,55 +28,55 @@ export default function Home() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-5 gap-4 justify-center items-center p-5 mx-ful">
-        <img
-          className="row-span-3 rounded-2xl "
-          src="https://media.gettyimages.com/id/1424826929/es/foto/close-up-of-chef-making-nigiri-sushi.jpg?s=612x612&w=gi&k=20&c=6BRjr0-uHDZR_yUwYn-2DF0dlK2kQrxR8Lq_SyYooBY= "
-        />
+        <div className="grid grid-cols-5 gap-2 justify-center items-center p-5   ">
+          <img
+            className="row-span-3 rounded-2xl"
+            src="/img/cards-4.svg "
+          />
 
-        <img
-          className="row-span-2 rounded-2xl"
-          src="https://media.gettyimages.com/id/1097842636/es/foto/cosecha-oto%C3%B1o.jpg?s=2048x2048&w=gi&k=20&c=Xdj5hPrLzeC0LVXW4ASjRxW1GZN2avMAAuEVdV-PaYk="
-        />
-        <img
-          className=" rounded-2xl"
-          src="https://media.gettyimages.com/id/1217807835/es/foto/esto-es-delicioso.jpg?s=2048x2048&w=gi&k=20&c=5HFpINtfKsV8M-_rS9GTrCRa69BJSo4Ozm44FO3wg2w="
-        />
+          <img
+            className="row-span-2 rounded-2xl"
+            src="/img/cards-5.svg"
+          />
+          <img
+            className=" rounded-2xl"
+            src="/img/cards-3.svg"
+          />
 
-        <img
-          className="row-span-2 rounded-2xl"
-          src="https://media.gettyimages.com/id/530067365/es/foto/usa-new-jersey-jersey-city-woman-choosing-between-pasta-and-salad.jpg?s=612x612&w=gi&k=20&c=YQlJ_mfUnXN8w4n6Tbz0g61OLOc3bXHDD1_WriWSgUA="
-        />
+          <img
+            className="row-span-2 rounded-2xl"
+            src="/img/cards-2.svg"
+          />
 
-        <img
-          className="row-span-3 rounded-2xl"
-          src="https://media.gettyimages.com/id/1241881284/es/foto/manos-de-cocinero-fotografiando-tacos-mexicanos.jpg?s=612x612&w=gi&k=20&c=S380x8WGYhO-a3pMUCoNa78ffbvCpUdfeYaP3nFtywM="
-        />
+          <img
+            className="row-span-3 rounded-2xl"
+            src="/img/cards-5.svg"
+          />
 
-        <img
-          className="row-span-3 rounded-2xl"
-          src="https://media.gettyimages.com/id/1385196919/es/foto/la-inflaci%C3%B3n-concepto.jpg?s=2048x2048&w=gi&k=20&c=orCWSaB8JyI-dyKKsHEspa0OfdJLbD_fuQ9uI4FKkns="
-        />
+          <img
+            className="row-span-4 rounded-2xl"
+            src="/img/cards-4.svg"
+          />
 
-        <img
-          className="row-span-4 rounded-2xl "
-          src="https://media.gettyimages.com/id/892674198/es/foto/preparar-su-plato-favorito.jpg?s=612x612&w=gi&k=20&c=fR7IKUWJ0vep2muNt6hDFxPV3S0WFeuqWBWwXDgzwXY="
-        />
+          <img
+            className="row-span-4 rounded-2xl "
+            src="/img/cards-2.svg"
+          />
 
-        <img
-          className="row-span-5 rounded-2xl"
-          src="https://media.gettyimages.com/id/1221325418/es/foto/ordering-food-online-at-home-with-smartphone.jpg?s=612x612&w=gi&k=20&c=iTAeGfWXRUJpkhoQHb0tUTtnbrNOr3aI2Y8aC4TUPEo="
-        />
+          <img
+            className="row-span-5 rounded-2xl"
+            src="/img/cards-3.svg"
+          />
 
-        <img
-          className="row-span-7  rounded-2xl"
-          src="https://media.gettyimages.com/id/1314632869/es/foto/primer-plano-de-la-mujer-empacando-comida-para-el-parto.jpg?s=612x612&w=gi&k=20&c=Esryh8o3c5fYlPxJQNAtRc_CbGugfm_gNiRbdyLxJsE="
-        />
+          <img
+            className="row-span-7  rounded-2xl"
+            src="/img/cards-1.svg"
+          />
 
-        <img
-          className="row-span-7 rounded-2xl   "
-          src="https://media.gettyimages.com/id/1314632869/es/foto/primer-plano-de-la-mujer-empacando-comida-para-el-parto.jpg?s=612x612&w=gi&k=20&c=Esryh8o3c5fYlPxJQNAtRc_CbGugfm_gNiRbdyLxJsE="
-        />
+          <img
+            className="row-span-7 rounded-2xl   "
+            src="/img/cards-5.svg" 
+            />
       </div>
     </main>
   );
