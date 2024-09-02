@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import Login from './Login';
 import Register from './Register';
 
@@ -10,7 +8,7 @@ const ModalRegisterLoginMainStart = ({ isVisible, onClose, typeModal }) => {
     <div
       id="modal_main"
       onClick={onClose}
-      className={`fixed inset-0 flex justify-center items-center transition-colors ${isVisible.modal ? 'visible bg-black/20 ' : 'invisible'}  `}
+      className={`fixed z-10  inset-0 flex justify-center items-center transition-colors  ${isVisible.modal ? 'visible bg-black/55  inset-0  backdrop-blur-md  ' : 'invisible'}  `}
     >
       <div
         id="modal_container"
