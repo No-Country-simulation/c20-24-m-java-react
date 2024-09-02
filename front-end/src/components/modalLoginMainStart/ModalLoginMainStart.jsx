@@ -1,9 +1,8 @@
 import Image from "next/image";
 
-const ModalLoginMainStart = ({ isVisible, onClose }) => {
-  const p = "px-28 py-32";
-
+const ModalRegisterMainStart = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
+
   return (
     <div
       id="modal_main"
@@ -68,7 +67,7 @@ const ModalLoginMainStart = ({ isVisible, onClose }) => {
               </div>
 
               <button class=" my-5  w-[319px] h-[48px] bg-[#F27B13] hover:bg-orange-300 hover:shadow-xl text-black font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded-lg">
-                Registrarse
+                Iniciar sesion
               </button>
             </form>
             <p className="mb-4 mt-2">o registrate con </p>
@@ -110,4 +109,4 @@ const ModalLoginMainStart = ({ isVisible, onClose }) => {
   );
 };
 
-export default ModalLoginMainStart;
+export default ModalRegisterMainStart;
