@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 const ModalRegisterMainStart = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
@@ -6,7 +6,7 @@ const ModalRegisterMainStart = ({ isVisible, onClose }) => {
   return (
     <div
       id="modal_main"
-      className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex"
+      className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex z-10"
     >
       <div
         id="modal_container"
@@ -80,7 +80,7 @@ const ModalRegisterMainStart = ({ isVisible, onClose }) => {
             </button>
 
             <p className="mt-12">
-              ¿Ya tenes cuenta?{" "}
+              ¿Ya tenes cuenta?{' '}
               <a href="" className="text-[#F27B13]">
                 Iniciar sesión
               </a>
@@ -90,7 +90,7 @@ const ModalRegisterMainStart = ({ isVisible, onClose }) => {
           <div className="text-white bg-[#160852] w-full px-14 py-16 ">
             <div></div>
             <h2 className="text-2xl font-bold text-center">
-              ¡Únete a nuestra comunidad de apasionados por la cocina!{" "}
+              ¡Únete a nuestra comunidad de apasionados por la cocina!{' '}
             </h2>
             <p className="text-center mt-4">¡Ser parte es fácil y gratuito! </p>
             <div className="flex  flex-col items-center justify-between ">
