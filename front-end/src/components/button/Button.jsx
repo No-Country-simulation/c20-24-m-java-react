@@ -1,9 +1,12 @@
-const Button = ({ className, children }) => {
-    return (
-        <>
-            <button className={className}>{children}</button>
-        </>
-    );
+'use client';
+const Button = ({ className, children, typeBotton, stateModal }) => {
+  return (
+    <>
+      <button id={typeBotton} onClick={stateModal} className={className}>
+        {children}
+      </button>
+    </>
+  );
 };
 
 export default Button;
