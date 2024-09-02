@@ -3,7 +3,7 @@ import Button from '@/components/button/Button';
 import HeaderLogo from '@/components/headerLogo/HeaderLogo';
 import ImgMainStar from '@/components/imgMainStar/ImgMainStar';
 import MainStart from '@/components/mainStart/MainStart';
-import ModalRegisterMainStart from '@/components/modalLoginMainStart/ModalRegisterMainStart';
+import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
 
 import Image from 'next/image';
 import { useState } from 'react';
@@ -41,20 +41,24 @@ export default function Home() {
 
       <div className="flex justify-center items-center text-center space-x-10 mr-auto p-10 ">
         <Button
-          handleOpenModal={handleOpenModal}
+          stateModal={handleOpenModal}
           typeBotton={'register'}
           className="top-2 w-40 h-14  bg-lime-600 rounded-xl hover:bg-lime-800 md:w-52 md:h-10 sm:w-40 "
         >
-          <p className="text-black">Registrarse</p>
+          <p id="register" className="text-black">
+            Registrarse
+          </p>
         </Button>
         <Button
-          handleOpenModal={handleOpenModal}
+          stateModal={handleOpenModal}
           typeBotton={'login'}
           className="w-40 h-14 bg-violet-950 rounded-xl hover:bg-lime-800 md:w-52 md:h-10 sm:w-40"
         >
-          <p className="text-white">Inicio Sesion</p>
+          <p id="login" className="text-white">
+            Inicio Sesion
+          </p>
         </Button>
-        <ModalRegisterMainStart
+        <ModalRegisterLoginMainStart
           isVisible={isModalVisible}
           onClose={handleCloseModal}
           typeModal={handleOpenModal}

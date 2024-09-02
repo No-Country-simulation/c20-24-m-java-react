@@ -1,7 +1,10 @@
 'use client';
 
+import Button from '@/components/button/Button';
+import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
+
 // import ModalLoginMainStart from "@/components/modalLoginMainStart/ModalLoginMainStart";
-import ModalRegisterMainStart from '@/components/modalLoginMainStart/ModalRegisterMainStart';
+
 import { useState } from 'react';
 
 export default function Prueba() {
@@ -16,6 +19,7 @@ export default function Prueba() {
     const id = target.id;
 
     setIsModalVisible({ ...isModalVisible, modal: true, typeModal: id });
+    console.log(isModalVisible);
   };
 
   const handleCloseModal = () => {
@@ -38,7 +42,17 @@ export default function Prueba() {
       >
         Registro
       </button>
-      <ModalRegisterMainStart
+      <Button
+        id="register"
+        stateModal={handleOpenModal}
+        typeBotton={'register'}
+        className="top-2 w-40 h-14  bg-lime-600 rounded-xl hover:bg-lime-800 md:w-52 md:h-10 sm:w-40 "
+      >
+        <p id="register" className="text-black">
+          Registrarse
+        </p>
+      </Button>
+      <ModalRegisterLoginMainStart
         isVisible={isModalVisible}
         onClose={handleCloseModal}
         typeModal={handleOpenModal}

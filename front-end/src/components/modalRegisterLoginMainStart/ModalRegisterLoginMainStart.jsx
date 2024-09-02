@@ -1,8 +1,9 @@
 import Image from 'next/image';
-import Re from './Re';
-import Lo from './Lo';
 
-const ModalRegisterMainStart = ({ isVisible, onClose, typeModal }) => {
+import Login from './Login';
+import Register from './Register';
+
+const ModalRegisterLoginMainStart = ({ isVisible, onClose, typeModal }) => {
   // if (!isVisible.modal) return null;
   // console.log(isVisible);
   return (
@@ -18,9 +19,9 @@ const ModalRegisterMainStart = ({ isVisible, onClose, typeModal }) => {
       >
         <div className={`flex`}>
           {isVisible.typeModal === 'login' ? (
-            <Lo onClose={onClose} typeModal={typeModal} />
+            <Login onClose={onClose} typeModal={typeModal} />
           ) : isVisible.typeModal === 'register' ? (
-            <Re onClose={onClose} typeModal={typeModal} />
+            <Register onClose={onClose} typeModal={typeModal} />
           ) : null}
         </div>
       </div>
@@ -28,4 +29,4 @@ const ModalRegisterMainStart = ({ isVisible, onClose, typeModal }) => {
   );
 };
 
-export default ModalRegisterMainStart;
+export default ModalRegisterLoginMainStart;

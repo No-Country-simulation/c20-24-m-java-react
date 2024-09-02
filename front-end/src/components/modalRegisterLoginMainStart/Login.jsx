@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { registerFormDataInputs } from './helpers/registerFormDataInputs';
 
-const Lo = ({ onClose, typeModal }) => {
+const Login = ({ onClose, typeModal }) => {
   const initialStateDataInput = {
     name: '',
     email: '',
@@ -122,4 +122,4 @@ const Lo = ({ onClose, typeModal }) => {
   );
 };
 
-export default Lo;
+export default Login;

@@ -1,7 +1,8 @@
-const Button = ({ className, children, typeBotton, handleOpenModal }) => {
+'use client';
+const Button = ({ className, children, typeBotton, stateModal }) => {
   return (
     <>
-      <button id={typeBotton} onClick={handleOpenModal} className={className}>
+      <button id={typeBotton} onClick={stateModal} className={className}>
         {children}
       </button>
     </>

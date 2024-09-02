@@ -13,7 +13,7 @@ const validateRegister = ({ name, email, password }) => {
     // confirmPassword: '',
   };
   if (!name) errors.name = 'El nombre es requerido';
-  else if (name.trim().length < 2 || name.trim().length > 30) {
+  else if (name.trim().length < 1 || name.trim().length > 30) {
     errors.name = 'El nombre debe tener entre 2 y 30 caracteres';
   } else if (!nameRegExp.test(name)) {
     errors.name = 'Este campo no acepta caracteres especiales.';

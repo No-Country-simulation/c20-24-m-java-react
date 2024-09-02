@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { registerFormDataInputs } from './helpers/registerFormDataInputs';
 import validateRegister from './helpers/validateRegister';
 
-const Re = ({ onClose, typeModal }) => {
+const Register = ({ onClose, typeModal }) => {
   const initialStateDataInput = {
     name: '',
     email: '',
@@ -64,7 +64,12 @@ const Re = ({ onClose, typeModal }) => {
 
           <button
             type="submit"
-            class={` my-5  w-[319px] h-[48px] bg-[#F27B13] hover:bg-orange-300 hover:shadow-xl text-black font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded-lg ${errorDataInputs.name && errorDataInputs.email && errorDataInputs.password ? 'opacity-50 cursor-not-allowed' : ''}`}
+            class={` my-5  w-[319px] h-[48px] bg-[#F27B13] hover:bg-orange-300 hover:shadow-xl text-black font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded-lg ${
+              userDataInputs.email.length === 0 ||
+              Object.keys(errorDataInputs).some((e) => errorDataInputs[e])
+                ? 'opacity-50 cursor-not-allowed'
+                : ''
+            }`}
           >
             Registrarse
           </button>
@@ -130,4 +135,4 @@ const Re = ({ onClose, typeModal }) => {
   );
 };
 
-export default Re;
+export default Register;
