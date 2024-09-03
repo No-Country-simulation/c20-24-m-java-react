@@ -1,11 +1,9 @@
 'use client';
 import Button from '@/components/button/Button';
 import HeaderLogo from '@/components/headerLogo/HeaderLogo';
-import ImgMainStar from '@/components/imgMainStar/ImgMainStar';
 import MainStart from '@/components/mainStart/MainStart';
 import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
 
-import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Home() {
@@ -39,7 +37,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="flex justify-center items-center text-center space-x-10 mr-auto p-10 ">
+      <div className="flex justify-center items-center text-center mr-auto p-10 gap-10 ">
         <Button
           stateModal={handleOpenModal}
           typeBotton={'register'}

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { registerFormDataInputs } from './helpers/registerFormDataInputs';
 import validateRegister from './helpers/validateRegister';
@@ -16,7 +15,7 @@ const Register = ({ onClose, typeModal }) => {
   };
   const [userDataInputs, setUserDataInputs] = useState(initialStateDataInput);
   const [errorDataInputs, setErrorDataInputs] = useState(initialStateDataInput);
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
