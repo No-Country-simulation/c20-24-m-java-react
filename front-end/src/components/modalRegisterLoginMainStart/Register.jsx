@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { registerFormDataInputs } from './helpers/registerFormDataInputs';
 import validateRegister from './helpers/validateRegister';
 import axios from 'axios';
+import { X } from 'react-feather';
+import { useRouter } from 'next/navigation';
 
 const REGISTER_USER_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -15,7 +17,7 @@ const Register = ({ onClose, typeModal }) => {
   };
   const [userDataInputs, setUserDataInputs] = useState(initialStateDataInput);
   const [errorDataInputs, setErrorDataInputs] = useState(initialStateDataInput);
-  // const router = useRouter();
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -56,39 +58,25 @@ const Register = ({ onClose, typeModal }) => {
           onClick={onClose}
           className="absolute xl:hidden top-5 right-5 p-1 rounded-lg text-gray-400  hover:bg-blue-900 hover:text-[#160852]"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-x"
-          >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+          <X />
         </button>
         <form onSubmit={handleSubmit}>
           {registerFormDataInputs.map(({ name, type, placeholder }) => {
             return (
-              <div key={name} class="relative z-0  mb-6 group ">
+              <div key={name} className="relative z-0  mb-6 group ">
                 <input
                   id={name}
                   type={type}
                   name={name}
                   value={userDataInputs[name]}
                   className={`block px-2 h-[48px]  text-black py-2.5  w-[319px]
-                  text-sm  bg-transparent border-2  border-gray-300 appearance-none  dark:border-gray-600  focus:outline-none focus:ring-0 focus:border-green-600 peer rounded-lg ${errorDataInputs[name] ? 'focus:border-red-600' : ''}`}
+                  text-sm  bg-transparent border-2  border-gray-300 appearance-none  dark:border-gray-600  focus:outline-none focus:ring-0  peer rounded-lg ${errorDataInputs[name] ? 'focus:border-red-600 dark:border-red-600' : 'focus:border-green-600'}`}
                   placeholder=" "
                   onChange={handleChange}
                 />
                 <label
-                  for="floating_email"
-                  class={`peer-focus:text-sm  absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-[14px]  origin-[0] peer-focus:start-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 bg-white left-3 px-1 pointer-events-none ${errorDataInputs[name] ? 'peer-focus:text-red-600 peer-focus:dark:text-red-600' : ''}`}
+                  htmlFor="floating_email"
+                  className={`peer-focus:text-sm  absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-[14px]  origin-[0] peer-focus:start-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 bg-white left-3 px-1 pointer-events-none ${errorDataInputs[name] ? 'peer-focus:text-red-600 peer-focus:dark:text-red-600' : ''}`}
                 >
                   {placeholder}
                 </label>
@@ -103,10 +91,14 @@ const Register = ({ onClose, typeModal }) => {
 
           <button
             type="submit"
-            class={` my-5  w-[319px] h-[48px] bg-[#F27B13] hover:bg-orange-300 hover:shadow-xl text-black font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded-lg ${
+            disabled={
               userDataInputs.email.length === 0 ||
               Object.keys(errorDataInputs).some((e) => errorDataInputs[e])
-                ? 'opacity-50 cursor-not-allowed'
+            }
+            className={` my-5  w-[319px] h-[48px] bg-[#F27B13] hover:bg-orange-300 hover:shadow-xl text-black font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded-lg ${
+              userDataInputs.email.length === 0 ||
+              Object.keys(errorDataInputs).some((e) => errorDataInputs[e])
+                ? 'opacity-50 cursor-not-allowed disabled'
                 : ''
             }`}
           >
@@ -117,7 +109,7 @@ const Register = ({ onClose, typeModal }) => {
         <button
           type="button"
           onClick={onClose}
-          class="   w-[319px] h-[48px] bg-slate-50 hover:bg-[#F27B13] shadow-xl hover:shadow-none text-black font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded-lg"
+          className="   w-[319px] h-[48px] bg-slate-50 hover:bg-[#F27B13] shadow-xl hover:shadow-none text-black font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded-lg"
         >
           Registrarse con google
         </button>
@@ -140,21 +132,7 @@ const Register = ({ onClose, typeModal }) => {
           onClick={onClose}
           className="absolute  top-5 right-5 p-1 rounded-lg text-gray-400  hover:bg-blue-900 hover:text-[#160852]"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-x"
-          >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+          <X />
         </button>
         <h2 className="text-2xl font-bold text-center">
           ¡Únete a nuestra comunidad de apasionados por la cocina!{' '}
