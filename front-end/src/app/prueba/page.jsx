@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '@/components/button/Button';
+// import Button from '@/components/button/Button';
 import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
 
 // import ModalLoginMainStart from "@/components/modalLoginMainStart/ModalLoginMainStart";
@@ -42,7 +42,7 @@ export default function Prueba() {
       >
         Registro
       </button>
-      <Button
+      {/* <Button
         id="register"
         stateModal={handleOpenModal}
         typeBotton={'register'}
@@ -51,7 +51,8 @@ export default function Prueba() {
         <p id="register" className="text-black">
           Registrarse
         </p>
-      </Button>
+      </Button> */}
+
       <ModalRegisterLoginMainStart
         isVisible={isModalVisible}
         onClose={handleCloseModal}

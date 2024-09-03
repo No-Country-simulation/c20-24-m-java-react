@@ -11,15 +11,17 @@ const validateRegister = ({ name, email, password }) => {
     password: '',
     // confirmPassword: '',
   };
-  if (!name) errors.name = 'El nombre es requerido';
-  else if (name.trim().length < 1 || name.trim().length > 30) {
+  if (!name) errors.name = ' ';
+  if (name.trim().length < 1 || name.trim().length > 30) {
     errors.name = 'El nombre debe tener entre 2 y 30 caracteres';
   } else if (!nameRegExp.test(name)) {
     errors.name = 'Este campo no acepta caracteres especiales.';
-  } else if (!email) errors.email = 'Ingresa tu correo electrónico.';
+  }
+  if (!email) errors.email = ' ';
   else if (!emailRegExp.test(email)) {
     errors.email = 'Correo electrónico invalido';
-  } else if (!password) errors.password = 'Debes ingresar una contraseña.';
+  }
+  if (!password) errors.password = ' ';
   else if (!passwordRegExp.test(password))
     errors.password =
       'Almenos: una mayúscula, una minúscula, un carácter especial y un número.';
