@@ -1,8 +1,7 @@
 const emailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const userRegExp = /^[a-zA-Z0-9]+$/;
 const nameRegExp = /^[a-zA-Z0-9 ]+$/;
-const passwordRegExp =
-  /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W)(?!.*\s).{8,15}$/;
+const passwordRegExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W)(?!.*\s).{8,15}$/;
 const onlypositivenumbers = /^[0-9]+$/;
 
 const validateRegister = ({ name, email, password }) => {

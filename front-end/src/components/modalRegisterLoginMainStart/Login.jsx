@@ -28,7 +28,32 @@ const Login = ({ onClose, typeModal }) => {
   };
   return (
     <>
-      <div className="px-14 py-20 bg-white flex w-4/5 flex-col  items-center  ">
+      <div className="w-full px-14 py-20  flex xl:w-4/5 flex-col  items-center  ">
+        <div className="xl:hidden absolute top-[1.6rem] ">
+          <h2 className="text-[16px] w-[15rem]  font-bold text-center">
+            ¡Qué alegría verte de nuevo!{' '}
+          </h2>
+        </div>
+        <button
+          onClick={onClose}
+          className="absolute xl:hidden top-5 right-5 p-1 rounded-lg text-gray-400  hover:bg-blue-900 hover:text-[#160852]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-x"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
         <form action="" className=" ">
           {registerFormDataInputs
             .filter((input) => input.name !== 'name')
@@ -80,7 +105,7 @@ const Login = ({ onClose, typeModal }) => {
         </p>
       </div>
 
-      <div className="text-white bg-[#160852] w-full px-14 py-16 ">
+      <div className="hidden text-white  w-full  px-14 py-16 xl:bg-[#160852] xl:block">
         <button
           onClick={onClose}
           className="absolute top-5 right-5 p-1 rounded-lg text-gray-400  hover:bg-blue-900 hover:text-[#160852]"
@@ -105,8 +130,8 @@ const Login = ({ onClose, typeModal }) => {
           ¡Qué alegría verte de nuevo!{' '}
         </h2>
         <p className="text-center mt-4">
-          Inicia sesión para continuar explorando deliciosas recetas y
-          compartiendo tus propias creaciones.{' '}
+          Inicia sesión para continuar explorando deliciosas recetas y compartiendo
+          tus propias creaciones.{' '}
         </p>
         <div className="flex  flex-col items-center justify-between ">
           <Image

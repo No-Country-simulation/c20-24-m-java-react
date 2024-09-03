@@ -32,8 +32,8 @@ export default function Home() {
           <span className="text-black lg:text-2xl font-bold m-1 text-center ">
             Descubre y comparte
           </span>
-          las mejores recetas caseras. !Únete a nuestra comunidad y empieza a
-          cocinar con nosotros!
+          las mejores recetas caseras. !Únete a nuestra comunidad y empieza a cocinar
+          con nosotros!
         </p>
       </div>
 
@@ -56,13 +56,12 @@ export default function Home() {
             Inicio Sesion
           </p>
         </Button>
-        <ModalRegisterLoginMainStart
-          isVisible={isModalVisible}
-          onClose={handleCloseModal}
-          typeModal={handleOpenModal}
-        />
       </div>
-
+      <ModalRegisterLoginMainStart
+        isVisible={isModalVisible}
+        onClose={handleCloseModal}
+        typeModal={handleOpenModal}
+      />
       <div className=" flex justify-center h-auto w-[100%] ">
         <div className=" w-[100%] md:sticky  md:grid md:grid-cols-5  md:gap-x-5 md:gap-y-3 md:justify-center md:items-center md:mx-1 md:m-auto md:px-2  lg:gap-x-15 lg:gap-y-5 md:p-2   ">
           <img
