@@ -1,0 +1,11 @@
+com\example\demo\controller\RecipeController.class
+com\example\demo\DemoApplication.class
+com\example\demo\repository\RecipeRepository.class
+com\example\demo\model\Recipe.class
+com\example\demo\mapper\RecipeMapper.class
+com\example\demo\service\RecipeService.class
+com\example\demo\exception\RecipeNotFoundExepcion.class
+com\example\demo\security\SecurityConfig.class
+com\example\demo\model\Recipe$RecipeBuilder.class
+com\example\demo\service\Imp\RecipeServiceImp.class
+com\example\demo\dto\RecipeDto.class
