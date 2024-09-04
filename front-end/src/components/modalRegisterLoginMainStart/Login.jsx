@@ -6,6 +6,8 @@ import axios from 'axios';
 
 import { X } from 'react-feather';
 
+const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const Login = ({ onClose, typeModal }) => {
   const initialStateDataInput = {
     name: '',
@@ -28,9 +30,16 @@ const Login = ({ onClose, typeModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.get('https://rickandmortyapi.com/api/character/5').then((res) => {
-      console.log(res.data);
-    });
+    axios
+      .post(`${BACK_API_URL}/auth/login`, userDataInputs)
+      .then((data) => {
+        data;
+      })
+      .then((data) => {
+        router.push('/inicio');
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <>
