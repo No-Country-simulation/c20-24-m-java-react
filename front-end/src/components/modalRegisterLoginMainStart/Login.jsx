@@ -26,13 +26,23 @@ const Login = ({ onClose, typeModal }) => {
       ...userDataInputs,
       [name]: value,
     });
+    // console.log(userDataInputs);
   };
 
   const handleSubmit = (e) => {
+    // console.log(userDataInputs);
     e.preventDefault();
+    console.log(userDataInputs);
+    const data = {
+      username: userDataInputs.name,
+      email: userDataInputs.name,
+      password: userDataInputs.password,
+    };
+    console.log(data);
+    console.log(data, 'data');
     axios
-      .post(`${BACK_API_URL}/auth/login`, userDataInputs)
-      .then((data) => {
+      .post(`${BACK_API_URL}/auth/login`, data)
+      .then(({ data }) => {
         data;
       })
       .then((data) => {
@@ -55,9 +65,9 @@ const Login = ({ onClose, typeModal }) => {
         >
           <X />
         </button>
-        <form onSubmit={handleSubmit} action="" className=" ">
+        <form onSubmit={handleSubmit}>
           {registerFormDataInputs
-            .filter((input) => input.name !== 'name')
+            .filter((input) => input.name !== 'email')
             .map(({ name, type, placeholder }) => {
               return (
                 <div key={name} className="relative z-0  mb-6 group ">
