@@ -21,6 +21,7 @@ module.exports = {
     },
     fontFamily: {
       abril: ['Abril Fatface'],
+      hanken: ['Hanken Grotesk'],
     },
   },
   plugins: [],

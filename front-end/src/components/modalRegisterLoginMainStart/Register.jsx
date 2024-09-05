@@ -29,12 +29,12 @@ const Register = ({ onClose, typeModal }) => {
     });
 
     setErrorDataInputs(validateRegister({ ...userDataInputs, [name]: value }));
-    console.log(errorDataInputs);
+    // console.log(errorDataInputs);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userDataInputs);
+    // console.log(userDataInputs);
     const data = {
       username: userDataInputs.name,
       email: userDataInputs.email,
