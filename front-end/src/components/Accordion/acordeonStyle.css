@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.accordion_heading .container {
+  @apply flex  items-center px-5 py-3 cursor-pointer hover:bg-slate-50;
+}
+
+.accordion_heading .container p {
+  @apply font-semibold;
+}
+
+.content_container {
+  @apply overflow-hidden  transition-all duration-1000 ease-[cubic-bezier(0.87,2,1.13,1)];
+}
+
+.accordion_content.open .content_container {
+  /* @apply h-[300px] opacity-[1] bg-black; */
+  @apply max-h-fit py-3;
+}
+
+.accordion_content.close .content_container {
+  @apply max-h-0;
+}
+
+.content_container {
+  @apply px-5 ml-3;
+}
+
+/*  */
+/* .acor_content {
+  @apply px-5 ml-3 overflow-hidden;
+}
+
+.acor_item.close .acor_content {
+  @apply max-h-0;
+}
+
+.acor_item.open .acor_content {
+  @apply max-h-fit py-3;
+} */
