@@ -4,7 +4,7 @@
 import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
 
 // import ModalLoginMainStart from "@/components/modalLoginMainStart/ModalLoginMainStart";
-
+import { Input } from '@material-tailwind/react';
 import { useState } from 'react';
 
 export default function Prueba() {
@@ -52,7 +52,11 @@ export default function Prueba() {
           Registrarse
         </p>
       </Button> */}
-
+      <div className="flex w-72 flex-col gap-6">
+        <Input variant="static" label="Static" placeholder="Static" />
+        <Input variant="standard" label="Standard" placeholder="Standard" />
+        <Input variant="outlined" label="Outlined" placeholder="Outlined" />
+      </div>
       <ModalRegisterLoginMainStart
         isVisible={isModalVisible}
         onClose={handleCloseModal}

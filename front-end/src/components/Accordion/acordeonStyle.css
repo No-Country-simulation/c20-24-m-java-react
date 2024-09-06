@@ -3,28 +3,51 @@
 @tailwind utilities;
 
 .accordion_heading .container {
-  @apply flex  items-center px-5 py-3 cursor-pointer hover:bg-slate-50;
+  /* @apply flex  items-center px-5 py-3 cursor-pointer hover:bg-slate-50; */
+  display: flex;
+  align-items: center;
+  padding-left: 1.25rem /* 20px */;
+  padding-right: 1.25rem /* 20px */;
+  padding-top: 0.75rem /* 12px */;
+  padding-bottom: 0.75rem /* 12px */;
+  cursor: pointer;
 }
 
+.accordion_heading .container:hover {
+  background-color: #f5f5f5;
+}
 .accordion_heading .container p {
-  @apply font-semibold;
+  /* @apply font-semibold; */
+  font-weight: 600;
 }
 
 .content_container {
-  @apply overflow-hidden  transition-all duration-1000 ease-[cubic-bezier(0.87,2,1.13,1)];
+  /* @apply overflow-hidden  transition-all duration-1000 ease-[cubic-bezier(0.87,2,1.13,1)]; */
+  overflow: hidden;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 1000ms;
+  transition-timing-function: cubic-bezier(0.87, 2, 1.13, 1);
 }
 
 .accordion_content.open .content_container {
-  /* @apply h-[300px] opacity-[1] bg-black; */
-  @apply max-h-fit py-3;
+  /* @apply max-h-fit py-3; */
+  max-height: fit-content;
+  padding-top: 0.75rem /* 12px */;
+  padding-bottom: 0.75rem /* 12px */;
 }
 
 .accordion_content.close .content_container {
-  @apply max-h-0;
+  /* @apply max-h-0; */
+  max-height: 0px;
 }
 
 .content_container {
-  @apply px-5 ml-3;
+  /* @apply px-5 ml-3; */
+  padding-left: 1.25rem /* 20px */;
+  padding-right: 1.25rem /* 20px */;
+  margin-left: 0.75rem /* 12px */;
 }
 
 /*  */
