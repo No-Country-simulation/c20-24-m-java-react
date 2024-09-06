@@ -3,8 +3,10 @@ import { Bell, ChevronDown, Home, Twitter } from 'react-feather';
 import './acordeonStyle.css';
 import { BeakerIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
+import Accordion from '../Accordion/Accordion';
+import Image from 'next/image';
 const SideMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [activeAccordion, setActiveAccordion] = useState('');
   const handleOpenModal = (event) => {
     const target = event.currentTarget.toggle('close');
     const cl = target.classList[1];
@@ -12,12 +14,12 @@ const SideMenu = () => {
   };
 
   return (
-    <div className="bg-white w-[280px] h-[919px] p-1">
+    <div className="bg-white w-[280px] h-[919px] p-1 overflow-auto ">
       <div className="flex flex-col justify-center items-center m-[2rem]">
         <Twitter />
         <h1 className="font-abril font-bold text-[28px]">Foodies</h1>
       </div>
-      <div className="flex flex-col justify-start items-start ml-4">
+      <div className="flex flex-col justify-start items-start ml-4 text">
         <ul>
           <li className="flex my-1">
             <svg
@@ -44,83 +46,92 @@ const SideMenu = () => {
         </ul>
       </div>
       <hr className="w-48 h-px mx-auto my-4 bg-gray-200 border-0 rounded  dark:bg-gray-700"></hr>
+      <div className="h-[300px]">
+        <Accordion
+          title={'Salado'}
+          icon={
+            <Image
+              width={30}
+              height={30}
+              src="/icons/mdi--food-italian (1).svg"
+              alt="picture"
+            />
+          }
+          activeAccordion={activeAccordion}
+          setActiveAccordion={setActiveAccordion}
+        >
+          <ul>
+            <li>
+              <p>Entradas y aperitivos</p>
+            </li>
+            <li>
+              <p>Platos principales</p>
+            </li>
+            <li>
+              <p>Guarniciones</p>
+            </li>
+            <li>
+              <p>Sopa y cremas</p>
+            </li>
+          </ul>
+        </Accordion>
+        <Accordion
+          title={'Dulce'}
+          activeAccordion={activeAccordion}
+          setActiveAccordion={setActiveAccordion}
+        >
+          <ul>
+            <li>
+              <p>Postres</p>
+            </li>
+            <li>
+              <p>Tortas</p>
+            </li>
+            <li>
+              <p>Planificacion</p>
+            </li>
+            <li>
+              <p>Galletas</p>
+            </li>
+            <li>
+              <p>Tartas</p>
+            </li>
+          </ul>
+        </Accordion>
+        <Accordion
+          title={'Tragos y bebidas'}
+          activeAccordion={activeAccordion}
+          setActiveAccordion={setActiveAccordion}
+        >
+          <ul>
+            <li>
+              <p>Con alcohol</p>
+            </li>
+            <li>
+              <p>Sin alcohol</p>
+            </li>
+          </ul>
+        </Accordion>
+      </div>
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className=" my-5  w-[183px] h-[48px] bg-[#7DA626] hover:bg-[#160852] hover:shadow-xl text-black font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded-2xl"
+        >
+          SUBIR RECETA
+        </button>
+      </div>
       <div>
-        <div className="acordeon">
-          <div
-            onClick={() => setIsOpen(!isOpen)}
-            className={`acor_item ${isOpen ? 'close' : 'open'}`}
-          >
-            <div className="acor_header">
-              <h3>Salado</h3>
-              <ChevronDown />
-            </div>
-            <div className="acor_content">
-              <ul>
-                <li>
-                  <p>Entradas y aperitivos</p>
-                </li>
-                <li>
-                  <p>Platos principales</p>
-                </li>
-                <li>
-                  <p>Guarniciones</p>
-                </li>
-                <li>
-                  <p>Sopa y cremas</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div
-            onClick={() => setIsOpen(!isOpen)}
-            className={`acor_item ${isOpen ? 'close' : 'open'}`}
-          >
-            <div className="acor_header">
-              <h3>Dulce</h3>
-              <ChevronDown />
-            </div>
-            <div className="acor_content">
-              <ul>
-                <li>
-                  <p>Postres</p>
-                </li>
-                <li>
-                  <p>Tortas</p>
-                </li>
-                <li>
-                  <p>Planificacion</p>
-                </li>
-                <li>
-                  <p>Galletas</p>
-                </li>
-                <li>
-                  <p>Tartas</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div
-            onClick={() => setIsOpen(!isOpen)}
-            className={`acor_item ${isOpen ? 'close' : 'open'}`}
-          >
-            <div className="acor_header">
-              <h3>Tragos y bebidas</h3>
-              <ChevronDown />
-            </div>
-            <div className="acor_content">
-              <ul>
-                <li>
-                  <p>Con alcohol</p>
-                </li>
-                <li>
-                  <p>Sin alcohol</p>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <div>
+          <Image
+            className="icon_profile"
+            width={3000}
+            height={2000}
+            src="/img/Registro ilustracion.svg"
+            alt="picture"
+          />
         </div>
+        <p className="text-center mt-4">Cambiamos el mundo</p>
       </div>
     </div>
   );
