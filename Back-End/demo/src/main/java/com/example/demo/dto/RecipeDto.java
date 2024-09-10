@@ -1,8 +1,11 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Category;
 import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public record RecipeDto(
         Long id,
@@ -21,7 +24,21 @@ public record RecipeDto(
         @NotBlank(message = "Las instrucciones no pueden estar vacías.")
         String instructions,
 
-        @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "La fecha de creación debe tener el formato yyyy-MM-dd.")
-        String dateCreation
+        @NotNull(message = "La fecha de creación no puede estar vacía.")
+        LocalDateTime dateCreation,
+
+        @NotNull(message = "La categoría no puede estar vacía.")
+        Category category,
+
+        @NotBlank(message = "El tiempo no puede estar vacío.")
+        String time,
+
+        @NotBlank(message = "El número de comensales no puede estar vacío.")
+        String commensal,
+
+        @NotBlank(message = "La cantidad no puede estar vacía.")
+        String amount,
+
+        List<String> imageUrls
 ) implements Serializable {
 }

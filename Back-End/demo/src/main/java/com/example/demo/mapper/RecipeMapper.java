@@ -3,8 +3,10 @@ package com.example.demo.mapper;
 import com.example.demo.dto.RecipeDto;
 import com.example.demo.model.Recipe;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 public class RecipeMapper {
 
     public static Recipe dtoToEntity(RecipeDto recipeDto) {
@@ -19,6 +21,11 @@ public class RecipeMapper {
                 .ingredients(recipeDto.ingredients())
                 .instructions(recipeDto.instructions())
                 .dateCreation(recipeDto.dateCreation())
+                .category(recipeDto.category())
+                .time(recipeDto.time())
+                .commensal(recipeDto.commensal())
+                .amount(recipeDto.amount())
+                .imageUrls(recipeDto.imageUrls() != null ? recipeDto.imageUrls() : new ArrayList<>())
                 .build();
     }
 
@@ -33,7 +40,12 @@ public class RecipeMapper {
                 recipe.getDescription(),
                 recipe.getIngredients(),
                 recipe.getInstructions(),
-                recipe.getDateCreation()
+                recipe.getDateCreation(),
+                recipe.getCategory(),
+                recipe.getTime(),
+                recipe.getCommensal(),
+                recipe.getAmount(),
+                recipe.getImageUrls()
         );
     }
 
@@ -49,3 +61,4 @@ public class RecipeMapper {
                 .collect(Collectors.toList());
     }
 }
+

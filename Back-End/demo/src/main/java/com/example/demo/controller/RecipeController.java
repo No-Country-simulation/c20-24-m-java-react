@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.RecipeDto;
 import com.example.demo.exception.RecipeNotFoundExepcion;
+import com.example.demo.model.Category;
 import com.example.demo.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -142,6 +144,35 @@ public class RecipeController {
     public ResponseEntity<String> deleteRecipe(@PathVariable("id") Long id) {
         recipeService.deleteRecipe(id);
         return ResponseEntity.ok("The Promotion was eliminated");
+    }
+
+
+    @Operation(
+            summary = "List recipes by category.",
+            description = "Retrieves a list of recipes filtered by the specified category."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "recipes list successfully generated",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = RecipeDto.class))
+                    }),
+            @ApiResponse(responseCode = "403", description = "Forbidden access to this resource", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                    @Content})
+    })
+    @Parameter(
+            name = "category",
+            description = "The category of recipes to filter by (e.g., SWEET, SAVORY, DRINKS, COCKTAILS, UNSPECIFIED).",
+            example = "SWEET",
+            required = true,
+            schema = @Schema(type = "string")
+    )
+    @GetMapping("/list/{category}")
+    public List<RecipeDto> getRecipesByCategory(@PathVariable Category category) {
+        return recipeService.findRecipesByCategory(category);
     }
 
 }

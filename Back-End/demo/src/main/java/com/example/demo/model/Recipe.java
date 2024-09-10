@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,19 @@ public class Recipe {
     private String description;
     private String ingredients;
     private String instructions;
-    private String dateCreation;
+    private LocalDateTime dateCreation;
+    @Enumerated(EnumType.STRING)
+    private Category category;
+    private String time;
+    private String commensal;
+    private String amount;
+    @ElementCollection
+    @CollectionTable(name = "recipe_images", joinColumns = @JoinColumn(name = "recipe_id"))
+    @Column(name = "image_url")
+    private List<String> imageUrls = new ArrayList<>();
+
+
+
 
 //    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Comment> comments = new ArrayList<>();
