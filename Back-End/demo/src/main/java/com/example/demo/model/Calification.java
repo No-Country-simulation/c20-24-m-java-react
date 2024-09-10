@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,21 +7,22 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "recipe")
+@Table(name = "calification")
 @Data
-public class Recipe {
+public class Calification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String description;
-    private String ingredients;
-    private String instruction;
+    private String start;
+    private Integer likes;
+
+    @ManyToOne
+    @JoinColumn(name = "recipe_id")
+    private Recipe recipe;
 
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime dateCreation;
-
 
 }
 
