@@ -24,7 +24,7 @@ export default function Home() {
     setIsModalVisible({ ...isModalVisible, modal: false, typeModal: '' });
   };
   return (
-    <main className="bg-orange-50">
+    <main className="">
       <HeaderLogo />
       <MainStart />
       <div className="flex flex-wrap items-center justify-center p-5">

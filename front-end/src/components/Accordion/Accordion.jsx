@@ -24,8 +24,8 @@ const Accordion = ({
     <div className="accordion">
       <div className="accordion_heading">
         <div onClick={() => handleAction(title)} className="container">
-          <span className="">{icon}</span>
-          <p className="">{title}</p>
+          <span className="mr-1">{icon}</span>
+          <p className="text-[18px]">{title}</p>
           <span className="flex-[1] flex justify-end">
             {activeAccordion === title ? <ChevronDown /> : <ChevronUp />}
           </span>
@@ -35,7 +35,9 @@ const Accordion = ({
       <div
         className={`accordion_content ${activeAccordion === title ? 'open' : 'close'} `}
       >
-        <div className="content_container">{children}</div>
+        <div className="content_container transition-all duration-[2s]">
+          {children}
+        </div>
       </div>
     </div>
   );

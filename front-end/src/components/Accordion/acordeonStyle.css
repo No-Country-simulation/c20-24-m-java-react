@@ -6,7 +6,7 @@
   /* @apply flex  items-center px-5 py-3 cursor-pointer hover:bg-slate-50; */
   display: flex;
   align-items: center;
-  padding-left: 1.25rem /* 20px */;
+  padding-left: 16px;
   padding-right: 1.25rem /* 20px */;
   padding-top: 0.75rem /* 12px */;
   padding-bottom: 0.75rem /* 12px */;
@@ -19,35 +19,58 @@
 .accordion_heading .container p {
   /* @apply font-semibold; */
   font-weight: 600;
+  /* font-size: 15px; */
 }
 
 .content_container {
-  /* @apply overflow-hidden  transition-all duration-1000 ease-[cubic-bezier(0.87,2,1.13,1)]; */
+  @apply overflow-hidden ease-linear transition-all ease-in-out  duration-1000 ease-[cubic-bezier(0.87,2,1.13,1)];
+  padding-left: 1.25rem /* 20px */;
+  padding-right: 1.25rem /* 20px */;
+  margin-left: 0.75rem /* 12px */;
   overflow: hidden;
-  transition-property: all;
+  /* o1 */
+  height: 0;
+  opacity: 0;
+  transition: all 600ms ease-in-out;
+  /*  */
+  /* transition: all;
+  transition-duration: 600ms;
+   transition-timing-function: linear; */
+  /* transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
+
+  /* transition-timing-function: linear; */
+  /* transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-  transition-duration: 1000ms;
-  transition-timing-function: cubic-bezier(0.87, 2, 1.13, 1);
+
+  transition-duration: 5s; */
+  /* transition-timing-function: ease-in-out; */
+  /* transition-timing-function: cubic-bezier(0.87, 2, 1.13, 1); */
+}
+
+.accordion_content.close .content_container {
+  /* @apply max-h-0 opacity-0; */
+  /* max-height: 0px;
+  opacity: 0; */
 }
 
 .accordion_content.open .content_container {
   /* @apply max-h-fit py-3; */
-  max-height: fit-content;
+
   padding-top: 0.75rem /* 12px */;
   padding-bottom: 0.75rem /* 12px */;
+  /* max-height: fit-content; */
+
+  /* o1 */
+  height: 130px;
+  opacity: 1;
+  /*  */
+  /* height: fit-content; */
+  /* max-height: fit-content;
+  opacity: 100; */
 }
 
-.accordion_content.close .content_container {
-  /* @apply max-h-0; */
-  max-height: 0px;
-}
-
-.content_container {
-  /* @apply px-5 ml-3; */
-  padding-left: 1.25rem /* 20px */;
-  padding-right: 1.25rem /* 20px */;
-  margin-left: 0.75rem /* 12px */;
+.accordion_content.close {
+  /* transition-duration: 5s; */
 }
 
 /*  */

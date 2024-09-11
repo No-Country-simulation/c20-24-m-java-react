@@ -1,12 +1,13 @@
 'use client';
 
+import ScrollInfinite from '@/components/scrollInfinite/ScrollInfinite';
 import SideMenu from '@/components/sideMenu/SideMenu';
 
 export default function Inicio() {
   return (
     <main className=" w-full">
       <div className="flex ">
-        <div className="flex w-[300px] flex-col">
+        <div className="flex w-[300px] flex-col ">
           <SideMenu />
         </div>
         <div className="flex w-full flex-col">
@@ -17,6 +18,9 @@ export default function Inicio() {
               <span className="font-bold">conecta</span> con{' '}
               <span className="text-[#F58026]">foodies</span> alrededor del mundo
             </h2>
+          </div>
+          <div className="flex flex-col justify-normal items-center mt-10 overflow-auto h-[calc(var(--vh, 1vh) * 100)]">
+            <ScrollInfinite />
           </div>
         </div>
       </div>
