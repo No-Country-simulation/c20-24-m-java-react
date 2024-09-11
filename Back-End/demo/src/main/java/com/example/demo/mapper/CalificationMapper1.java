@@ -14,6 +14,7 @@ public interface CalificationMapper1 {
     @Mapping(target = "recipe", ignore = true)
     Calification toEntity(CalificationDto calificationDto);
 
+    @Mapping(source = "recipe.id", target = "recipeId")
     CalificationDto toDto(Calification calification);
 
     List<CalificationDto> entityListToDtoList(List<Calification> califications);
