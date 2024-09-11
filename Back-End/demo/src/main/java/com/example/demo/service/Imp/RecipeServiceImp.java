@@ -2,7 +2,8 @@ package com.example.demo.service.Imp;
 
 import com.example.demo.dto.RecipeDto;
 import com.example.demo.exception.RecipeNotFoundExepcion;
-import com.example.demo.mapper.RecipeMapper;
+import com.example.demo.mapper.CalificationMapper1;
+import com.example.demo.mapper.RecipeMapper1;
 import com.example.demo.model.Category;
 import com.example.demo.model.Recipe;
 import com.example.demo.repository.RecipeRepository;
@@ -19,27 +20,29 @@ import java.util.List;
 public class RecipeServiceImp implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final RecipeMapper1 recipeMapper1;
+    private final CalificationMapper1 calificationMapper1;
 
     @Override
     @Transactional
     public RecipeDto createRecipe(RecipeDto recipeDto) {
-        Recipe recipe = RecipeMapper.dtoToEntity(recipeDto);
+        Recipe recipe = recipeMapper1.toEntity(recipeDto);
         Recipe recipeSaved = recipeRepository.save(recipe);
-        return RecipeMapper.entityToDto(recipeSaved);
+        return recipeMapper1.toDto(recipeSaved);
     }
 
     @Override
     @Transactional(readOnly = true)
     public RecipeDto findRecipeById(Long id) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundExepcion("This Recipe Does Not Exist with that ID: " + id));
-        return RecipeMapper.entityToDto(recipe);
+        return recipeMapper1.toDto(recipe);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<RecipeDto> listRecipe() {
         List<Recipe> recipes = (List<Recipe>) recipeRepository.findAll();
-        return RecipeMapper.entityListToDtoList(recipes);
+        return recipeMapper1.entityListToDtoList(recipes);
     }
 
     @Override
@@ -47,20 +50,26 @@ public class RecipeServiceImp implements RecipeService {
     public RecipeDto updateRecipe(Long id, RecipeDto recipeUpdate) {
         Recipe recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new RecipeNotFoundExepcion("This Recipe Does Not Exist with that ID: " + id));
-
         recipe.setTitle(recipeUpdate.title());
         recipe.setDescription(recipeUpdate.description());
         recipe.setIngredients(recipeUpdate.ingredients());
         recipe.setInstructions(recipeUpdate.instructions());
-        recipe.setDateCreation(recipeUpdate.dateCreation());
         recipe.setCategory(recipeUpdate.category());
         recipe.setTime(recipeUpdate.time());
         recipe.setCommensal(recipeUpdate.commensal());
         recipe.setAmount(recipeUpdate.amount());
-        recipe.setImageUrls(recipeUpdate.imageUrls() != null ? recipeUpdate.imageUrls() : new ArrayList<>());  // Agregado
+        recipe.setImageUrls(recipeUpdate.imageUrls() != null ? recipeUpdate.imageUrls() : new ArrayList<>());
 
-        return RecipeMapper.entityToDto(recipeRepository.save(recipe));
+        if (recipeUpdate.califications() != null) {
+            recipe.getCalifications().clear();
+            recipe.getCalifications().addAll(
+                    calificationMapper1.dtoListToEntityList(recipeUpdate.califications())
+            );
+        }
+
+        return recipeMapper1.toDto(recipeRepository.save(recipe));
     }
+
 
 
     @Override
@@ -74,7 +83,7 @@ public class RecipeServiceImp implements RecipeService {
     @Transactional(readOnly = true)
     public List<RecipeDto> findRecipesByCategory(Category category) {
         List<Recipe> recipes = recipeRepository.findByCategory(category);
-        return RecipeMapper.entityListToDtoList(recipes);
+        return recipeMapper1.entityListToDtoList(recipes);
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class Recipe {
     private String description;
     private String ingredients;
     private String instructions;
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     private LocalDateTime dateCreation;
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -34,13 +37,13 @@ public class Recipe {
     @Column(name = "image_url")
     private List<String> imageUrls = new ArrayList<>();
 
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Calification> califications;
+
 
 
 
 //    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Comment> comments = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Calification> califications = new ArrayList<>();
 
 }

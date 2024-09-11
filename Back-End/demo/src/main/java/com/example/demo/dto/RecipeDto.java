@@ -39,6 +39,9 @@ public record RecipeDto(
         @NotBlank(message = "La cantidad no puede estar vacía.")
         String amount,
 
-        List<String> imageUrls
+        List<String> imageUrls,
+
+        List<CalificationDto> califications
+
 ) implements Serializable {
 }
