@@ -42,10 +42,15 @@ const Login = ({ onClose, typeModal }) => {
     console.log(data, 'data');
     axios
       .post(`${BACK_API_URL}/auth/login`, data)
-      .then(({ data }) => {
-        data;
-      })
+      .then(({ data }) => data)
       .then((data) => {
+        const userInfo = {
+          id: data.user.id,
+          name: data.user.username,
+          email: data.user.email,
+          rol: data.user.rol,
+          image: data.user.image,
+        };
         router.push('/inicio');
         console.log(data);
       })

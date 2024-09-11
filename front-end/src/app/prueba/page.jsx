@@ -2,6 +2,8 @@
 
 // import Button from '@/components/button/Button';
 import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
+import RatingStars from '@/components/ratingStars/RatingStars';
+import SaveRecipe from '@/components/saveRecipe/SaveRecipe';
 
 // import ModalLoginMainStart from "@/components/modalLoginMainStart/ModalLoginMainStart";
 import { Input } from '@material-tailwind/react';
@@ -62,6 +64,12 @@ export default function Prueba() {
         onClose={handleCloseModal}
         typeModal={handleOpenModal}
       />
+      <div className="flex flex-col">
+        <RatingStars rating={3} />
+        <RatingStars rating={2} />
+        <RatingStars rating={1} />
+      </div>
+      <SaveRecipe />
     </div>
   );
 }
