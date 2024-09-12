@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -23,16 +25,39 @@ public class AuthService {
 
 
     public AuthResponse login(LoginRequest request) {
-        autenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),
-                                                                                  request.getPassword()));
 
-        UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        String username = request.getUsername();
+        String password = request.getPassword();
+
+        Optional<User> usernameRepository = userRepository.findByUsername(username);
+
+        if (usernameRepository.isEmpty()) {
+            return new AuthResponse("El usuario no existe.");
+        }
+
+        if (!passwordEncoder.matches(password, usernameRepository.orElseThrow().getPassword())) {
+            return new AuthResponse("La contraseña es incorrecta");
+        }
+
+
+        autenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,
+                                                                                  password));
+
+        UserDetails user = userRepository.findByUsername(username).orElseThrow();
         String token = jwtService.getToken(user);
         return AuthResponse.builder().token(token).build();
 
     }
 
     public AuthResponse register(RegisterRequest request) {
+
+        if(userRepository.existsByUsername(request.getUsername())) {
+            return new AuthResponse("El usuario ya se encuentra registrado");
+        }
+
+        if(userRepository.existsByEmail(request.getEmail())) {
+            return new AuthResponse("El email ya se encuentra registrado");
+        }
 
         User user = User.builder()
                         .username(request.getUsername())
