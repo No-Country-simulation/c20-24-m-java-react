@@ -5,7 +5,7 @@ import { registerFormDataInputs } from './helpers/registerFormDataInputs';
 import validateRegister from './helpers/validateRegister';
 import axios from 'axios';
 import { X } from 'react-feather';
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -18,7 +18,7 @@ const Register = ({ onClose, typeModal }) => {
   };
   const [userDataInputs, setUserDataInputs] = useState(initialStateDataInput);
   const [errorDataInputs, setErrorDataInputs] = useState(initialStateDataInput);
-  const router = useRouter();
+  //const router = useRouter();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
