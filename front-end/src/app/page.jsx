@@ -159,19 +159,19 @@ export default function Home() {
           </div>
           <div class="md:grid  md:grid-cols-7 md:gap-4">
             <div className="">
-              <h3 class="font-medium ml-3 md:ml-10 mt-5">
+              <h3 className="font-medium ml-3 md:ml-10 mt-5">
                 Desarrolladores back-end
               </h3>
-              <ul class="mt-2 space-y-2">
+              <ul className="mt-2 space-y-2">
                 <li className="flex ml-6 md:ml-14">
                   <a
                     href="https://www.linkedin.com/in/eloy-simonin/"
-                    class="flex items-center hover:text-[#7da626]"
+                    className="flex items-center hover:text-[#7da626]"
                   >
                     <img
                       src="/img/linkedin.svg"
                       alt="LinkedIn"
-                      class="w-4 h-4 mr-2  bg-[#0a66c2] hover:bg-white  "
+                      className="w-4 h-4 mr-2  bg-[#0a66c2] hover:bg-white  "
                     />
                     Eloy Simonin
                   </a>
@@ -179,12 +179,12 @@ export default function Home() {
                 <li className="flex ml-6 md:ml-14">
                   <a
                     href="https://www.linkedin.com/in/luciano-molina-/"
-                    class="flex items-center hover:text-[#7da626]"
+                    className="flex items-center hover:text-[#7da626]"
                   >
                     <img
                       src="/img/linkedin.svg"
                       alt="LinkedIn"
-                      class="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white "
+                      className="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white "
                     />
                     Luciano Molina
                   </a>
@@ -192,12 +192,12 @@ export default function Home() {
                 <li className="flex ml-6 md:ml-14">
                   <a
                     href="https://www.linkedin.com/in/eric-merel-779669298"
-                    class="flex items-center hover:text-[#7da626]"
+                    className="flex items-center hover:text-[#7da626]"
                   >
                     <img
                       src="/img/linkedin.svg"
                       alt="LinkedIn"
-                      class="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white "
+                      className="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white "
                     />
                     Eric Merel
                   </a>
@@ -206,19 +206,19 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 class="font-medium ml-3 md:ml-10 mt-5">
+              <h3 className="font-medium ml-3 md:ml-10 mt-5">
                 Desarrolladores front-end
               </h3>
-              <ul class="mt-2 space-y-2">
+              <ul className="mt-2 space-y-2">
                 <li className="flex ml-6 md:ml-14  ">
                   <a
                     href="https://www.linkedin.com/in/alejandro-abalos-flores-5bb905115"
-                    class="flex items-center hover:text-[#7da626]"
+                    className="flex items-center hover:text-[#7da626]"
                   >
                     <img
                       src="/img/linkedin.svg"
                       alt="LinkedIn"
-                      class="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white "
+                      className="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white "
                     />
                     Alejandro Abalos
                   </a>
@@ -226,12 +226,12 @@ export default function Home() {
                 <li className="flex ml-6 md:ml-14">
                   <a
                     href="https://www.linkedin.com/in/hector-duarte"
-                    class="flex items-center hover:text-[#7da626]"
+                    className="flex items-center hover:text-[#7da626]"
                   >
                     <img
                       src="/img/linkedin.svg"
                       alt="LinkedIn"
-                      class="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white"
+                      className="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white"
                     />
                     Hector Duarte
                   </a>
@@ -239,17 +239,17 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 class="font-medium ml-3 md:ml-10 mt-5 ">Diseñadora UX/UI</h3>
-              <ul class="mt-2 space-y-2">
+              <h3 className="font-medium ml-3 md:ml-10 mt-5 ">Diseñadora UX/UI</h3>
+              <ul className="mt-2 space-y-2">
                 <li className="flex ml-6 md:ml-14">
                   <a
                     href="https://www.linkedin.com/in/marian-miranda/"
-                    class="flex items-center hover:text-[#7da626]"
+                    className="flex items-center hover:text-[#7da626]"
                   >
                     <img
                       src="/img/linkedin.svg"
                       alt="LinkedIn"
-                      class="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white"
+                      className="w-4 h-4 mr-2 bg-[#0a66c2] hover:bg-white"
                     />
                     Marian Miranda
                   </a>
@@ -257,12 +257,12 @@ export default function Home() {
               </ul>
             </div>
 
-            <div class="flex justify-center items-center ">
-              <img src="/img/logo.svg" alt="LinkedIn" class="w-40 h-60" />
+            <div className="flex justify-center items-center ">
+              <img src="/img/logo.svg" alt="LinkedIn" className="w-40 h-60" />
             </div>
 
-            <div class="md:flex md:flex-col-reverse md:col-start-6 md:col-end-8 md:text-end">
-              <p class=" text-darkColor dark:text-whiteColor text-sm ">
+            <div className="md:flex md:flex-col-reverse md:col-start-6 md:col-end-8 md:text-end">
+              <p className=" text-darkColor dark:text-whiteColor text-sm ">
                 Copyright © 2024. Todos los derechos reservados.
               </p>
             </div>
