@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import RatingStars from '../ratingStars/RatingStars';
 import SaveRecipe from '../saveRecipe/SaveRecipe';
+import LikeRecipe from '../likeRecipe/LikeRecipe';
+import { Share2 } from 'react-feather';
 // import rsat from '../ratingStars/rsat';
 const CardRecipe = ({ user, title, image, description, category, subcategory }) => {
   // const [isNear, fromRef] = useNearsatcreen();
@@ -13,7 +15,7 @@ const CardRecipe = ({ user, title, image, description, category, subcategory }) 
             alt="image"
             className="w-full h-full rounded-3xl  object-contain"
           /> */}
-          <div className="absolute top-7 right-6 p-1">
+          <div className="absolute top-4 right-4 ">
             <SaveRecipe />
           </div>
           <Image
@@ -36,19 +38,33 @@ const CardRecipe = ({ user, title, image, description, category, subcategory }) 
           </div>
           <h3 className="text-2xl font-semibold">{title}</h3>
           <p className="text-[13px] h-[40px] items-start">{description}</p>
-          <div className="flex justify-start items-center -ml-3 , mt-2">
-            <div className=" ">
+          <div className="flex justify-between items-center mt-2">
+            <div className="flex justify-start items-center -ml-3 ">
+              <div className=" ">
+                <Image
+                  className="w-[45px] h-[45px] rounded-full"
+                  width={300}
+                  height={200}
+                  src="/img/Registro ilustracion.svg"
+                  alt="picture"
+                />
+              </div>
+              <p className="ml-2 text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
+                {user}
+              </p>
+            </div>
+
+            <div className="flex justify-between items-center ">
+              <LikeRecipe />
               <Image
-                className="icon_profile w-[47px] h-[47px] rounded-full"
-                width={300}
-                height={200}
-                src="/img/Registro ilustracion.svg"
+                className=" rounded-full mx-2"
+                width={30}
+                height={30}
+                src="/icons/vaadin_comments.svg"
                 alt="picture"
               />
+              <Share2 className="w-[2em] h-[2em]" />
             </div>
-            <p className="ml-2 text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
-              {user}
-            </p>
           </div>
         </div>
       </div>

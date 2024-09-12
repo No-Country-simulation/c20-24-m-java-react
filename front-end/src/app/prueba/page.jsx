@@ -1,5 +1,6 @@
 'use client';
 
+import LikeRecipe from '@/components/likeRecipe/LikeRecipe';
 // import Button from '@/components/button/Button';
 import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
 import RatingStars from '@/components/ratingStars/RatingStars';
@@ -70,6 +71,7 @@ export default function Prueba() {
         <RatingStars rating={1} />
       </div>
       <SaveRecipe />
+      <LikeRecipe />
     </div>
   );
 }
