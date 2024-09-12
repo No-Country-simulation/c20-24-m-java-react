@@ -10,7 +10,7 @@ public interface CalificationService {
 
     CalificationDto findCalificationById(Long id);
 
-    List<CalificationDto> listCalification();
+    List<CalificationDto> calificationlist();
 
     CalificationDto updateCalification(Long id, CalificationDto calificationUpDate);
 

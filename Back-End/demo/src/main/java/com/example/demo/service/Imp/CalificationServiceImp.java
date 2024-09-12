@@ -35,22 +35,32 @@ public class CalificationServiceImp implements CalificationService {
     @Override
     @Transactional(readOnly = true)
     public CalificationDto findCalificationById(Long id) {
-        Calification calification = calificationRepository.findById(id).orElseThrow(() -> new CalificationNotFoundExepcion("This Calification Does Not Exist with that ID: " + id));
+        Calification calification = calificationRepository.findById(id).orElseThrow(()
+                -> new CalificationNotFoundExepcion("This Calification Does Not Exist with that ID: " + id));
         return calificationMapper1.toDto(calification);
     }
 
     @Override
-    public List<CalificationDto> listCalification() {
-        return null;
+    @Transactional(readOnly = true)
+    public List<CalificationDto> calificationlist() {
+        List<Calification> calification = (List<Calification>) calificationRepository.findAll();
+        return calificationMapper1.entityListToDtoList(calification);
     }
 
     @Override
     public CalificationDto updateCalification(Long id, CalificationDto calificationUpDate) {
-        return null;
+        Calification calification = calificationRepository.findById(id).orElseThrow(()
+                -> new CalificationNotFoundExepcion("This Calification Does Not Exist with that ID: " + id));
+        calification.setStars(calificationUpDate.stars());
+        calification.setLikes(calificationUpDate.likes());
+        return calificationMapper1.toDto(calificationRepository.save(calification));
     }
 
     @Override
     public void deleteCalification(Long id) {
-
+        Calification calification = calificationRepository.findById(id).orElseThrow(()
+                -> new CalificationNotFoundExepcion("This Calification Does Not Exist with that ID: " + id));
+        calificationRepository.delete(calification);
     }
+
 }

@@ -140,10 +140,10 @@ public class RecipeController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
                     @Content})
     })
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteRecipe(@PathVariable("id") Long id) {
         recipeService.deleteRecipe(id);
-        return ResponseEntity.ok("The Promotion was eliminated");
+        return ResponseEntity.ok("The Recipe was eliminated");
     }
 
 
