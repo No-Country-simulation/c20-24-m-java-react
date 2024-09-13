@@ -21,7 +21,5 @@ public class Recipe {
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime dateCreation;
-
-
 }
 
