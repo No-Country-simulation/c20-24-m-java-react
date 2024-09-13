@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class CreateCommentDTO {
-    @NotBlank(message = "Comment content cannot be empty")
-    private String content;
+public class CreateReportCommentDto {
     @NotNull(message = "Recipe ID is required")
-    private Long recipeId;
+    private Long commentId;
     @NotNull(message = "User ID is required")
     private Long userId;
+    @NotBlank(message = "Content must not be blank")
+    private String reason;
 }

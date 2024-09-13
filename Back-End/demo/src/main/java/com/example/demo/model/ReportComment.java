@@ -28,5 +28,4 @@ public class ReportComment {
     @Column(name = "dateCreation", nullable = false)
     private LocalDateTime dateCreation;
 
-    // Constructor, getters y setters
 }

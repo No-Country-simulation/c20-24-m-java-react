@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class ResponseCommentDTO {
     private Long id;
     private String content;
-    private RecipeDTO recipe;
-    private UserDTO user;
+    private RecipeCommentDto recipe;
+    private UserCommentDto user;
     private LocalDateTime dateCreation;
 }

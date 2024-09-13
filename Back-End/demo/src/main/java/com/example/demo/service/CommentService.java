@@ -5,13 +5,14 @@ import com.example.demo.model.Comment;
 import com.example.demo.model.Recipe;
 import com.example.demo.model.ReportComment;
 import com.example.demo.model.User;
-import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.exception.ResourceNotFoundExceptionComment;
 import com.example.demo.mapper.ResponseCommentMapper;
 import com.example.demo.repository.CommentRepository;
-import com.example.demo.repository.RecipeRepository;
+import com.example.demo.repository.RecipeCommentRepository;
 import com.example.demo.repository.ReportCommentRepository;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.UserCommentRepository;
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +22,16 @@ import java.time.LocalDateTime;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final RecipeRepository recipeRepository;
-    private final UserRepository userRepository;
+    private final RecipeCommentRepository recipeRepository;
+    private final UserCommentRepository userRepository;
     private final ReportCommentRepository reportCommentRepository;
     private final ResponseCommentMapper responseCommentMapper;
 
     @Autowired
     public CommentService(
             CommentRepository commentRepository,
-            RecipeRepository recipeRepository,
-            UserRepository userRepository,
+            RecipeCommentRepository recipeRepository,
+            UserCommentRepository userRepository,
             ReportCommentRepository reportCommentRepository,
             ResponseCommentMapper responseCommentMapper) {
         this.commentRepository = commentRepository;
@@ -46,11 +47,11 @@ public class CommentService {
     }
 
     // Método para crear comentario
-    public ResponseCommentDTO createComment(CreateCommentDTO createCommentDTO) {
+    public ResponseCommentDTO createComment(CreateCommentDto createCommentDTO) {
         Recipe recipe = recipeRepository.findById(createCommentDTO.getRecipeId())
-                .orElseThrow(() -> new ResourceNotFoundException("Recipe not found with id: " + createCommentDTO.getRecipeId()));
+                .orElseThrow(() -> new ResourceNotFoundExceptionComment("Recipe not found with id: " + createCommentDTO.getRecipeId()));
         User user = userRepository.findById(createCommentDTO.getUserId())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + createCommentDTO.getUserId()));
+                .orElseThrow(() -> new ResourceNotFoundExceptionComment("User not found with id: " + createCommentDTO.getUserId()));
         Comment comment = new Comment();
         comment.setContent(createCommentDTO.getContent());
         comment.setRecipe(recipe);
@@ -61,29 +62,31 @@ public class CommentService {
     }
 
     // Método para actualizar comentario
-    public ResponseCommentDTO updateComment(Long commentId, CreateUpdateCommentDTO updateCommentDTO) {
+    public ResponseCommentDTO updateComment(Long commentId, CreateUpdateCommentDto updateCommentDTO) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Comment not found with id: " + commentId));
+                .orElseThrow(() -> new ResourceNotFoundExceptionComment("Comment not found with id: " + commentId));
         comment.setContent(updateCommentDTO.getContent());
         Comment savedComment = commentRepository.save(comment);
         return responseCommentMapper.convertToCommentDTO(savedComment);
     }
 
-    // Método para borrar comentario
+    // Metodo para borrar comentario
+    @Transactional
     public ResponseCommentDTO deleteComment(Long commentId) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Comment not found with id: " + commentId));
+                .orElseThrow(() -> new ResourceNotFoundExceptionComment("Comment not found with id: " + commentId));
         ResponseCommentDTO commentDTO = responseCommentMapper.convertToCommentDTO(comment);
+        reportCommentRepository.deleteById(commentId);
         commentRepository.delete(comment);
         return commentDTO;
     }
 
     // Método para reportar comentario
-    public ResponseCommentDTO reportComment(CreateReportCommentDTO reportCommentDTO) {
+    public ResponseCommentDTO reportComment(CreateReportCommentDto reportCommentDTO) {
         Comment comment = commentRepository.findById(reportCommentDTO.getCommentId())
-                .orElseThrow(() -> new ResourceNotFoundException("Comment not found"));
+                .orElseThrow(() -> new ResourceNotFoundExceptionComment("Comment not found"));
         User user = userRepository.findById(reportCommentDTO.getUserId())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundExceptionComment("User not found"));
         ReportComment reportComment = new ReportComment();
         reportComment.setComment(comment);
         reportComment.setUser(user);

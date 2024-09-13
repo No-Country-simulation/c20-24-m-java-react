@@ -14,9 +14,9 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     //Manejo de exepcion para los recursos no encontrados en la BBDD
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+    @ExceptionHandler(ResourceNotFoundExceptionComment.class)
+    public ResponseEntity<ErrorResponseComment> handleResourceNotFoundException(ResourceNotFoundExceptionComment ex) {
+        ErrorResponseComment errorResponse = new ErrorResponseComment(HttpStatus.NOT_FOUND.value(), ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 

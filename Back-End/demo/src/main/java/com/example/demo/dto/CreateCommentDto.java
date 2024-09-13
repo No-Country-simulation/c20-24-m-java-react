@@ -5,9 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class CreateUpdateCommentDTO {
-    @NotBlank(message = "Content must not be blank")
+public class CreateCommentDto {
+    @NotBlank(message = "Comment content cannot be empty")
     private String content;
+    @NotNull(message = "Recipe ID is required")
+    private Long recipeId;
     @NotNull(message = "User ID is required")
-    private Long userId;  // ID del usuario que está intentando hacer la actualización
+    private Long userId;
 }
