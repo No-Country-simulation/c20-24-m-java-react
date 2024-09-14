@@ -41,9 +41,5 @@ public class Recipe {
     private List<Calification> califications;
 
 
-
-
-//    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Comment> comments = new ArrayList<>();
-
 }
+
