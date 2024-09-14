@@ -23,7 +23,9 @@ public class Calification {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
-    //    private User user;
+
+//    private User user;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime dateCreation;
