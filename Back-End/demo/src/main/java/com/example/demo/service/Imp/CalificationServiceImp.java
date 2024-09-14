@@ -23,6 +23,8 @@ public class CalificationServiceImp implements CalificationService {
     private final CalificationMapper1 calificationMapper1;
     private final RecipeRepository recipeRepository;
 
+    @Override
+    @Transactional
     public CalificationDto createCalification(CalificationDto calificationDto) {
         Recipe recipe = recipeRepository.findById(calificationDto.recipeId())
                 .orElseThrow(() -> new RecipeNotFoundExepcion("Recipe not found with ID: " + calificationDto.recipeId()));

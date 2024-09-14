@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.CalificationDto;
 import com.example.demo.dto.RecipeDto;
-import com.example.demo.exception.RecipeNotFoundExepcion;
+import com.example.demo.exception.CalificationNotFoundExepcion;
 import com.example.demo.service.CalificationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -72,7 +72,7 @@ public class CalificationController {
         try {
             CalificationDto calificationDto = calificationService.findCalificationById(id);
             return ResponseEntity.ok(calificationDto);
-        } catch (RecipeNotFoundExepcion ex) {
+        } catch (CalificationNotFoundExepcion ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
