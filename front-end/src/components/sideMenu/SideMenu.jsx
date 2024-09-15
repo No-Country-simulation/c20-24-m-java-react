@@ -9,7 +9,7 @@ const SideMenu = () => {
   const [activeAccordion, setActiveAccordion] = useState('');
 
   return (
-    <div className="select-none bg-white w-[280px] h-[919px] p-1 overflow-auto shadow-md sticky top-0">
+    <div className="select-none bg-red-900 w-[280px] h-[919px] p-1 overflow-auto shadow-md sticky top-0">
       <div className="flex flex-col justify-center items-center mt-14 mb-7">
         <Twitter />
         <h1 className="font-abril font-bold text-[28px]">Foodies</h1>
