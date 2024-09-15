@@ -12,9 +12,11 @@ import java.util.List;
 public interface CalificationMapper1 {
 
     @Mapping(target = "recipe", ignore = true)
+    @Mapping(target = "user", ignore = true)
     Calification toEntity(CalificationDto calificationDto);
 
     @Mapping(source = "recipe.id", target = "recipeId")
+    @Mapping(source = "user.id", target = "userId")
     CalificationDto toDto(Calification calification);
 
     List<CalificationDto> entityListToDtoList(List<Calification> califications);

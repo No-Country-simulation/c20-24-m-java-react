@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 public record CalificationDto(
         Long id,
-
         @Min(value = 1, message = "Las estrellas deben ser al menos 1.")
         @Max(value = 5, message = "Las estrellas no pueden ser más de 5.")
         int stars,
@@ -18,6 +17,8 @@ public record CalificationDto(
         int likes,
         @NotNull(message = "El 'ID_RECIPE' no puede estar vacío.")
         Long recipeId,
+        @NotNull(message = "El 'ID_USER' no puede estar vacío.")
+        Long userId,
         LocalDateTime dateCreation
 
 ) implements Serializable {

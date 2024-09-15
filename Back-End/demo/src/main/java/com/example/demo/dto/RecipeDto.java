@@ -41,7 +41,10 @@ public record RecipeDto(
 
         List<String> imageUrls,
 
-        List<CalificationDto> califications
+        List<CalificationDto> califications,
+
+        @NotNull(message = "El 'ID_USER' no puede estar vacío.")
+        Long userId
 
 ) implements Serializable {
 }

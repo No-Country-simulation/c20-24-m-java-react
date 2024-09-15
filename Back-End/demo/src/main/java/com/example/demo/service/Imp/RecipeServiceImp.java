@@ -2,11 +2,14 @@ package com.example.demo.service.Imp;
 
 import com.example.demo.dto.RecipeDto;
 import com.example.demo.exception.RecipeNotFoundExepcion;
+import com.example.demo.exception.UserNotFoundExepcion;
 import com.example.demo.mapper.CalificationMapper1;
 import com.example.demo.mapper.RecipeMapper1;
 import com.example.demo.model.Category;
 import com.example.demo.model.Recipe;
+import com.example.demo.model.User;
 import com.example.demo.repository.RecipeRepository;
+import com.example.demo.repository.UserCommentRepository;
 import com.example.demo.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,11 +25,15 @@ public class RecipeServiceImp implements RecipeService {
     private final RecipeRepository recipeRepository;
     private final RecipeMapper1 recipeMapper1;
     private final CalificationMapper1 calificationMapper1;
+    private final UserCommentRepository userCommentRepository;
 
     @Override
     @Transactional
     public RecipeDto createRecipe(RecipeDto recipeDto) {
+        User user = userCommentRepository.findById(recipeDto.userId())
+                .orElseThrow(() -> new UserNotFoundExepcion("User not found with ID: " + recipeDto.userId()));
         Recipe recipe = recipeMapper1.toEntity(recipeDto);
+        recipe.setUser(user);
         Recipe recipeSaved = recipeRepository.save(recipe);
         return recipeMapper1.toDto(recipeSaved);
     }
