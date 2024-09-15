@@ -23,7 +23,7 @@
 }
 
 .content_container {
-  @apply overflow-hidden ease-linear transition-all ease-in-out  duration-1000 ease-[cubic-bezier(0.87,2,1.13,1)];
+  /* @apply overflow-hidden ease-linear transition-all ease-in-out  duration-1000 ease-[cubic-bezier(0.87,2,1.13,1)]; */
   padding-left: 1.25rem /* 20px */;
   padding-right: 1.25rem /* 20px */;
   margin-left: 0.75rem /* 12px */;

@@ -19,7 +19,7 @@ const CardRecipe = ({ user, title, image, description, category, subcategory }) 
             <SaveRecipe />
           </div>
           <Image
-            className="w-full h-[417px] rounded-3xl object-contain"
+            className="w-full h-[417px] rounded-[20px] object-cover"
             width={80}
             height={80}
             src={image}
