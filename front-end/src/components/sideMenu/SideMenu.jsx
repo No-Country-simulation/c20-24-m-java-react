@@ -9,10 +9,10 @@ const SideMenu = () => {
   const [activeAccordion, setActiveAccordion] = useState('');
 
   return (
-    <div className="select-none bg-red-900 w-[280px] h-[919px] p-1 overflow-auto shadow-md sticky top-0">
-      <div className="flex flex-col justify-center items-center mt-14 mb-7">
-        <Twitter />
-        <h1 className="font-abril font-bold text-[28px]">Foodies</h1>
+    <div className="select-none bg-white w-[280px] h-[calc(var(--vh, 1vh) * 100)] p-1 overflow-auto shadow-md sticky top-0">
+      <div className="flex flex-col justify-center items-center mt-5 mb-7">
+        <Image width={130} height={130} src="/img/Logo.svg" alt="picture" />
+        {/* <h1 className="font-abril font-bold text-[28px]">Foodies</h1> */}
       </div>
       <div className="flex justify-start items-center ml-4 text-[18px] font-semibold text-center">
         <ul>
@@ -134,17 +134,17 @@ const SideMenu = () => {
           SUBIR RECETA
         </button>
       </div>
-      <div className="flex justify-end items-center mt-12">
+      <div className="flex flex-col justify-between items-center mt-12">
         <div className="mx-2">
           <Image
-            className="icon_profile"
-            width={3000}
-            height={2000}
+            className="icon_profile flex items-center"
+            width={60}
+            height={60}
             src="/img/Registro ilustracion.svg"
             alt="picture"
           />
         </div>
-        <p className="text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
+        <p className="mt-2 text-center w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
           Camila lopez
         </p>
       </div>

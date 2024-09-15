@@ -1,4 +1,4 @@
-import './rs.css';
+// import './rs.css';
 const rsat = () => {
   return (
     <div class="rating">
