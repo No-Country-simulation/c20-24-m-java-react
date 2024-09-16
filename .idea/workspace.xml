@@ -5,12 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5569d19-f90d-425c-8574-090ef14ec1be" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/controller/FollowersController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/dto/ApiFollowersResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Followers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/FollowersId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/repository/FollowersRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/FollowersService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/repository/UserCommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/repository/UserCommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -28,7 +46,8 @@
   "keyToString": {
     "Application.DemoApplication.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature/crudComentarios",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "feature/follows",
     "kotlin-language-version-configured": "true",
     "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
   }
@@ -36,7 +55,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ab7bd42d-6992-46a3-b390-6ff3f17c4d1f" name="Changes" comment="" />
+      <changelist id="f5569d19-f90d-425c-8574-090ef14ec1be" name="Changes" comment="" />
       <created>1726280277394</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
