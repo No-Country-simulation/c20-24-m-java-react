@@ -3,11 +3,14 @@ package com.example.demo.service.Imp;
 import com.example.demo.dto.FavoriteDto;
 import com.example.demo.exception.FavoriteNotFoundExepcion;
 import com.example.demo.exception.RecipeNotFoundExepcion;
+import com.example.demo.exception.UserNotFoundExepcion;
 import com.example.demo.mapper.FavoriteMapper1;
 import com.example.demo.model.Favorite;
 import com.example.demo.model.Recipe;
+import com.example.demo.User.User;
 import com.example.demo.repository.FavoriteRepository;
 import com.example.demo.repository.RecipeRepository;
+import com.example.demo.repository.UserCommentRepository;
 import com.example.demo.service.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,10 +25,14 @@ public class FavoriteServiceImp implements FavoriteService {
     private final FavoriteRepository favoriteRepository;
     private final RecipeRepository recipeRepository;
     private final FavoriteMapper1 favoriteMapper1;
+    private final UserCommentRepository userCommentRepository;
     @Override
     @Transactional
     public FavoriteDto createFavorite(FavoriteDto favoriteDto) {
+        User user = userCommentRepository.findById(favoriteDto.userId())
+                .orElseThrow(() -> new UserNotFoundExepcion("User not found with ID: " + favoriteDto.userId()));
         Favorite favorite = favoriteMapper1.toEntity(favoriteDto);
+        favorite.setUser(user);
         Favorite favoriteSaved = favoriteRepository.save(favorite);
         return favoriteMapper1.toDto(favoriteSaved);
     }

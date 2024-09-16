@@ -4,7 +4,7 @@ import com.example.demo.dto.*;
 import com.example.demo.model.Comment;
 import com.example.demo.model.Recipe;
 import com.example.demo.model.ReportComment;
-import com.example.demo.model.User;
+import com.example.demo.User.User;
 import com.example.demo.exception.ResourceNotFoundExceptionComment;
 import com.example.demo.mapper.ResponseCommentMapper;
 import com.example.demo.repository.CommentRepository;

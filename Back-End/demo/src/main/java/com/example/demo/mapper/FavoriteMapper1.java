@@ -10,9 +10,11 @@ import org.mapstruct.MappingConstants;
 public interface FavoriteMapper1 {
 
     @Mapping(target = "recipeList", source = "recipeList")
+    @Mapping(target = "user", ignore = true)
     Favorite toEntity(FavoriteDto favoriteDto);
 
     @Mapping(target = "recipeList", source = "recipeList")
+    @Mapping(source = "user.id", target = "userId")
     FavoriteDto toDto(Favorite favorite);
 
 }

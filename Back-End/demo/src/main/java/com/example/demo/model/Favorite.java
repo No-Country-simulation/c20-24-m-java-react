@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.User.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,11 +27,10 @@ public class Favorite {
             inverseJoinColumns = @JoinColumn(name = "recipe_id")
     )
     private List<Recipe> recipeList;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
-
+    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime dateCreation;
