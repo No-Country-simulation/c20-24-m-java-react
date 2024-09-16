@@ -14,4 +14,8 @@ public class RegisterRequest {
     String username;
     String email;
     String password;
+    String fullName;
+    String phoneNumber;
+    boolean isActive;
+
 }
