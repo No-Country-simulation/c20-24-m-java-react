@@ -1,7 +1,7 @@
 import './ratingStars.style.css';
 
 const RatingStars = ({ rating, id }) => {
-  console.log(rating);
+  // console.log(rating);
   return (
     <div className="rating ">
       <input

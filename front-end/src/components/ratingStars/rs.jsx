@@ -1,7 +1,7 @@
 // import './rs.css';
 const rsat = () => {
   return (
-    <div class="rating">
+    <div className="rating">
       <input type="radio" id="star5" name="rate" value="5" />
       <label for="star5" title="text"></label>
       <input type="radio" id="star4" name="rate" value="4" />

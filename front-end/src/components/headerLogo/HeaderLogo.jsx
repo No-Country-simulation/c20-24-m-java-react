@@ -4,7 +4,7 @@ const HeaderLogo = () => {
       <img
         src="/img/logo.svg"
         alt="LinkedIn"
-        class="w-[8.5rem] h-[5.5rem] xl:w-[8.5rem] xl:h-[5.5rem] "
+        className="w-[8.5rem] h-[5.5rem] xl:w-[8.5rem] xl:h-[5.5rem] "
       />
     </div>
   );
