@@ -127,7 +127,10 @@ const UploadRecipe = (isVisible) => {
 
         <div className={`flex justify-start  mt-5 mb-5`}>
           <div>
-            <label class="block text-gray-700 font-semibold mb-2" for="categoria">
+            <label
+              className="block text-gray-700 font-semibold mb-2"
+              for="categoria"
+            >
               Categoría
             </label>
             <select
@@ -217,7 +220,7 @@ const UploadRecipe = (isVisible) => {
                 />
                 <div className="w-full">
                   <select
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#7da626] "
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#7da626] "
                     id="categoria"
                   >
                     <option value="">Seleccionar opción...</option>
