@@ -7,7 +7,7 @@ import com.example.demo.exception.UserNotFoundExepcion;
 import com.example.demo.mapper.CalificationMapper1;
 import com.example.demo.model.Calification;
 import com.example.demo.model.Recipe;
-import com.example.demo.model.User;
+import com.example.demo.User.User;
 import com.example.demo.repository.CalificationRepository;
 import com.example.demo.repository.RecipeRepository;
 import com.example.demo.repository.UserCommentRepository;

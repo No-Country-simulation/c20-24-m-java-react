@@ -7,7 +7,7 @@ import com.example.demo.exception.UserNotFoundExepcion;
 import com.example.demo.mapper.FavoriteMapper1;
 import com.example.demo.model.Favorite;
 import com.example.demo.model.Recipe;
-import com.example.demo.model.User;
+import com.example.demo.User.User;
 import com.example.demo.repository.FavoriteRepository;
 import com.example.demo.repository.RecipeRepository;
 import com.example.demo.repository.UserCommentRepository;

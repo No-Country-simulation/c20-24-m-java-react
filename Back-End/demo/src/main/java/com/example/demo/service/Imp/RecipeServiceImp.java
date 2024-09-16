@@ -7,7 +7,7 @@ import com.example.demo.mapper.CalificationMapper1;
 import com.example.demo.mapper.RecipeMapper1;
 import com.example.demo.model.Category;
 import com.example.demo.model.Recipe;
-import com.example.demo.model.User;
+import com.example.demo.User.User;
 import com.example.demo.repository.RecipeRepository;
 import com.example.demo.repository.UserCommentRepository;
 import com.example.demo.service.RecipeService;

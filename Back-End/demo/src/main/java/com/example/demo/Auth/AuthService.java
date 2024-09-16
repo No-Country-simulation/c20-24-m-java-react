@@ -32,11 +32,11 @@ public class AuthService {
         Optional<User> usernameRepository = userRepository.findByUsername(username);
 
         if (usernameRepository.isEmpty()) {
-            return new AuthResponse("El usuario no existe.");
+            return new AuthResponse(0L,"El usuario no existe.", "N/A");
         }
 
         if (!passwordEncoder.matches(password, usernameRepository.orElseThrow().getPassword())) {
-            return new AuthResponse("La contraseña es incorrecta");
+            return new AuthResponse(0L, "N/A","La contraseña es incorrecta");
         }
 
 
@@ -45,18 +45,20 @@ public class AuthService {
 
         UserDetails user = userRepository.findByUsername(username).orElseThrow();
         String token = jwtService.getToken(user);
-        return AuthResponse.builder().token(token).build();
+        return AuthResponse.builder().userId(userRepository.findByUsername(username).orElseThrow().getId())
+               .username(userRepository.findByUsername(username).orElseThrow().getUsername())
+               .token(token).build();
 
     }
 
     public AuthResponse register(RegisterRequest request) {
 
         if(userRepository.existsByUsername(request.getUsername())) {
-            return new AuthResponse("El usuario ya se encuentra registrado");
+            return new AuthResponse(0L,"El usuario ya se encuentra registrado", "N/A");
         }
 
         if(userRepository.existsByEmail(request.getEmail())) {
-            return new AuthResponse("El email ya se encuentra registrado");
+            return new AuthResponse(0L, "El email ya se encuentra registrado", "N/A");
         }
 
         User user = User.builder()
