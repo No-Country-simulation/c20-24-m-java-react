@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.User.User;
 import com.example.demo.model.Followers;
 import com.example.demo.model.FollowersId;
-import com.example.demo.model.User;
 import com.example.demo.repository.FollowersRepository;
 import com.example.demo.repository.UserCommentRepository;
 import jakarta.transaction.Transactional;

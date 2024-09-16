@@ -5,42 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5569d19-f90d-425c-8574-090ef14ec1be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/Auth/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/Auth/AuthResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/Auth/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/Auth/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/Auth/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/Jwt/JwtAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/Jwt/JwtService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/User/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/User/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/User/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/config/ApplicationConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/exception/UserNotFoundExepcion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/controller/FavoriteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/controller/FavoriteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/dto/CalificationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/dto/CalificationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/dto/FavoriteDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/dto/FavoriteDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/dto/RecipeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/dto/RecipeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/mapper/CalificationMapper1.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/mapper/CalificationMapper1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/mapper/FavoriteMapper1.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/mapper/FavoriteMapper1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/mapper/RecipeMapper1.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/mapper/RecipeMapper1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Calification.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Calification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Favorite.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Favorite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Recipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/ReportComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/ReportComment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/repository/UserCommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/repository/UserCommentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/security/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/Imp/CalificationServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/Imp/CalificationServiceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/Imp/FavoriteServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/Imp/FavoriteServiceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/Imp/RecipeServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/Imp/RecipeServiceImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/controller/FollowersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/controller/FollowersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Followers.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/Followers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/FollowersId.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/model/FollowersId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/FollowersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back-End/demo/src/main/java/com/example/demo/service/FollowersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/testdb.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/testdb.mv.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +42,7 @@
     "Application.DemoApplication.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Merging feature/follows",
+    "git-widget-placeholder": "feature/follows",
     "kotlin-language-version-configured": "true",
     "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
   }
