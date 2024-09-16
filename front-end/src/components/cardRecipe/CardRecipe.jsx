@@ -3,11 +3,28 @@ import RatingStars from '../ratingStars/RatingStars';
 import SaveRecipe from '../saveRecipe/SaveRecipe';
 import LikeRecipe from '../likeRecipe/LikeRecipe';
 import { Share2 } from 'react-feather';
+import { useState } from 'react';
+import ModalRecipeDetail from '../modalRecipeDetail/ModalRecipeDetail';
 // import rsat from '../ratingStars/rsat';
 const CardRecipe = ({ user, title, image, description, category, subcategory }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleModal = () => {
+    console.log(isVisible);
+    setIsVisible(!isVisible);
+  };
   // const [isNear, fromRef] = useNearsatcreen();
   return (
     <div>
+      <ModalRecipeDetail
+        isVisible={isVisible}
+        onClose={handleModal}
+        category={category}
+        subcategory={subcategory}
+        title={title}
+        description={description}
+        image={image}
+      />
       <div className="m-3 w-[39rem] h-[37rem] bg-white rounded-3xl shadow-md">
         <div className="relative bg-black w-full h-[417px] rounded-3xl">
           {/* <img
@@ -33,11 +50,18 @@ const CardRecipe = ({ user, title, image, description, category, subcategory }) 
 
         <div className="px-9 py-3">
           <div className="flex justify-between items-center">
-            <p className=" text-sm">{category + ' - ' + subcategory}</p>
+            <p className=" text-sm">
+              {(category || 'Categoria') + ' - ' + (subcategory || 'Subcategoria')}
+            </p>
             <RatingStars rating={Math.floor(Math.random() * 5) + 1} />
           </div>
-          <h3 className="text-2xl font-semibold">{title}</h3>
-          <p className="text-[13px] h-[40px] items-start">{description}</p>
+          <h3
+            onClick={handleModal}
+            className="text-2xl font-semibold cursor-pointer"
+          >
+            {title || 'Titulo'}
+          </h3>
+          <p className="text-[13px] h-[40px] items-start">{description || ''}</p>
           <div className="flex justify-between items-center mt-2">
             <div className="flex justify-start items-center -ml-3 ">
               <div className=" ">

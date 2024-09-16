@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useRef, useState } from 'react';
 import CardRecipe from '../cardRecipe/CardRecipe';
 import axios from 'axios';
