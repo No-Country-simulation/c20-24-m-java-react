@@ -22,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
+@Table(name = "app_user", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 @Data
 public class User implements UserDetails {
     @Id
