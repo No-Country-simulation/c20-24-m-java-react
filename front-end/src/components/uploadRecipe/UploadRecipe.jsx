@@ -1,13 +1,50 @@
 'use client';
 import { use, useState } from 'react';
-
 const UploadRecipe = (isVisible) => {
-  const [steps, setSteps] = useState(1);
+  const [steps, setSteps] = useState([1]);
+  const [steps2, setSteps2] = useState([1]);
+
+  const [ImagePrevius, setImagePrevious] = useState(null);
+  const changeImage = (e) => {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(e.target.file[0]);
+    reader.onload = (e) => {
+      e.preventDefault();
+      setImagePrevious(e.target.result);
+    };
+  };
+
+  const initialStateDataInput = {
+    title: '',
+    overview: '',
+
+    time: '',
+    diners: '',
+
+    ingredients: '',
+    deacriptionsteps: '',
+
+    // confirmPassword: '',
+  };
+  const [userDataInputs, setUserDataInputs] = useState(initialStateDataInput);
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+
+    setUserDataInputs({
+      ...userDataInputs,
+      [name]: value,
+    });
+    console.log(userDataInputs);
+    //setErrorDataInputs(validateRegister({ ...userDataInputs, [name]: value }));
+    // console.log(errorDataInputs);
+  };
+
   return (
     <div
       id="modal_main"
       //onClick={onClose}
-      className={` z-10  flex justify-center items-center transition-colors      `}
+      className={`z-10  flex justify-center items-center transition-colors      `}
     >
       <div
         id="modal_container"
@@ -16,8 +53,10 @@ const UploadRecipe = (isVisible) => {
       >
         <h2 className="text-4xl font-bold mb-8">Compartir receta</h2>
         <p>Publicar una foto del plato terminado </p>
+
+        {/*Subir imagenes */}
         <form action="#" className="space-y-6 mt-5 mb-5">
-          <div className="border-dashed border-2 border-gray-400 rounded-lg p-6 flex items-center justify-center">
+          <div className="border-dashed border-2 border-gray-400 rounded-3xl p-6 flex items-center justify-center">
             <label
               htmlFor="uploadImage"
               className="text-gray-600 text-center cursor-pointer"
@@ -42,12 +81,15 @@ const UploadRecipe = (isVisible) => {
             </label>
             <input type="file" id="uploadImage" className="hidden" />
           </div>
+          <div className="flex justify-center items-center">
+            <img src={ImagePrevius} alt="" height="150px" width="250px" />
+          </div>
         </form>
 
         <div className="flex justify-center items-center mt-5 mb-14">
           <button
             type="button"
-            className="  w-56 bg-[#160852] rounded-md text-white font-medium"
+            className="t w-72 h-10 bg-[#160852] hover:bg-[#7da626]  hover:text-black font-semibold rounded-2xl text-white ease-in duration-300 "
           >
             Subir Imagen
           </button>
@@ -58,6 +100,9 @@ const UploadRecipe = (isVisible) => {
             Título
           </label>
           <input
+            name="title"
+            onChange={handleChange}
+            value={userDataInputs['title']}
             type="text"
             id="titulo"
             className="w-full p-2 border border-gray-300 rounded-md"
@@ -71,6 +116,9 @@ const UploadRecipe = (isVisible) => {
             Descripción
           </label>
           <textarea
+            name="overview"
+            onChange={handleChange}
+            value={useState['overview']}
             id="descripcion"
             rows="3"
             className="w-full p-2 border border-gray-300 rounded-md"
@@ -78,21 +126,19 @@ const UploadRecipe = (isVisible) => {
         </div>
 
         <div className={`flex justify-start  mt-5 mb-5`}>
-          <div class="grid grid-cols-2 gap-4 mb-6">
-            <div>
-              <label class="block text-gray-700 font-semibold mb-2" for="categoria">
-                Categoría
-              </label>
-              <select
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                id="categoria"
-              >
-                <option value="">Seleccionar opción...</option>
-                <option value="">Opcion 1</option>
-                <option value="">Opcion 2</option>
-                <option value="">Opcion 3</option>
-              </select>
-            </div>
+          <div>
+            <label class="block text-gray-700 font-semibold mb-2" for="categoria">
+              Categoría
+            </label>
+            <select
+              class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#7da626]"
+              id="categoria"
+            >
+              <option value="">Seleccionar opción...</option>
+              <option value="">Dulce</option>
+              <option value="">Salado</option>
+              <option value="">Tragos y bebidas</option>
+            </select>
           </div>
         </div>
 
@@ -105,6 +151,9 @@ const UploadRecipe = (isVisible) => {
               Tiempo
             </label>
             <input
+              name="time"
+              onChange={handleChange}
+              value={useState['time']}
               type="text"
               id="tiempo"
               className="w-full p-2 border border-gray-300 rounded-md"
@@ -118,6 +167,9 @@ const UploadRecipe = (isVisible) => {
               Comensales
             </label>
             <input
+              name="diners"
+              onChange={handleChange}
+              value={useState['diners']}
               type="text"
               id="comensales"
               className="w-full p-2 border border-gray-300 rounded-md"
@@ -132,7 +184,7 @@ const UploadRecipe = (isVisible) => {
             </label>
             <select
               id="dificultad"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border border-gray-300 rounded-md focus:border-[#7da626]"
             >
               <option value="">Seleccionar opción...</option>
               <option value="">Facil</option>
@@ -142,76 +194,97 @@ const UploadRecipe = (isVisible) => {
           </div>
         </div>
 
-        <div className="w-full mt-5 mb-5">
-          <label className="block font-medium text-gray-700">Ingredientes</label>
-          <div className="flex space-x-4 mb-2">
-            <input
-              type="text"
-              placeholder="Ingrediente"
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-            <input
-              type="text"
-              placeholder="Cantidad"
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
-            <div className="w-full">
-              <select
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                id="categoria"
-              >
-                <option value="">Seleccionar opción...</option>
-                <option value="">Taza</option>
-                <option value="">Milimetros</option>
-                <option value="">Centimetros Cubicos</option>
-                <option value="">Litro</option>
-                <option value="">Cucharada</option>
-                <option value="">Cucharadita</option>
-                <option value="">Gramos</option>
-                <option value="">kilo</option>
-                <option value="">Onza</option>
-                <option value="">Libra</option>
-              </select>
+        {steps.map((step, index) => {
+          return (
+            <div key={index} className="w-full mt-5 mb-5">
+              <label className="block font-medium text-gray-700">Ingredientes</label>
+              <div className="flex space-x-4 mb-2">
+                <input
+                  name="ingredients"
+                  onChange={handleChange}
+                  value={useState['ingredients']}
+                  type="text"
+                  placeholder="Ingrediente"
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                />
+                <input
+                  name="amount"
+                  onChange={handleChange}
+                  value={useState['amount']}
+                  type="text"
+                  placeholder="Cantidad"
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                />
+                <div className="w-full">
+                  <select
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#7da626] "
+                    id="categoria"
+                  >
+                    <option value="">Seleccionar opción...</option>
+                    <option value="">Taza</option>
+                    <option value="">Milimetros</option>
+                    <option value="">Centimetros Cubicos</option>
+                    <option value="">Litro</option>
+                    <option value="">Cucharada</option>
+                    <option value="">Cucharadita</option>
+                    <option value="">Gramos</option>
+                    <option value="">kilo</option>
+                    <option value="">Onza</option>
+                    <option value="">Libra</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
 
         <div className="flex justify-center items-center mt-5 mb-5">
           <button
+            onClick={() => setSteps([...steps, 1])}
             type="button"
-            className="  w-32 bg-[#160852] rounded-md text-white font-medium"
+            className="  w-44 h-10 bg-[#160852] hover:bg-[#7da626]  hover:text-black rounded-2xl font-semibold text-white ease-in duration-300"
           >
             + Ingrediente
           </button>
         </div>
 
-        <div className="mt-5 m-b5">
-          <label className="block font-medium text-gray-700">Paso a paso</label>
-          <div className="flex items-start space-x-4 mb-2">
-            <label className="block w-32 h-32 border border-dashed border-gray-400 rounded-md flex items-center justify-center cursor-pointer">
-              <span>Upload</span>
-              <input type="file" className="hidden" />
-            </label>
-            <textarea
-              className="w-full p-2 border border-gray-300 rounded-md"
-              rows="3"
-            ></textarea>
-          </div>
-        </div>
+        {steps2.map((step, index) => {
+          return (
+            // eslint-disable-next-line react/jsx-key
+            <div key={index} className="mt-5 m-b5">
+              <label className="block font-medium text-gray-700">Paso a paso</label>
+              <div className="flex items-start space-x-4 mb-2">
+                <label className="w-32 h-32 border border-dashed border-gray-400 rounded-md flex items-center justify-center cursor-pointer">
+                  <span>Upload</span>
+                  <input type="file" className="hidden" />
+                </label>
+                <textarea
+                  name="deacriptionsteps"
+                  onChange={handleChange}
+                  value={useState['deacriptionsteps']}
+                  className="w-full h-32 p-2 border border-gray-300 rounded-md"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+          );
+        })}
+
         <div className="flex justify-center items-center mt-5 mb-5">
           <button
+            onClick={() => setSteps2([...steps2, 1])}
             type="button"
-            className="  w-32 bg-[#160852] rounded-md text-white font-medium"
+            className="  w-44 h-10 bg-[#160852] hover:bg-[#7da626] hover:text-black rounded-2xl font-semibold text-white ease-in duration-300"
           >
-            + Paso
+            + Pasos
           </button>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-[#7da626] text-white font-bold py-2 rounded-md mt-5 mb-5"
+          className="w-full bg-[#7da626] hover:bg-[#160852] hover:text-white font-semibold text-black py-2 rounded-2xl mt-5 mb-5 uppercase ease-in duration-300"
         >
-          Subir Receta
+          Compartir Receta
         </button>
       </div>
     </div>
