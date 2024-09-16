@@ -134,7 +134,7 @@ const UploadRecipe = (isVisible) => {
               Categoría
             </label>
             <select
-              class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#7da626]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#7da626]"
               id="categoria"
             >
               <option value="">Seleccionar opción...</option>
