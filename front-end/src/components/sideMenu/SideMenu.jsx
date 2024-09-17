@@ -1,13 +1,30 @@
 'use client';
 import { Twitter } from 'react-feather';
 import './acordeonStyle.css';
-
-import { useState } from 'react';
+import { FaUser } from 'react-icons/fa6';
+import { useEffect, useState } from 'react';
 import Accordion from '../accordion/Accordion';
 import Image from 'next/image';
+import { useUserContext } from '../UserProvider';
+import UploadRecipe from '../uploadRecipe/UploadRecipe';
 const SideMenu = ({ showMenu, handleShowMenu }) => {
+  const { user, setUser } = useUserContext();
   const [activeAccordion, setActiveAccordion] = useState('');
+  const [showUploadRecipe, setShowUploadRecipe] = useState(false);
 
+  useEffect(() => {
+    const checkToken = async () => {
+      const currentUser = await JSON.parse(localStorage.user);
+      setUser(currentUser);
+    };
+
+    checkToken();
+  }, [setUser]);
+
+  const handleShowUploadRecipe = () => {
+    setShowUploadRecipe(!showUploadRecipe);
+  };
+  const data = user;
   return (
     <div
       onClick={handleShowMenu}
@@ -140,24 +157,33 @@ const SideMenu = ({ showMenu, handleShowMenu }) => {
         </div>
         <div className="flex justify-center pt-11">
           <button
+            onClick={handleShowUploadRecipe}
             type="submit"
             className=" my-5  w-[183px] h-[48px] bg-[#7DA626] hover:bg-[#160852] hover:shadow-xl text-black font-semibold hover:text-white  px-4 border hover:border-transparent rounded-2xl"
           >
             SUBIR RECETA
           </button>
+          <UploadRecipe
+            onClose={handleShowUploadRecipe}
+            isVisible={showUploadRecipe}
+          />
         </div>
         <div className="flex flex-col justify-between items-center mt-12">
-          <div className="mx-2">
-            <Image
-              className="icon_profile flex items-center"
-              width={60}
-              height={60}
-              src="/img/Registro ilustracion.svg"
-              alt="picture"
-            />
+          <div className="mx-2 w-[60px] h-[60px] icon_profile flex justify-center items-center">
+            {data?.imageUser ? (
+              <Image
+                className="icon_profile flex items-center"
+                width={60}
+                height={60}
+                src={data.imageUser}
+                alt="picture"
+              />
+            ) : (
+              <FaUser className="rounded-full w-[50px] h-[50px]" />
+            )}
           </div>
           <p className="mt-2 text-center w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
-            Camila lopez
+            {data?.username || 'UsuarioError'}
           </p>
         </div>
         <div className=" text-[14px] mt-16 ml-4">
