@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/califications")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class CalificationController {
 
     private final CalificationService calificationService;
