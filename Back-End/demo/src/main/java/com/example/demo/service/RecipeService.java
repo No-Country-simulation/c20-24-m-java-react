@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.RecipeDto;
 import com.example.demo.model.Category;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,5 +19,7 @@ public interface RecipeService {
     void deleteRecipe(Long id);
 
     List<RecipeDto> findRecipesByCategory(Category category);
+
+    List<String> uploadImages(Long recipeId, List<MultipartFile> images);
 
 }

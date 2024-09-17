@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -173,6 +174,32 @@ public class RecipeController {
     @GetMapping("/list/{category}")
     public List<RecipeDto> getRecipesByCategory(@PathVariable Category category) {
         return recipeService.findRecipesByCategory(category);
+    }
+
+    @Operation(
+            summary = "Upload images and associate with a recipe.",
+            description = "Uploads images and associates them with the specified recipe by ID."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "Images uploaded and associated successfully",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(type = "array", implementation = String.class))
+                    }),
+            @ApiResponse(responseCode = "400", description = "Invalid input", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "404", description = "Recipe not found", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                    @Content})
+    })
+    @PostMapping("/upload-images")
+    public ResponseEntity<List<String>> uploadImages(
+            @RequestParam("recipeId") Long recipeId,
+            @RequestParam("images") List<MultipartFile> images) {
+        List<String> imageUrls = recipeService.uploadImages(recipeId, images);
+        return ResponseEntity.ok(imageUrls);
     }
 
 }
