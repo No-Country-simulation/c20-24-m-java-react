@@ -129,7 +129,7 @@ const UploadRecipe = (isVisible) => {
           <div>
             <label
               className="block text-gray-700 font-semibold mb-2"
-              for="categoria"
+              htmlfor="categoria"
             >
               Categoría
             </label>
