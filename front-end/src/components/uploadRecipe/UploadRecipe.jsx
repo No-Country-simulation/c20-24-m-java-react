@@ -167,7 +167,25 @@ const UploadRecipe = ({ isVisible, onClose }) => {
                 Subir Imagen
               </button>
             </div>
-
+        <div className={`flex justify-start  mt-5 mb-5`}>
+          <div>
+            <label
+              className="block text-gray-700 font-semibold mb-2"
+              htmlfor="categoria"
+            >
+              Categoría
+            </label>
+            <select
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#7da626]"
+              id="categoria"
+            >
+              <option value="">Seleccionar opción...</option>
+              <option value="">Dulce</option>
+              <option value="">Salado</option>
+              <option value="">Tragos y bebidas</option>
+            </select>
+          </div>
+        </div>
             <div>
               <label
                 htmlFor="titulo"
@@ -200,7 +218,6 @@ const UploadRecipe = ({ isVisible, onClose }) => {
                 className="w-full p-2 border border-gray-300 rounded-md"
               ></textarea>
             </div>
-
             <div className={`flex justify-start  mt-5 mb-5`}>
               <div>
                 <label

@@ -1,6 +1,7 @@
 'use client';
 import Button from '@/components/button/Button';
 import HeaderLogo from '@/components/headerLogo/HeaderLogo';
+import Loading from '@/components/loading/Loading';
 import MainStart from '@/components/mainStart/MainStart';
 import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
 
@@ -39,7 +40,6 @@ export default function Home() {
           con nosotros!
         </p>
       </div>
-
       <div className="flex justify-center items-center text-center mr-auto p-10 gap-10 ">
         <Button
           stateModal={handleOpenModal}
@@ -150,14 +150,13 @@ export default function Home() {
           />
         </div>
       </div>
-
       <footer className="bg-white h-auto w-[100%]  p-5 stiky mt-10 ">
         <div className="">
           <div className="flex justify-start items-center mb-1">
             <AlertCircle className=" text-white fill-[#160852]" />
-            <h2 class="text-lg font-semibold ml-1">Información de contacto</h2>
+            <h2 className="text-lg font-semibold ml-1">Información de contacto</h2>
           </div>
-          <div class="md:grid  md:grid-cols-7 md:gap-4">
+          <div className="md:grid  md:grid-cols-7 md:gap-4">
             <div className="">
               <h3 className="font-medium ml-3 md:ml-10 mt-5">
                 Desarrolladores back-end
