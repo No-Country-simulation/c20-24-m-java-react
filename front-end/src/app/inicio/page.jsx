@@ -2,12 +2,30 @@
 
 import ScrollInfinite from '@/components/scrollInfinite/ScrollInfinite';
 import SideMenu from '@/components/sideMenu/SideMenu';
+import { useUserContext } from '@/components/UserProvider';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu } from 'react-feather';
 import { IoMenu } from 'react-icons/io5';
 export default function Inicio() {
+  const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(null);
+  const { user, setUser } = useUserContext();
+
+  useEffect(() => {
+    const checkToken = async () => {
+      if (localStorage.user) {
+        const userInfo = await JSON.parse(localStorage.user);
+        // console.log(userInfo);
+        setUser(userInfo);
+        // console.log(user.username);
+      } else {
+        router.push('/');
+      }
+    };
+    checkToken();
+  }, [setUser]);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -17,7 +35,7 @@ export default function Inicio() {
         setShowMenu(false);
       }
     };
-
+    handleWindowResize();
     window.addEventListener('resize', handleWindowResize);
 
     return () => {
@@ -50,6 +68,7 @@ export default function Inicio() {
             {/*  */}
           </div>
           <p>{windowWidth}</p>
+          <p>idUser:{user?.username}</p>
           <div className="flex items-center justify-center lg:hidden">
             <button
               onClick={() => setShowMenu(!showMenu)}

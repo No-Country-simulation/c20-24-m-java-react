@@ -551,8 +551,9 @@ const foodArray = [
     subcategory: 'Carnes',
   },
 ];
-
+const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 const ScrollInfinite = () => {
+  const [dataRecipes, setDataRecipes] = useState([]);
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [offSet, setOffSet] = useState(0);
@@ -560,6 +561,20 @@ const ScrollInfinite = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const elementRef = useRef(null);
 
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      const stoken = await localStorage.getItem('token');
+
+      const response = await axios
+        .get(`${BACK_API_URL}/recipes/list`, {
+          headers: { Authorization: `Bearer ${stoken}` },
+        })
+        .catch((error) => console.log(error));
+      // setDataRecipes(response.data);
+      console.log(dataRecipes);
+    };
+    fetchRecipe();
+  }, []);
   useEffect(() => {
     console.log(elementRef.current);
 

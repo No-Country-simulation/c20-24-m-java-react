@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -5,6 +6,7 @@ import { registerFormDataInputs } from './helpers/registerFormDataInputs';
 import axios from 'axios';
 
 import { X } from 'react-feather';
+import { useUserContext } from '../UserProvider';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -17,6 +19,7 @@ const Login = ({ onClose, typeModal }) => {
   };
   const [userDataInputs, setUserDataInputs] = useState(initialStateDataInput);
   const [errorDataInputs, setErrorDataInputs] = useState(initialStateDataInput);
+  const { setUser, setToken } = useUserContext();
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -32,27 +35,32 @@ const Login = ({ onClose, typeModal }) => {
   const handleSubmit = (e) => {
     // console.log(userDataInputs);
     e.preventDefault();
-    console.log(userDataInputs);
+    // console.log(userDataInputs);
     const data = {
       username: userDataInputs.name,
       email: userDataInputs.name,
       password: userDataInputs.password,
     };
-    console.log(data);
-    console.log(data, 'data');
+    // console.log(data);
+    // console.log(data, 'data');
     axios
       .post(`${BACK_API_URL}/auth/login`, data)
       .then(({ data }) => data)
       .then((data) => {
+        // console.log(data);
         const userInfo = {
-          id: data.user.id,
-          name: data.user.username,
-          email: data.user.email,
-          rol: data.user.rol,
-          image: data.user.image,
+          userId: data.userId,
+          username: data.username,
+          // email: data.user.email,
+          rol: data.rol || null,
+          imageUser: data.image || null,
         };
+        localStorage.setItem('user', JSON.stringify(userInfo));
+        setUser(userInfo);
+        localStorage.setItem('token', data.token);
+        setToken(data.token);
+        console.log(userInfo);
         router.push('/inicio');
-        console.log(data);
       })
       .catch((error) => console.log(error));
   };
