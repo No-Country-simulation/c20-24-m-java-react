@@ -78,7 +78,7 @@ const CardRecipe = ({ user, title, image, description, category, subcategory }) 
           <div className="flex justify-between items-center mt-2">
             <div className="flex justify-start items-center -ml-3 ">
               <div onM className=" ">
-                <Link href={`/perffil/${user}`}>
+                <Link href={`/perfil?user=${user}`}>
                   <Image
                     className="w-[45px] h-[45px] rounded-full"
                     width={300}

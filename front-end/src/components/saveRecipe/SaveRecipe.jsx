@@ -1,7 +1,7 @@
 // import './saveRecipe.styles.css';
 import { useState } from 'react';
 import './save.css';
-const SaveRecipe = ({ height }) => {
+const SaveRecipe = ({ height, idRecipe }) => {
   const [isSave, setIsSave] = useState(false);
 
   return (
