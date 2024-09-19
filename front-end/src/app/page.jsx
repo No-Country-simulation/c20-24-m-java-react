@@ -1,7 +1,7 @@
 'use client';
 import Button from '@/components/button/Button';
 import HeaderLogo from '@/components/headerLogo/HeaderLogo';
-import Loading from '@/components/loading/Loading';
+// import Loading from '@/components/loading/Loading';
 import MainStart from '@/components/mainStart/MainStart';
 import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
 
