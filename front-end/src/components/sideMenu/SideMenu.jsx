@@ -7,6 +7,9 @@ import Accordion from '../accordion/Accordion';
 import Image from 'next/image';
 import { useUserContext } from '../UserProvider';
 import UploadRecipe from '../uploadRecipe/UploadRecipe';
+import { MdOutlineLogout } from 'react-icons/md';
+import ButtonLogOut from '../buttonLogOut/ButtonLogOut';
+import Link from 'next/link';
 const SideMenu = ({ showMenu, handleShowMenu }) => {
   const { user, setUser } = useUserContext();
   const [activeAccordion, setActiveAccordion] = useState('');
@@ -32,7 +35,7 @@ const SideMenu = ({ showMenu, handleShowMenu }) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="select-none bg-white w-[280px] h-[calc(var(--vh, 1vh) * 100)] p-1 overflow-auto shadow-md fixed z-50  top-0"
+        className="select-none bg-white w-[280px] h-[calc(var(--vh, 1vh) * 100)] p-1 overflow-auto shadow-md fixed   top-0"
       >
         <div className="flex flex-col justify-center items-center mt-5 mb-7">
           <Image width={130} height={130} src="/img/Logo.svg" alt="picture" />
@@ -163,30 +166,39 @@ const SideMenu = ({ showMenu, handleShowMenu }) => {
           >
             SUBIR RECETA
           </button>
-          <UploadRecipe
-            onClose={handleShowUploadRecipe}
-            isVisible={showUploadRecipe}
-          />
+          {showUploadRecipe && (
+            <UploadRecipe
+              onClose={handleShowUploadRecipe}
+              isVisible={showUploadRecipe}
+            />
+          )}
         </div>
         <div className="flex flex-col justify-between items-center mt-12">
-          <div className="mx-2 w-[60px] h-[60px] icon_profile flex justify-center items-center">
-            {data?.imageUser ? (
-              <Image
-                className="icon_profile flex items-center"
-                width={60}
-                height={60}
-                src={data.imageUser}
-                alt="picture"
-              />
-            ) : (
-              <FaUser className="rounded-full w-[50px] h-[50px]" />
-            )}
-          </div>
-          <p className="mt-2 text-center w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
-            {data?.username || 'UsuarioError'}
-          </p>
+          <Link href="/perfil">
+            <div className="mx-2 w-[60px] h-[60px] icon_profile flex justify-center items-center">
+              {data?.imageUser ? (
+                <Image
+                  className="icon_profile flex items-center"
+                  width={60}
+                  height={60}
+                  src={data.imageUser}
+                  alt="picture"
+                />
+              ) : (
+                <FaUser className="rounded-full w-[50px] h-[50px]" />
+              )}
+            </div>
+          </Link>
+          <Link href="/perfil">
+            <p className="mt-2 text-center w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
+              {data?.username || 'UsuarioError'}
+            </p>
+          </Link>
         </div>
-        <div className=" text-[14px] mt-16 ml-4">
+        <div className=" text-[14px] mt-10 ml-4">
+          <div className="flex justify-start items-center">
+            <ButtonLogOut />
+          </div>
           <div className="flex justify-start items-center">
             <Image
               className="mr-1"

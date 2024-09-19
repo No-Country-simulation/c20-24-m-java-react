@@ -19,7 +19,7 @@ export default function Inicio() {
         const userInfo = await JSON.parse(localStorage.user);
         // console.log(userInfo);
         setUser(userInfo);
-        // console.log(user.username);
+        console.log(userInfo, 'userInfo');
       } else {
         router.push('/');
       }
@@ -49,7 +49,7 @@ export default function Inicio() {
     <main className=" w-full">
       <div className="flex ">
         <div
-          className={`${showMenu ? 'visible ' : 'hidden '} ${windowWidth > 1024 ? 'w-[300px]' : ''} lg:block `}
+          className={`${showMenu ? 'visible ' : 'hidden '} ${windowWidth > 1024 ? 'w-[300px]' : ''} lg:flex`}
         >
           <SideMenu
             showMenu={showMenu}
