@@ -31,6 +31,7 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Category category;
     private String time;
+    private String difficulty;
     private String commensal;
     private String amount;
     @ElementCollection

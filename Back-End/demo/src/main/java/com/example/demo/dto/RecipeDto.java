@@ -36,7 +36,7 @@ public record RecipeDto(
         @NotBlank(message = "El número de comensales no puede estar vacío.")
         String commensal,
 
-        @NotBlank(message = "La cantidad no puede estar vacía.")
+//        @NotBlank(message = "La cantidad no puede estar vacía.")
         String amount,
 
         List<String> imageUrls,
@@ -44,7 +44,9 @@ public record RecipeDto(
         List<CalificationDto> califications,
 
         @NotNull(message = "El 'ID_USER' no puede estar vacío.")
-        Long userId
+        Long userId,
+        @NotBlank(message = "La dificultad no puede estar vacío.")
+        String difficulty
 
 ) implements Serializable {
 }

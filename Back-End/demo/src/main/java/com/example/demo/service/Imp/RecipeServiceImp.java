@@ -70,6 +70,7 @@ public class RecipeServiceImp implements RecipeService {
         recipe.setInstructions(recipeUpdate.instructions());
         recipe.setCategory(recipeUpdate.category());
         recipe.setTime(recipeUpdate.time());
+        recipe.setDifficulty(recipeUpdate.difficulty());
         recipe.setCommensal(recipeUpdate.commensal());
         recipe.setAmount(recipeUpdate.amount());
 
