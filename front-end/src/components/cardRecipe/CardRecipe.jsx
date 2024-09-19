@@ -8,18 +8,27 @@ import ModalRecipeDetail from '../modalRecipeDetail/ModalRecipeDetail';
 import PopupProfile from '../popupProfile/PopupProfile';
 import AnotherProfile from '../anotherProfile/AnotherProfile';
 import Link from 'next/link';
+import ModalAnotherProfile from '../modalAnotherProfile/ModalAnotherProfile';
 // import rsat from '../ratingStars/rsat';
 const CardRecipe = ({ user, title, image, description, category, subcategory }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isModalAnotherVisible, setIsModalAnotherVisible] = useState(false);
 
   const handleModal = () => {
     console.log(isVisible);
     setIsVisible(!isVisible);
   };
+  const handleAnotherProfile = () => {
+    setIsModalAnotherVisible(!isModalAnotherVisible);
+  };
   // const [isNear, fromRef] = useNearsatcreen();
   return (
     <div>
+      <ModalAnotherProfile
+        isVisible={isModalAnotherVisible}
+        onClose={handleAnotherProfile}
+      />
       <ModalRecipeDetail
         isVisible={isVisible}
         onClose={handleModal}
@@ -79,7 +88,10 @@ const CardRecipe = ({ user, title, image, description, category, subcategory }) 
                   />
                 </Link>
               </div>
-              <p className="ml-2 text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
+              <p
+                onClick={handleAnotherProfile}
+                className="ml-2 text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold"
+              >
                 {user}
               </p>
               {/* <div className="fixed">
