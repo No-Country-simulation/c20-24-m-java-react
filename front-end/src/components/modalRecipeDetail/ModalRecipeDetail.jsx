@@ -29,10 +29,10 @@ const ModalRecipeDetail = ({
       <div
         id="modal_container"
         onClick={(e) => e.stopPropagation()}
-        className={`flex flex-col overflow-auto h-[750px] w-[80rem] xl:ml-72 xl: xl:w-auto xl:max-w-screen-xl lg:mx-5 mx-5  bg-blue-400 rounded-md  shadow transition-all ${isVisible ? 'scale-100 opacity-100' : 'scale-125 opacity-0'}`}
+        className={` h-[calc(var(--vh, 1vh) * 100)] flex flex-col overflow-auto h-[800px] w-[80rem] xl:ml-72 xl:mr-40  xl:max-w-screen  lg:mx-5 mx-5  bg-white rounded-md  shadow transition-all ${isVisible ? 'scale-100 opacity-100' : 'scale-125 opacity-0'}`}
       >
         <div className={`flex flex-col justify-center items-center my-5`}>
-          <div className="flex flex-col justify-center items-center rounded-3xl w-auto h-auto my-auto mx-1  md:flex md:flex-row-reverse xl:flex xl:justify-center xl:items-center xl:w-auto xl:h-auto xl:mx-1 xl:p-8  xl:bg-green-500 lg:bg-pink-900 md:bg-deep-orange-700 sm:bg-amber-400 bg-pink-400    md:w-auto md:h-auto md:mx-2 sm:w-auto sm:h-auto sm:mx-1 sm:flex sm:flex-col sm:justify-center sm:items-center ">
+          <div className="flex flex-col justify-center items-center rounded-3xl w-auto h-auto my-auto mx-1  md:flex md:flex-row-reverse xl:flex xl:justify-center xl:items-center xl:w-full xl:h-auto xl:mx-10 xl:p-8  bg-[#fff8f2]   md:w-auto md:h-auto md:mx-2 sm:w-auto sm:h-auto sm:mx-1 sm:flex sm:flex-col sm:justify-center sm:items-center ">
             <div className="mb-1 mx-10 bg-blue-gray-800 w-auto h-auto rounded-3xl my-5 ">
               {/* <img
                 src={image}
@@ -181,7 +181,7 @@ const ModalRecipeDetail = ({
           </div>
           {/*  */}
           <div className="flex justify-center items-center w-full">
-            <div className="my-3 mx-1 flex justify-center items-center p-3 rounded-3xl  h-auto xl:w-[69rem] md:w-full sm:w-full bg-[#33cfa8]">
+            <div className="my-3 mx-1 flex justify-center items-center p-3 rounded-3xl  h-auto xl:w-[90rem] md:w-full sm:w-full bg-[#fff8f2]">
               <div className="grid grid-cols-3 gap-4 justify-center items-center">
                 <div className="flex flex-col justify-center items-center mx-5">
                   <Share2 height={23} />
@@ -205,7 +205,7 @@ const ModalRecipeDetail = ({
 
           <div className="xl:flex xl:flex-row md:flex md:flex-row sm:flex sm:flex-col justify-between items-start mx-1">
             <div className="w-auto h-auto mx-1 flex flex-col justify-center items-center rounded-3xl bg-[#fff8f2] my-1">
-              <h3 className="text-2xl mt-1 font-semibold">Paso a paso</h3>
+              <h3 className="text-2xl mt-5 font-semibold">Paso a paso</h3>
               <Image
                 sizes="(max-width: 380px) 50vw,400px"
                 height={100}
@@ -256,7 +256,9 @@ const ModalRecipeDetail = ({
             </div>
             <div className="">
               <div className="flex flex-col  xl:w-[400px] w-auto h-auto my-2 mx-1 p-3 rounded-2xl  bg-[#fff8f2]">
-                <h3 className="text-2xl font-semibold ml-5">Ingredientes</h3>
+                <h3 className="flex text-2xl font-semibold ml-5 mt-5">
+                  Ingredientes
+                </h3>
                 <div className="flex justify-center items-center pt-5 ml-5 pb-5">
                   <FaCircleArrowRight className="w-[23px] h-[23px]" />
                   <p className="ml-1">Ingredientes 250g</p>
