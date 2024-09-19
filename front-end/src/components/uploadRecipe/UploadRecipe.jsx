@@ -1,6 +1,6 @@
 'use client';
 import axios from 'axios';
-import { use, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 const UploadRecipe = ({ isVisible, onClose }) => {
@@ -8,10 +8,15 @@ const UploadRecipe = ({ isVisible, onClose }) => {
   const [steps2, setSteps2] = useState([1]);
 
   const [ImagePrevius, setImagePrevious] = useState(null);
+
+  useEffect(() => {
+    return () => {};
+  }, []);
   const changeImage = (e) => {
     const reader = new FileReader();
-
-    reader.readAsDataURL(e.target.file[0]);
+    console.log(e.target.files[0]);
+    const img = e.target.files[0];
+    reader.readAsDataURL(img);
     reader.onload = (e) => {
       e.preventDefault();
       setImagePrevious(e.target.result);
@@ -99,9 +104,7 @@ const UploadRecipe = ({ isVisible, onClose }) => {
     };
     console.log(token);
     axios
-      .post(`${BACK_API_URL}/recipes/save`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(`${BACK_API_URL}/recipes/save`, data)
       .then(({ data }) => data)
       .then((data) => {
         console.log(data);
@@ -129,63 +132,61 @@ const UploadRecipe = ({ isVisible, onClose }) => {
           <form onSubmit={handleSubmit}>
             {/*Subir imagenes */}
             <div action="#" className="space-y-6 mt-5 mb-5">
-              <div className="border-dashed border-2 border-gray-400 rounded-3xl p-6 flex items-center justify-center">
-                <label
+              <div className="relative  border-dashed border-2 border-gray-400 rounded-3xl p-6 flex items-center justify-center hover:bg-transparent hover:border-2 hover:border-dashed hover:border-[#d0d7de]">
+                {/* <label
                   htmlFor="uploadImage"
                   className="text-gray-600 text-center cursor-pointer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-12 w-12 mx-auto"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 16l6-6m0 0l6 6m-6-6v12m6-12l6 6M16 7V5a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2"
+                ></label> */}
+                <input
+                  type="file"
+                  id="uploadImage"
+                  className=" outline-none absolute m-0 p-0 w-full h-full cursor-pointer opacity-0 "
+                  accept="image/*"
+                  onChange={(e) => {
+                    changeImage(e);
+                  }}
+                />
+                <div>
+                  {ImagePrevius ? (
+                    <img
+                      src={ImagePrevius}
+                      alt="picture"
+                      className="w-[200px] h-[200px] object-cover"
                     />
-                  </svg>
-                  <span className="block mt-2">
-                    Elija una imagen o arrástrela y suéltela aquí
-                  </span>
-                </label>
-                <input type="file" id="uploadImage" className="hidden" />
-              </div>
-              <div className="flex justify-center items-center">
-                <img src={ImagePrevius} alt="" height="150px" width="250px" />
+                  ) : (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-12 w-12 mx-auto"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M3 16l6-6m0 0l6 6m-6-6v12m6-12l6 6M16 7V5a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2"
+                        />
+                      </svg>
+                      <span className="block mt-2">
+                        Elija una imagen o arrástrela y suéltela aquí
+                      </span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className="flex justify-center items-center mt-5 mb-14">
+            {/* <div className="flex justify-center items-center mt-5 mb-14">
               <button
                 type="button"
                 className="t w-72 h-10 bg-[#160852] hover:bg-[#7da626]  hover:text-black font-semibold rounded-2xl text-white ease-in duration-300 "
               >
                 Subir Imagen
               </button>
-            </div>
-        <div className={`flex justify-start  mt-5 mb-5`}>
-          <div>
-            <label
-              className="block text-gray-700 font-semibold mb-2"
-              htmlfor="categoria"
-            >
-              Categoría
-            </label>
-            <select
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#7da626]"
-              id="categoria"
-            >
-              <option value="">Seleccionar opción...</option>
-              <option value="">Dulce</option>
-              <option value="">Salado</option>
-              <option value="">Tragos y bebidas</option>
-            </select>
-          </div>
-        </div>
+            </div> */}
+
             <div>
               <label
                 htmlFor="titulo"
@@ -218,6 +219,7 @@ const UploadRecipe = ({ isVisible, onClose }) => {
                 className="w-full p-2 border border-gray-300 rounded-md"
               ></textarea>
             </div>
+
             <div className={`flex justify-start  mt-5 mb-5`}>
               <div>
                 <label
@@ -295,16 +297,13 @@ const UploadRecipe = ({ isVisible, onClose }) => {
                 </select>
               </div>
             </div>
-
+            <label className="block font-medium text-gray-700">Ingredientes</label>
             {steps.map((step, index) => {
               const ingredientsKey = `ingredients${index}`;
               const amountKey = `amount${index}`;
               const measurementKey = `measurement${index}`;
               return (
                 <div key={index} className="w-full mt-5 mb-5">
-                  <label className="block font-medium text-gray-700">
-                    Ingredientes
-                  </label>
                   <div className="flex space-x-4 mb-2">
                     <input
                       name={ingredientsKey}
@@ -352,9 +351,10 @@ const UploadRecipe = ({ isVisible, onClose }) => {
 
             <div className="flex justify-center items-center mt-5 mb-5">
               <button
+                disabled={steps.length === 3}
                 onClick={() => setSteps([...steps, 1])}
                 type="button"
-                className="  w-44 h-10 bg-[#160852] hover:bg-[#7da626]  hover:text-black rounded-2xl font-semibold text-white ease-in duration-300"
+                className="bl  w-44 h-10 bg-[#160852] hover:bg-[#7da626]  hover:text-black rounded-2xl font-semibold text-white ease-in duration-300"
               >
                 + Ingrediente
               </button>
@@ -386,6 +386,7 @@ const UploadRecipe = ({ isVisible, onClose }) => {
 
             <div className="flex justify-center items-center mt-5 mb-5">
               <button
+                disabled={steps2.length === 1}
                 onClick={() => setSteps2([...steps2, 1])}
                 type="button"
                 className="  w-44 h-10 bg-[#160852] hover:bg-[#7da626] hover:text-black rounded-2xl font-semibold text-white ease-in duration-300"

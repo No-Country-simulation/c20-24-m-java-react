@@ -5,9 +5,13 @@ import LikeRecipe from '../likeRecipe/LikeRecipe';
 import { Share2 } from 'react-feather';
 import { useState } from 'react';
 import ModalRecipeDetail from '../modalRecipeDetail/ModalRecipeDetail';
+import PopupProfile from '../popupProfile/PopupProfile';
+import AnotherProfile from '../anotherProfile/AnotherProfile';
+import Link from 'next/link';
 // import rsat from '../ratingStars/rsat';
 const CardRecipe = ({ user, title, image, description, category, subcategory }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const handleModal = () => {
     console.log(isVisible);
@@ -64,18 +68,24 @@ const CardRecipe = ({ user, title, image, description, category, subcategory }) 
           <p className="text-[13px] h-[40px] items-start">{description || ''}</p>
           <div className="flex justify-between items-center mt-2">
             <div className="flex justify-start items-center -ml-3 ">
-              <div className=" ">
-                <Image
-                  className="w-[45px] h-[45px] rounded-full"
-                  width={300}
-                  height={200}
-                  src="/img/Registro ilustracion.svg"
-                  alt="picture"
-                />
+              <div onM className=" ">
+                <Link href={`/perffil/${user}`}>
+                  <Image
+                    className="w-[45px] h-[45px] rounded-full"
+                    width={300}
+                    height={200}
+                    src="/img/Registro ilustracion.svg"
+                    alt="picture"
+                  />
+                </Link>
               </div>
               <p className="ml-2 text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
                 {user}
               </p>
+              {/* <div className="fixed">
+                <AnotherProfile user={user} />
+              </div> */}
+              <PopupProfile idUser={user} />
             </div>
 
             <div className="flex justify-between items-center ">

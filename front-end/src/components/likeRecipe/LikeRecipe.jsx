@@ -4,7 +4,12 @@ const LikeRecipe = ({ height }) => {
   const [isLike, setIsLike] = useState(false);
   return (
     <label className="container w-[30px] h-[30px]">
-      <input checked="checked" type="checkbox" onClick={() => setIsLike(!isLike)} />
+      <input
+        defaultChecked={false}
+        checked="checked"
+        type="checkbox"
+        onClick={() => setIsLike(!isLike)}
+      />
       <div className={`checkmark w-[${height || '30'}px] h-[30px] `}>
         <svg viewBox="0 0 256 256">
           <rect fill="none" height="256" width="256"></rect>

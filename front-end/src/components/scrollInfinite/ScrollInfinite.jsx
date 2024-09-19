@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from 'react';
 import CardRecipe from '../cardRecipe/CardRecipe';
 import axios from 'axios';
+import { useUserContext } from '../UserProvider';
+import { useRouter } from 'next/navigation';
 
 const foodArray = [
   {
@@ -553,28 +555,74 @@ const foodArray = [
 ];
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 const ScrollInfinite = () => {
-  const [dataRecipes, setDataRecipes] = useState([]);
+  // const [dataRecipes, setDataRecipes] = useState([]);
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [offSet, setOffSet] = useState(0);
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const elementRef = useRef(null);
+  const { setToken } = useUserContext();
+  const { setUser } = useUserContext();
+  // const { dataRecipes, setDataRecipes } = useUserContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkToken = async () => {
+      if (localStorage.user) {
+        const currentUser = await JSON.parse(localStorage.user);
+        setUser(currentUser);
+      } else {
+        router.push('/ingreso');
+      }
+    };
+
+    checkToken();
+  }, [setUser]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
       const stoken = await localStorage.getItem('token');
-
+      setToken(stoken);
+      console.log(stoken);
       const response = await axios
-        .get(`${BACK_API_URL}/recipes/list`, {
-          headers: { Authorization: `Bearer ${stoken}` },
-        })
+        .get(
+          `${BACK_API_URL}/recipes/list`,
+          //   ,
+          //   {
+          //   headers: {
+          //     Authorization: `Bearer ${stoken}`,
+          //     'Access-Control-Allow-Origin': '*',
+          //     'Content-Type': 'application/json',
+          //   },
+          // }
+        )
         .catch((error) => console.log(error));
       // setDataRecipes(response.data);
-      console.log(dataRecipes);
+      console.log(response);
+      // try {
+      //   const response = await fetch(`${BACK_API_URL}/recipes/list`, {
+      //     method: 'get',
+      //     headers: {
+      //       Authorization: `Bearer ${stoken}`,
+      //       'Content-Type': 'application/json',
+      //     },
+      //     mode: 'cors',
+      //     cache: 'default',
+      //   })
+      //     .then((response) => response.json())
+      //     .then((data) => console.log(JSON.stringify(data)))
+      //     .catch((error) => console.log(error));
+      //   const data = await response.json();
+      //   console.log(data);
+      // } catch (error) {
+      //   console.log(error);
+      // }
+      // console.log(dataRecipes);
     };
     fetchRecipe();
-  }, []);
+  }, [setToken]);
+
   useEffect(() => {
     console.log(elementRef.current);
 
@@ -606,6 +654,9 @@ const ScrollInfinite = () => {
       setHasMore(false);
     } else {
       setData([...data, ...view]);
+      // console.log(data);
+      // setDataRecipes([...dataRecipes, ...view]);
+      // console.log(dataRecipes);
       setCurrentPage((currentPage) => currentPage + 1);
     }
   };
