@@ -3,13 +3,11 @@ import Link from 'next/link';
 import { Globe, Instagram, MapPin } from 'react-feather';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
 
-const UserProfile = () => {
+const UserProfile = ({ onClose }) => {
   return (
     <div className="flex flex-col justify-center items-center relative">
-      <div className="fixed top-[12px] left-[30px]">
-        <Link href={'/inicio'}>
-          <IoArrowBackCircleOutline className="w-[80px] h-[80px] text-white" />
-        </Link>
+      <div onClick={onClose} className="fixed top-[12px] left-[30px]">
+        <IoArrowBackCircleOutline className="w-[80px] h-[80px] text-white" />
       </div>
       <div className="mt-1 bg-blue-gray-600 w-[252px] h-[252px] rounded-[50%] shadow-md ">
         <Image
