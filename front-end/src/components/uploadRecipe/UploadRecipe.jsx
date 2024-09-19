@@ -13,14 +13,19 @@ const UploadRecipe = ({ isVisible, onClose }) => {
     return () => {};
   }, []);
   const changeImage = (e) => {
+    const { value, name } = e.target;
     const reader = new FileReader();
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     const img = e.target.files[0];
+    // console.log(img);
     reader.readAsDataURL(img);
     reader.onload = (e) => {
       e.preventDefault();
       setImagePrevious(e.target.result);
     };
+    setUserDataImage(img);
+    // console.log(userDataImage);
+    // console.log(userDataImage);
   };
 
   const initialStateDataInput = {
@@ -50,7 +55,11 @@ const UploadRecipe = ({ isVisible, onClose }) => {
 
     // confirmPassword: '',
   };
+  const initialStateDataImage = {
+    image: '',
+  };
   const [userDataInputs, setUserDataInputs] = useState(initialStateDataInput);
+  const [userDataImage, setUserDataImage] = useState(null);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -59,6 +68,7 @@ const UploadRecipe = ({ isVisible, onClose }) => {
       ...userDataInputs,
       [name]: value,
     });
+
     // console.log(userDataInputs);
     //setErrorDataInputs(validateRegister({ ...userDataInputs, [name]: value }));
     // console.log(errorDataInputs);
@@ -75,6 +85,7 @@ const UploadRecipe = ({ isVisible, onClose }) => {
       description: userDataInputs.overview,
       category: userDataInputs.category,
       time: userDataInputs.time,
+      difficulty: userDataInputs.difficulty,
       commensal: userDataInputs.diners,
       ingredients:
         userDataInputs.ingredients0 +
@@ -102,12 +113,37 @@ const UploadRecipe = ({ isVisible, onClose }) => {
         userDataInputs.measurement3,
       instructions: userDataInputs.step,
     };
-    console.log(token);
+    // console.log(token);
     axios
-      .post(`${BACK_API_URL}/recipes/save`, data)
+      .post(`${BACK_API_URL}/recipes/save`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(({ data }) => data)
       .then((data) => {
         console.log(data);
+        console.log(userDataImage);
+        // const imagen = userDataImage ? userDataImage : null;
+        if (userDataImage) {
+          const formData = new FormData();
+          formData.append('image', userDataImage);
+          formData.append('recipeId', data.id);
+          // console.log(formData?.image[0]);
+          const file = {
+            recipeId: data.id,
+            images: formData.get('image'),
+          };
+          console.log(formData, 'file');
+          axios
+            .post(`${BACK_API_URL}/recipes/upload-images`, file, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+              },
+            })
+            .then(({ data }) => data)
+            .then((data) => console.log(data))
+            .catch((error) => console.log(error));
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -139,6 +175,7 @@ const UploadRecipe = ({ isVisible, onClose }) => {
                 ></label> */}
                 <input
                   type="file"
+                  name="image"
                   id="uploadImage"
                   className=" outline-none absolute m-0 p-0 w-full h-full cursor-pointer opacity-0 "
                   accept="image/*"

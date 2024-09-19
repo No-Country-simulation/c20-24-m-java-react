@@ -10,7 +10,7 @@ import UploadRecipe from '../uploadRecipe/UploadRecipe';
 import { MdOutlineLogout } from 'react-icons/md';
 import ButtonLogOut from '../buttonLogOut/ButtonLogOut';
 import Link from 'next/link';
-const SideMenu = ({ showMenu, handleShowMenu }) => {
+const SideMenu = ({ showMenu, handleShowMenu, setType }) => {
   const { user, setUser } = useUserContext();
   const [activeAccordion, setActiveAccordion] = useState('');
   const [showUploadRecipe, setShowUploadRecipe] = useState(false);
@@ -25,6 +25,7 @@ const SideMenu = ({ showMenu, handleShowMenu }) => {
   }, [setUser]);
 
   const handleShowUploadRecipe = () => {
+    console.log(showMenu, 'showMenu');
     setShowUploadRecipe(!showUploadRecipe);
   };
   const data = user;
@@ -65,7 +66,7 @@ const SideMenu = ({ showMenu, handleShowMenu }) => {
         </div>
         <hr className="w-[15rem] h-px mx-auto my-4 bg-gray-900 border-0 rounded  dark:bg-white"></hr>
         <div className="h-[300px]">
-          <Accordion
+          {/* <Accordion
             title={'Dulce'}
             icon={
               <Image
@@ -146,7 +147,40 @@ const SideMenu = ({ showMenu, handleShowMenu }) => {
                 <p>Sin alcohol</p>
               </li>
             </ul>
-          </Accordion>
+          </Accordion> */}
+          <div
+            onClick={() => setType('SWEET')}
+            className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer"
+          >
+            <Image
+              width={30}
+              height={30}
+              src="/icons/hugeicons--apple-pie.svg"
+              alt="picture"
+            />
+            <p className="ml-1">Dulce</p>
+          </div>
+          <div
+            onClick={() => setType('SAVORY')}
+            className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer"
+          >
+            <Image
+              width={30}
+              height={30}
+              src="/icons/mdi--food-italian (1).svg"
+              alt="picture"
+            />
+            <p className="ml-1">Salado</p>
+          </div>
+          <div className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer">
+            <Image
+              width={30}
+              height={30}
+              src="/icons/entypo--drink.svg"
+              alt="picture"
+            />
+            <p className="ml-1">Tragos y bebidas</p>
+          </div>
           <div className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer">
             <Image
               className="mr-1"

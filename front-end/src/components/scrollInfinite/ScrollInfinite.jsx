@@ -554,8 +554,8 @@ const foodArray = [
   },
 ];
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
-const ScrollInfinite = () => {
-  // const [dataRecipes, setDataRecipes] = useState([]);
+const ScrollInfinite = ({ dataExternal, type }) => {
+  const [dataRecipes, setDataRecipes] = useState([]);
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [offSet, setOffSet] = useState(0);
@@ -581,25 +581,37 @@ const ScrollInfinite = () => {
   }, [setUser]);
 
   useEffect(() => {
+    console.log(type, 'type');
+    // this.forceUpdate();
     const fetchRecipe = async () => {
       const stoken = await localStorage.getItem('token');
       setToken(stoken);
-      console.log(stoken);
-      const response = await axios
-        .get(
-          `${BACK_API_URL}/recipes/list`,
-          //   ,
-          //   {
-          //   headers: {
-          //     Authorization: `Bearer ${stoken}`,
-          //     'Access-Control-Allow-Origin': '*',
-          //     'Content-Type': 'application/json',
-          //   },
-          // }
-        )
-        .catch((error) => console.log(error));
+      // console.log(stoken);
+      // if (type === 'SWEET') {
+      // }
+      const path =
+        type === 'SWEET' ? 'list/SWEET' : type === 'SAVORY' ? 'list/SAVORY' : 'list';
+      console.log(path, 'path');
+      const response = await axios.get(`${BACK_API_URL}/recipes/${path}`, {
+        headers: {
+          Authorization: `Bearer ${stoken}`,
+        },
+      });
+
+      // if (dataRecipes?.length == 0) {
+      //   setDataRecipes(response.data);
+      // }
+      setDataRecipes(response.data);
+
+      console.log(response.data, 'que onda');
+      console.log(dataRecipes, 'dataRecipes');
+      // console.log(data, 'data');
+      // console.log(dataExternal, 'dataExternal');
+
       // setDataRecipes(response.data);
-      console.log(response);
+      // console.log(response.data);
+      // console.log(showGlobal);
+      // console.log(typeData, 'typeData');
       // try {
       //   const response = await fetch(`${BACK_API_URL}/recipes/list`, {
       //     method: 'get',
@@ -621,10 +633,10 @@ const ScrollInfinite = () => {
       // console.log(dataRecipes);
     };
     fetchRecipe();
-  }, [setToken]);
+  }, [setToken, type, setDataRecipes]);
 
   useEffect(() => {
-    console.log(elementRef.current);
+    console.log(dataRecipes);
 
     const observer = new IntersectionObserver(OnIntersection);
     if (observer && elementRef.current) {
@@ -633,7 +645,7 @@ const ScrollInfinite = () => {
     return () => {
       if (observer) observer.disconnect();
     };
-  }, [data]);
+  }, [data, dataRecipes, setDataRecipes]);
 
   const OnIntersection = (entries) => {
     const firstEntry = entries[0];
@@ -648,7 +660,9 @@ const ScrollInfinite = () => {
   };
   const getData = () => {
     // axios.get(``);
-    const view = getPaginatedData(foodArray);
+    // console.log('asdas');
+    const view = getPaginatedData(dataRecipes);
+    // console.log(view, 'adasda');
     // console.log(view);
     if (view.length === 0) {
       setHasMore(false);
@@ -662,27 +676,33 @@ const ScrollInfinite = () => {
   };
   return (
     <>
-      <div>
-        {data.map((food) => (
-          <CardRecipe
-            key={food.id}
-            title={food.name}
-            image={food.image}
-            user={food.user}
-            description={food.description}
-            category={food.category}
-            subcategory={food.subcategory}
-          />
-        ))}
-      </div>
+      {dataRecipes?.length > 0 ? (
+        <>
+          <div>
+            {data.map((food) => (
+              <CardRecipe
+                key={food.id}
+                title={food.title}
+                image={food.imageUrls[0]}
+                user={food.userId}
+                description={food.description}
+                category={food.category}
+                subcategory={food.subcategory}
+              />
+            ))}
+          </div>
 
-      {hasMore && (
-        <div className="" ref={elementRef}>
-          {' '}
-          Cargando Recetas
-        </div>
+          {hasMore && (
+            <div className="" ref={elementRef}>
+              {' '}
+              Cargando Recetas
+            </div>
+          )}
+          {/*  */}
+        </>
+      ) : (
+        <p> No hay recetas</p>
       )}
-      {/*  */}
     </>
   );
 };
