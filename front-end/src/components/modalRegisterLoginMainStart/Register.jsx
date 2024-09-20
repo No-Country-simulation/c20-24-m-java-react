@@ -44,7 +44,11 @@ const Register = ({ onClose, typeModal }) => {
     axios
       .post(`${BACK_API_URL}/auth/register`, data)
       .then(({ data }) => data)
-      .then(() => console.log('Usuario creado'))
+      .then((data) => {
+        console.log('Usuario creado');
+        console.log(data);
+        // axios.post(`${BACK_API_URL}/favorites/save`);
+      })
       .catch((error) => console.log(error));
   };
   return (

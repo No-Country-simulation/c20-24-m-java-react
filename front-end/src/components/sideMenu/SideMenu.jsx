@@ -10,7 +10,7 @@ import UploadRecipe from '../uploadRecipe/UploadRecipe';
 import { MdOutlineLogout } from 'react-icons/md';
 import ButtonLogOut from '../buttonLogOut/ButtonLogOut';
 import Link from 'next/link';
-const SideMenu = ({ showMenu, handleShowMenu, setType }) => {
+const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
   const { user, setUser } = useUserContext();
   const [activeAccordion, setActiveAccordion] = useState('');
   const [showUploadRecipe, setShowUploadRecipe] = useState(false);
@@ -39,7 +39,9 @@ const SideMenu = ({ showMenu, handleShowMenu, setType }) => {
         className="select-none bg-white w-[280px] h-[calc(var(--vh, 1vh) * 100)] p-1 overflow-auto shadow-md fixed   top-0"
       >
         <div className="flex flex-col justify-center items-center mt-5 mb-7">
-          <Image width={130} height={130} src="/img/Logo.svg" alt="picture" />
+          <Link href="/inicio">
+            <Image width={130} height={130} src="/img/Logo.svg" alt="picture" />
+          </Link>
           {/* <h1 className="font-abril font-bold text-[28px]">Foodies</h1> */}
         </div>
         <div className="flex justify-start items-center ml-4 text-[18px] font-semibold text-center">
@@ -149,7 +151,7 @@ const SideMenu = ({ showMenu, handleShowMenu, setType }) => {
             </ul>
           </Accordion> */}
           <div
-            onClick={() => setType('SWEET')}
+            onClick={() => setTypeGeneric('SWEET')}
             className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer"
           >
             <Image
@@ -161,7 +163,7 @@ const SideMenu = ({ showMenu, handleShowMenu, setType }) => {
             <p className="ml-1">Dulce</p>
           </div>
           <div
-            onClick={() => setType('SAVORY')}
+            onClick={() => setTypeGeneric('SAVORY')}
             className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer"
           >
             <Image
@@ -172,7 +174,10 @@ const SideMenu = ({ showMenu, handleShowMenu, setType }) => {
             />
             <p className="ml-1">Salado</p>
           </div>
-          <div className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer">
+          <div
+            onClick={() => setTypeGeneric('DRINKS_COCKTAILS')}
+            className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer"
+          >
             <Image
               width={30}
               height={30}

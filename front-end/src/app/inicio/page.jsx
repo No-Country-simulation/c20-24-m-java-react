@@ -1,6 +1,9 @@
 'use client';
 
 import ScrollInfinite from '@/components/scrollInfinite/ScrollInfinite';
+import ScrollInfiniteDRINKS_COCKTAILS from '@/components/scrollInfiniteDRINKS_COCKTAILS/ScrollInfiniteDRINKS_COCKTAILS';
+import ScrollInfiniteSAVORY from '@/components/scrollInfiniteSAVORY/ScrollInfiniteSAVORY';
+import ScrollInfiniteSWEET from '@/components/scrollInfiniteSWEET/ScrollInfiniteSWEET';
 import SideMenu from '@/components/sideMenu/SideMenu';
 import { useUserContext } from '@/components/UserProvider';
 import axios from 'axios';
@@ -15,7 +18,7 @@ export default function Inicio() {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(null);
-  const [showGlobal, setShowGlobal] = useState(true);
+  const [showGlobal, setShowGlobal] = useState('list');
   const [typeData, setTypeData] = useState([]);
   const [type, setType] = useState('list');
   const { user, setUser } = useUserContext();
@@ -36,17 +39,6 @@ export default function Inicio() {
   }, [setUser, typeData]);
 
   useEffect(() => {
-    const control = () => {
-      console.log(type, 'type page');
-      if (type === 'SWEET') {
-        setShowGlobal(false);
-        setShowGlobal(true);
-      }
-    };
-    control();
-  }, [type, setType]);
-
-  useEffect(() => {
     const fetchRecipe = async () => {
       const stoken = await localStorage.getItem('token');
       setToken(stoken);
@@ -60,7 +52,37 @@ export default function Inicio() {
           })
           .catch((error) => console.log(error));
         setTypeData(response?.data);
-        // console.log(response.data);
+        console.log(response.data, 'aqui');
+      }
+      const userInfo = await JSON.parse(localStorage.user);
+      console.log(userInfo.userId, 'user');
+      const id = userInfo.userId;
+      const response = await axios
+        .get(`${BACK_API_URL}/favorites/search/${id}`, {
+          headers: { Authorization: `Bearer ${stoken}` },
+        })
+        // .then(({ data }) => data)
+        // .then((data) => {
+        //   console.log(data, 'Save');
+        // })
+        .catch((error) => console.log(error));
+      console.log(response?.data, 'save data');
+      if (response === undefined) {
+        console.log('no hay nada ');
+        const saveInitialization = {
+          userId: id,
+          name: 'prime',
+        };
+        const response = await axios
+          .post(`${BACK_API_URL}/favorites/save`, saveInitialization, {
+            headers: { Authorization: `Bearer ${stoken}` },
+          })
+          // .then(({ data }) => data)
+          // .then((data) => {
+          //   console.log(data, 'Save');
+          // })
+          .catch((error) => console.log(error));
+        console.log(response?.data, 'save Create');
       }
       // if (showGlobal) {
       //   setType('list');
@@ -123,6 +145,7 @@ export default function Inicio() {
             handleShowMenu={handleShowMenu}
             windowWidth={windowWidth}
             setType={setType}
+            setTypeGeneric={setShowGlobal}
           />
         </div>
         <div className="flex w-full flex-col justify-end items-center">
@@ -134,6 +157,7 @@ export default function Inicio() {
               <span className="text-[#F58026]">foodies</span> alrededor del mundo
             </h2>
             {/*  */}
+            {/* user:{user?.userId} */}
           </div>
           <div className="flex items-center justify-center lg:hidden">
             <button
@@ -158,17 +182,17 @@ export default function Inicio() {
       </div> */}
               <div className="flex flex-row justify-center items-center">
                 <button
-                  onClick={() => setShowGlobal(true)}
+                  onClick={() => setShowGlobal('list')}
                   className={`${showGlobal ? 'text-[#7DA626] border-b-2 border-[#7DA626] ' : ''} text-[20px]  items-center text-center leading-5   pb-2 w-[170px] pl-2`}
                 >
                   Global
                 </button>
-                <button
+                {/* <button
                   onClick={() => setShowGlobal(false)}
                   className={`${!showGlobal ? 'text-[#7DA626] border-b-2 border-[#7DA626]' : ''} text-[20px]  items-center text-center  leading-5 ml-2 pb-2 pl-2 w-[170px]`}
                 >
                   Personal
-                </button>
+                </button> */}
               </div>
               <hr className="w-full h-px  mx-auto  bg-gray-900 border-0 rounded  dark:bg-white"></hr>
             </div>
@@ -177,7 +201,12 @@ export default function Inicio() {
             ) : (
               <ScrollInfinite dataExternal={typeData} />
             )} */}
-            {showGlobal && <ScrollInfinite dataExternal={typeData} type={type} />}
+            {showGlobal === 'list' && (
+              <ScrollInfinite dataExternal={typeData} type={type} />
+            )}
+            {showGlobal === 'SWEET' && <ScrollInfiniteSWEET />}
+            {showGlobal === 'SAVORY' && <ScrollInfiniteSAVORY />}
+            {showGlobal === 'DRINKS_COCKTAILS' && <ScrollInfiniteDRINKS_COCKTAILS />}
             {/* {showGlobal && <ScrollInfinite />} */}
             {/* <ScrollInfinite /> */}
           </div>

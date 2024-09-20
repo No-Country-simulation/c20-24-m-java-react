@@ -78,7 +78,7 @@ const UploadRecipe = ({ isVisible, onClose }) => {
     e.preventDefault();
     const token = await localStorage.getItem('token');
     const user = await localStorage.getItem('user');
-    console.log(userDataInputs);
+    console.log(user, 'Useraaa');
     const data = {
       userId: JSON.parse(user).userId,
       title: userDataInputs.title,

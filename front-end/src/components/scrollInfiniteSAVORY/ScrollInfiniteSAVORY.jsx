@@ -554,7 +554,7 @@ const foodArray = [
   },
 ];
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
-const ScrollInfinite = ({ dataExternal, type }) => {
+const ScrollInfiniteSAVORY = ({ dataExternal, type }) => {
   const [asType, setAsType] = useState(type);
   const [dataRecipes, setDataRecipes] = useState([]);
   const [data, setData] = useState([]);
@@ -593,13 +593,9 @@ const ScrollInfinite = ({ dataExternal, type }) => {
       // if (type === 'SWEET') {
       // }
       const path =
-        asType === 'SWEET'
-          ? 'list/SWEET'
-          : asType === 'SAVORY'
-            ? 'list/SAVORY'
-            : 'list';
+        type === 'SWEET' ? 'list/SWEET' : type === 'SAVORY' ? 'list/SAVORY' : 'list';
       console.log(path, 'path');
-      const response = await axios.get(`${BACK_API_URL}/recipes/list`, {
+      const response = await axios.get(`${BACK_API_URL}/recipes/list/SAVORY`, {
         headers: {
           Authorization: `Bearer ${stoken}`,
         },
@@ -640,7 +636,7 @@ const ScrollInfinite = ({ dataExternal, type }) => {
       // console.log(dataRecipes);
     };
     fetchRecipe();
-  }, [setToken, type, setDataRecipes, setAsType]);
+  }, [setToken, type, setDataRecipes, setAsType, asType]);
 
   useEffect(() => {
     console.log(dataRecipes);
@@ -721,4 +717,4 @@ const ScrollInfinite = ({ dataExternal, type }) => {
     </>
   );
 };
-export default ScrollInfinite;
+export default ScrollInfiniteSAVORY;
