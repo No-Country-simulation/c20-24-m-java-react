@@ -39,6 +39,7 @@ public class RecipeServiceImp implements RecipeService {
                 .orElseThrow(() -> new UserNotFoundExepcion("User not found with ID: " + recipeDto.userId()));
         Recipe recipe = recipeMapper1.toEntity(recipeDto);
         recipe.setUser(user);
+        recipe.setNombreDelUsuario(user.getUsername());
         Recipe recipeSaved = recipeRepository.save(recipe);
         return recipeMapper1.toDto(recipeSaved);
     }

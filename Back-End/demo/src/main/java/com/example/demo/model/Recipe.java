@@ -45,5 +45,7 @@ public class Recipe {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    private String nombreDelUsuario;
 }
 

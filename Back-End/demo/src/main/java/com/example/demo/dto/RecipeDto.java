@@ -46,7 +46,9 @@ public record RecipeDto(
         @NotNull(message = "El 'ID_USER' no puede estar vacío.")
         Long userId,
         @NotBlank(message = "La dificultad no puede estar vacío.")
-        String difficulty
+        String difficulty,
+
+        String nombreDelUsuario
 
 ) implements Serializable {
 }
