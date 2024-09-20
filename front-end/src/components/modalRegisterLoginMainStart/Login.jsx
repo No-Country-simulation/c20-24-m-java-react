@@ -56,6 +56,7 @@ const Login = ({ onClose, typeModal }) => {
           imageUser: data.image || null,
         };
         localStorage.setItem('user', JSON.stringify(userInfo));
+        console.log(userInfo);
         setUser(userInfo);
         localStorage.setItem('token', data.token);
         setToken(data.token);

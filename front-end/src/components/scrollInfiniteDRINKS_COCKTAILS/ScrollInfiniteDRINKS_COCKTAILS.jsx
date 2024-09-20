@@ -554,7 +554,7 @@ const foodArray = [
   },
 ];
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
-const ScrollInfinite = ({ dataExternal, type }) => {
+const ScrollInfiniteDRINKS_COCKTAILS = ({ dataExternal, type }) => {
   const [asType, setAsType] = useState(type);
   const [dataRecipes, setDataRecipes] = useState([]);
   const [data, setData] = useState([]);
@@ -593,17 +593,16 @@ const ScrollInfinite = ({ dataExternal, type }) => {
       // if (type === 'SWEET') {
       // }
       const path =
-        asType === 'SWEET'
-          ? 'list/SWEET'
-          : asType === 'SAVORY'
-            ? 'list/SAVORY'
-            : 'list';
+        type === 'SWEET' ? 'list/SWEET' : type === 'SAVORY' ? 'list/SAVORY' : 'list';
       console.log(path, 'path');
-      const response = await axios.get(`${BACK_API_URL}/recipes/list`, {
-        headers: {
-          Authorization: `Bearer ${stoken}`,
+      const response = await axios.get(
+        `${BACK_API_URL}/recipes/list/DRINKS_COCKTAILS`,
+        {
+          headers: {
+            Authorization: `Bearer ${stoken}`,
+          },
         },
-      });
+      );
 
       // if (dataRecipes?.length == 0) {
       //   setDataRecipes(response.data);
@@ -640,7 +639,7 @@ const ScrollInfinite = ({ dataExternal, type }) => {
       // console.log(dataRecipes);
     };
     fetchRecipe();
-  }, [setToken, type, setDataRecipes, setAsType]);
+  }, [setToken, type, setDataRecipes, setAsType, asType]);
 
   useEffect(() => {
     console.log(dataRecipes);
@@ -721,4 +720,4 @@ const ScrollInfinite = ({ dataExternal, type }) => {
     </>
   );
 };
-export default ScrollInfinite;
+export default ScrollInfiniteDRINKS_COCKTAILS;

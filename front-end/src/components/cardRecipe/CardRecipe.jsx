@@ -10,7 +10,21 @@ import AnotherProfile from '../anotherProfile/AnotherProfile';
 import Link from 'next/link';
 import ModalAnotherProfile from '../modalAnotherProfile/ModalAnotherProfile';
 // import rsat from '../ratingStars/rsat';
-const CardRecipe = ({ user, title, image, description, category, subcategory }) => {
+const CardRecipe = ({
+  userId,
+  title,
+  image,
+  description,
+  ingredients,
+  stepByStep,
+  time,
+  commensal,
+  difficulty,
+  category,
+  subcategory,
+  nameUser,
+  dateCreation,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isModalAnotherVisible, setIsModalAnotherVisible] = useState(false);
@@ -77,27 +91,26 @@ const CardRecipe = ({ user, title, image, description, category, subcategory }) 
           <p className="text-[13px] h-[40px] items-start">{description || ''}</p>
           <div className="flex justify-between items-center mt-2">
             <div className="flex justify-start items-center -ml-3 ">
-              <div onM className=" ">
-                <Link href={`/perfil?user=${user}`}>
-                  <Image
-                    className="w-[45px] h-[45px] rounded-full"
-                    width={300}
-                    height={200}
-                    src="/img/Registro ilustracion.svg"
-                    alt="picture"
-                  />
-                </Link>
+              <div className=" ">
+                <Image
+                  onClick={handleAnotherProfile}
+                  className="w-[45px] h-[45px] rounded-full cursor-pointer"
+                  width={300}
+                  height={200}
+                  src="/img/Registro ilustracion.svg"
+                  alt="picture"
+                />
               </div>
               <p
                 onClick={handleAnotherProfile}
-                className="ml-2 text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold"
+                className="cursor-pointer ml-2 text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold"
               >
-                {user}
+                {nameUser}
               </p>
               {/* <div className="fixed">
                 <AnotherProfile user={user} />
               </div> */}
-              <PopupProfile idUser={user} />
+              <PopupProfile idUser={nameUser} />
             </div>
 
             <div className="flex justify-between items-center ">

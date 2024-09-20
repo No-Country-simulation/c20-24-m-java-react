@@ -21,10 +21,10 @@ const validateRegister = ({ name, email, password }) => {
   else if (!emailRegExp.test(email)) {
     errors.email = 'Correo electrónico invalido';
   }
-  if (!password) errors.password = ' ';
-  else if (!passwordRegExp.test(password))
-    errors.password =
-      'Almenos: una mayúscula, una minúscula, un carácter especial y un número.';
+  // if (!password) errors.password = ' ';
+  // else if (!passwordRegExp.test(password))
+  //   errors.password =
+  //     'Almenos: una mayúscula, una minúscula, un carácter especial y un número.';
 
   return errors;
 };
