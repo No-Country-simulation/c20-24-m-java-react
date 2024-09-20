@@ -698,7 +698,7 @@ const ScrollInfiniteSWEET = ({ dataExternal, type }) => {
                 difficulty={food.difficulty}
                 ingredients={food.ingredients}
                 stepByStep={food.instructions}
-                userId={food.id}
+                userId={food.userId}
               />
             ))}
           </div>
