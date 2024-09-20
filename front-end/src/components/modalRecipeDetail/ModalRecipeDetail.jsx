@@ -10,15 +10,19 @@ import { CgProfile } from 'react-icons/cg';
 const ModalRecipeDetail = ({
   isVisible,
   onClose,
-  category,
-  subcategory,
+  userId,
   title,
-  description,
   image,
+  description,
+  ingredients,
+  stepByStep,
   time,
   commensal,
   difficulty,
-  user,
+  category,
+  subcategory,
+  nameUser,
+  dateCreation,
 }) => {
   return (
     <div
@@ -174,7 +178,7 @@ const ModalRecipeDetail = ({
                   />
                 </div>
                 <p className="mx-auto text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
-                  {user || 'Anonimo'}
+                  {nameUser || 'Anonimo'}
                 </p>
               </div>
             </div>
@@ -216,19 +220,7 @@ const ModalRecipeDetail = ({
 
               <ol class="list-decimal my-3 mx-3  ">
                 <li className="mx-2 my-2">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Similique, iure iusto illum, eos dicta illo exercitationem in
-                    voluptatem, tempore eaque doloremque deleniti quod odio
-                    perferendis repellat esse obcaecati dolorum dolores. Lorem ipsum
-                    dolor sit amet consectetur adipisicing elit. Dignissimos culpa
-                    doloribus blanditiis debitis hic quo, ab nisi ipsa sapiente
-                    asperiores non! Velit maxime fuga at quod perferendis tempora
-                    nesciunt dolore? Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Quod quasi aspernatur tempore, animi saepe
-                    consectetur ex sit necessitatibus? Sit vitae consequatur magnam
-                    obcaecati incidunt. Et quas dicta adipisci nostrum nemo.
-                  </p>
+                  <p>{stepByStep}</p>
                 </li>
                 <Image
                   sizes="(max-width: 380px) 50vw,400px"
@@ -239,45 +231,19 @@ const ModalRecipeDetail = ({
                 />
                 <li className="mx-2 my-2">
                   <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Similique, iure iusto illum, eos dicta illo exercitationem in
-                    voluptatem, tempore eaque doloremque deleniti quod odio
-                    perferendis repellat esse obcaecati dolorum dolores. Lorem ipsum
-                    dolor sit amet consectetur adipisicing elit. Dignissimos culpa
-                    doloribus blanditiis debitis hic quo, ab nisi ipsa sapiente
-                    asperiores non! Velit maxime fuga at quod perferendis tempora
-                    nesciunt dolore? Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Quod quasi aspernatur tempore, animi saepe
-                    consectetur ex sit necessitatibus? Sit vitae consequatur magnam
-                    obcaecati incidunt. Et quas dicta adipisci nostrum nemo.
+                    <p>{stepByStep}</p>
                   </p>
                 </li>
               </ol>
             </div>
             <div className="">
-              <div className="flex flex-col  xl:w-[400px] w-auto h-auto my-2 mx-1 p-3 rounded-2xl  bg-[#fff8f2]">
+              <div className="flex flex-col  xl:w-auto w-auto h-auto my-2 mx-1 p-3 rounded-2xl  bg-[#fff8f2]">
                 <h3 className="flex text-2xl font-semibold ml-5 mt-5">
                   Ingredientes
                 </h3>
                 <div className="flex justify-center items-center pt-5 ml-5 pb-5">
                   <FaCircleArrowRight className="w-[23px] h-[23px]" />
-                  <p className="ml-1">Ingredientes 250g</p>
-                </div>
-                <div className="flex justify-center items-center pt-5 ml-5 pb-5">
-                  <FaCircleArrowRight className="w-[23px] h-[23px]" />
-                  <p className="ml-1">Ingredientes 250g</p>
-                </div>
-                <div className="flex justify-center items-center pt-5 ml-5 pb-5">
-                  <FaCircleArrowRight className="w-[23px] h-[23px]" />
-                  <p className="ml-1">Ingredientes 250g</p>
-                </div>
-                <div className="flex justify-center items-center pt-5 ml-5 pb-5">
-                  <FaCircleArrowRight className="w-[23px] h-[23px]" />
-                  <p className="ml-1">Ingredientes 250g</p>
-                </div>
-                <div className="flex justify-center items-center pt-5 ml-5 pb-5">
-                  <FaCircleArrowRight className="w-[23px] h-[23px]" />
-                  <p className="ml-1">Ingredientes 250g</p>
+                  <p className="px-60 leading-[500%] flex ">{ingredients}</p>
                 </div>
               </div>
 

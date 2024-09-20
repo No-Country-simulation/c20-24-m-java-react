@@ -66,11 +66,19 @@ const CardRecipe = ({
       <ModalRecipeDetail
         isVisible={isVisible}
         onClose={handleModal}
+        title={title}
+        image={image}
+        userId={userId}
+        description={description}
         category={category}
         subcategory={subcategory}
-        title={title}
-        description={description}
-        image={image}
+        nameUser={nameUser}
+        dateCreation={dateCreation}
+        time={time}
+        commensal={commensal}
+        difficulty={difficulty}
+        ingredients={ingredients}
+        stepByStep={stepByStep}
       />
       <div className="m-3 w-[39rem] h-[37rem] bg-white rounded-3xl shadow-md">
         <div className="relative bg-black w-full h-[417px] rounded-3xl">
@@ -93,6 +101,7 @@ const CardRecipe = ({
             alt="picture"
             // priority={true}
             loading="eager"
+            onClick={handleModal}
           />
         </div>
 
