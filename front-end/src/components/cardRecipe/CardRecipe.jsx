@@ -62,6 +62,19 @@ const CardRecipe = ({
       <ModalAnotherProfile
         isVisible={isModalAnotherVisible}
         onClose={handleAnotherProfile}
+        title={title}
+        image={image}
+        userId={userId}
+        description={description}
+        category={category}
+        subcategory={subcategory}
+        nameUser={nameUser}
+        dateCreation={dateCreation}
+        time={time}
+        commensal={commensal}
+        difficulty={difficulty}
+        ingredients={ingredients}
+        stepByStep={stepByStep}
       />
       <ModalRecipeDetail
         isVisible={isVisible}
@@ -108,7 +121,15 @@ const CardRecipe = ({
         <div className="px-9 py-3">
           <div className="flex justify-between items-center">
             <p className=" text-sm">
-              {(category || 'Categoria') + ' - ' + (subcategory || 'Subcategoria')}
+              {(category === 'SWEET'
+                ? 'Dulce'
+                : category === 'SAVORY'
+                  ? 'Salado'
+                  : category === 'DRINKS_COCKTAILS'
+                    ? 'Tragos y bebidas'
+                    : category) +
+                ' - ' +
+                (subcategory || 'Subcategoria')}
             </p>
             <RatingStars rating={Math.floor(Math.random() * 5) + 1} />
           </div>

@@ -24,7 +24,7 @@ const UserProfileBody = () => {
             width={40}
             height={40}
           />
-          Mis recetas
+          Recetas
         </button>
         <button
           onClick={() => setShow(false)}

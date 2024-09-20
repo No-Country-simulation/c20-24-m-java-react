@@ -1,7 +1,23 @@
 import UserProfile from '../userProfile/UserProfile';
 import UserProfileBody from '../userProfileBody/UserProfileBody';
 
-const ModalAnotherProfile = ({ onClose, isVisible }) => {
+const ModalAnotherProfile = ({
+  onClose,
+  isVisible,
+  userId,
+  title,
+  image,
+  description,
+  ingredients,
+  stepByStep,
+  time,
+  commensal,
+  difficulty,
+  category,
+  subcategory,
+  nameUser,
+  dateCreation,
+}) => {
   return (
     <div
       id="modal_main"
@@ -23,7 +39,12 @@ const ModalAnotherProfile = ({ onClose, isVisible }) => {
         </div>
 
         <div className="flex justify-center flex-col  xl:flex xl:items-start xl:justify-start xl:flex-row xl:m-0 lg:flex lg:flex-row lg:items-start lg:justify-start lg:m-0 md:flex md:flex-row md:justify-start md:items-start md:m-0  w-full h-auto m-auto bg-[#fff8f2] ">
-          <UserProfile onClose={onClose} className={'bg-[#fff8f2]'} />
+          <UserProfile
+            onClose={onClose}
+            className={'bg-[#fff8f2]'}
+            userId={userId}
+            username={nameUser}
+          />
           <div className="flex flex-col ml-auto mr-auto	 w-full h-auto my-5 bg-[#fff8f2] ">
             <UserProfileBody />
           </div>
