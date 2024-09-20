@@ -1,6 +1,7 @@
 'use client';
 import axios from 'axios';
 import { use, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 const UploadRecipe = ({ isVisible, onClose }) => {
@@ -114,38 +115,81 @@ const UploadRecipe = ({ isVisible, onClose }) => {
       instructions: userDataInputs.step,
     };
     // console.log(token);
-    axios
-      .post(`${BACK_API_URL}/recipes/save`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(({ data }) => data)
-      .then((data) => {
-        console.log(data);
-        console.log(userDataImage);
-        // const imagen = userDataImage ? userDataImage : null;
-        if (userDataImage) {
-          const formData = new FormData();
-          formData.append('image', userDataImage);
-          formData.append('recipeId', data.id);
-          // console.log(formData?.image[0]);
-          const file = {
-            recipeId: data.id,
-            images: formData.get('image'),
-          };
-          console.log(formData, 'file');
-          axios
-            .post(`${BACK_API_URL}/recipes/upload-images`, file, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'multipart/form-data',
-              },
-            })
-            .then(({ data }) => data)
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error));
-        }
-      })
-      .catch((error) => console.log(error));
+    toast.promise(
+      axios
+        .post(`${BACK_API_URL}/recipes/save`, data, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(({ data }) => data)
+        .then((data) => {
+          console.log(data);
+          console.log(userDataImage);
+          // const imagen = userDataImage ? userDataImage : null;
+          if (userDataImage) {
+            const formData = new FormData();
+            formData.append('image', userDataImage);
+            formData.append('recipeId', data.id);
+            // console.log(formData?.image[0]);
+            const file = {
+              recipeId: data.id,
+              images: formData.get('image'),
+            };
+            console.log(formData, 'file');
+            axios
+              .post(`${BACK_API_URL}/recipes/upload-images`, file, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  'Content-Type': 'multipart/form-data',
+                },
+              })
+              .then(({ data }) => data)
+              .then((data) => console.log(data))
+              .catch((error) => console.log(error));
+            onClose();
+            // window.location.reload();
+            // e.reset();
+          }
+        }),
+      {
+        error: 'Error al publicar',
+        loading: 'Publicando...',
+        success: 'Receta publicada',
+      },
+    );
+    // axios
+    //   .post(`${BACK_API_URL}/recipes/save`, data, {
+    //     headers: { Authorization: `Bearer ${token}` },
+    //   })
+    //   .then(({ data }) => data)
+    //   .then((data) => {
+    //     console.log(data);
+    //     console.log(userDataImage);
+    //     // const imagen = userDataImage ? userDataImage : null;
+    //     if (userDataImage) {
+    //       const formData = new FormData();
+    //       formData.append('image', userDataImage);
+    //       formData.append('recipeId', data.id);
+    //       // console.log(formData?.image[0]);
+    //       const file = {
+    //         recipeId: data.id,
+    //         images: formData.get('image'),
+    //       };
+    //       console.log(formData, 'file');
+    //       axios
+    //         .post(`${BACK_API_URL}/recipes/upload-images`, file, {
+    //           headers: {
+    //             Authorization: `Bearer ${token}`,
+    //             'Content-Type': 'multipart/form-data',
+    //           },
+    //         })
+    //         .then(({ data }) => data)
+    //         .then((data) => console.log(data))
+    //         .catch((error) => console.log(error));
+    //       onClose();
+    //       window.location.reload();
+    //     }
+    //   })
+    //   .catch((error) => console.log(error));
   };
   return (
     <div

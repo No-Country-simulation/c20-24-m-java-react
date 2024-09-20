@@ -574,7 +574,7 @@ const ScrollInfinite = ({ dataExternal, type }) => {
         const currentUser = await JSON.parse(localStorage.user);
         setUser(currentUser);
       } else {
-        router.push('/ingreso');
+        router.push('/');
       }
     };
 
@@ -582,9 +582,9 @@ const ScrollInfinite = ({ dataExternal, type }) => {
   }, [setUser]);
 
   useEffect(() => {
-    console.log(type, 'type');
+    // console.log(type, 'type');
     setAsType(type);
-    console.log(asType, 'asType');
+    // console.log(asType, 'asType');
     // this.forceUpdate();
     const fetchRecipe = async () => {
       const stoken = await localStorage.getItem('token');
@@ -598,7 +598,7 @@ const ScrollInfinite = ({ dataExternal, type }) => {
           : asType === 'SAVORY'
             ? 'list/SAVORY'
             : 'list';
-      console.log(path, 'path');
+      // console.log(path, 'path');
       const response = await axios.get(`${BACK_API_URL}/recipes/list`, {
         headers: {
           Authorization: `Bearer ${stoken}`,
@@ -610,8 +610,8 @@ const ScrollInfinite = ({ dataExternal, type }) => {
       // }
       setDataRecipes(response.data);
 
-      console.log(response.data, 'que onda');
-      console.log(dataRecipes, 'dataRecipes');
+      // console.log(response.data, 'que onda');
+      // console.log(dataRecipes, 'dataRecipes');
       // console.log(data, 'data');
       // console.log(dataExternal, 'dataExternal');
 
@@ -643,7 +643,7 @@ const ScrollInfinite = ({ dataExternal, type }) => {
   }, [setToken, type, setDataRecipes, setAsType]);
 
   useEffect(() => {
-    console.log(dataRecipes);
+    // console.log(dataRecipes);
 
     const observer = new IntersectionObserver(OnIntersection);
     if (observer && elementRef.current) {
@@ -689,6 +689,7 @@ const ScrollInfinite = ({ dataExternal, type }) => {
             {data.map((food) => (
               <CardRecipe
                 key={food.id}
+                id={food.id}
                 title={food.title}
                 image={food.imageUrls[0]}
                 user={food.userId}
@@ -702,7 +703,7 @@ const ScrollInfinite = ({ dataExternal, type }) => {
                 difficulty={food.difficulty}
                 ingredients={food.ingredients}
                 stepByStep={food.instructions}
-                userId={food.id}
+                userId={food.userId}
               />
             ))}
           </div>

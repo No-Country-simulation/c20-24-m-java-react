@@ -25,7 +25,7 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
   }, [setUser]);
 
   const handleShowUploadRecipe = () => {
-    console.log(showMenu, 'showMenu');
+    // console.log(showMenu, 'showMenu');
     setShowUploadRecipe(!showUploadRecipe);
   };
   const data = user;
@@ -39,12 +39,20 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
         className="select-none bg-white w-[280px] h-[calc(var(--vh, 1vh) * 100)] p-1 overflow-auto shadow-md fixed   top-0"
       >
         <div className="flex flex-col justify-center items-center mt-5 mb-7">
-          <Link href="/inicio">
-            <Image width={130} height={130} src="/img/Logo.svg" alt="picture" />
-          </Link>
+          <Image
+            onClick={() => setTypeGeneric('list')}
+            width={130}
+            height={130}
+            src="/img/Logo.svg"
+            alt="picture"
+          />
+
           {/* <h1 className="font-abril font-bold text-[28px]">Foodies</h1> */}
         </div>
-        <div className="flex justify-start items-center ml-4 text-[18px] font-semibold text-center">
+        <div
+          onClick={() => setTypeGeneric('list')}
+          className="flex justify-start items-center ml-4 text-[18px] font-semibold text-center"
+        >
           <ul>
             <li className=" my-1 flex justify-start items-center w-f cursor-pointer">
               <Image

@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import global from './globalsStyle.css';
 import { UserProvider } from '@/components/UserProvider';
+import { Toaster } from 'sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -13,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className + global.body}>
-        <UserProvider>{children}</UserProvider>{' '}
+        <UserProvider>{children}</UserProvider> <Toaster richColors />
       </body>
     </html>
   );

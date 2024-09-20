@@ -5,6 +5,7 @@ import { registerFormDataInputs } from './helpers/registerFormDataInputs';
 import validateRegister from './helpers/validateRegister';
 import axios from 'axios';
 import { X } from 'react-feather';
+import { toast } from 'sonner';
 //import { useRouter } from 'next/navigation';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -40,16 +41,27 @@ const Register = ({ onClose, typeModal }) => {
       email: userDataInputs.email,
       password: userDataInputs.password,
     };
-    console.log(data);
-    axios
-      .post(`${BACK_API_URL}/auth/register`, data)
-      .then(({ data }) => data)
-      .then((data) => {
-        console.log('Usuario creado');
-        console.log(data);
-        // axios.post(`${BACK_API_URL}/favorites/save`);
-      })
-      .catch((error) => console.log(error));
+    // console.log(data);
+    toast.promise(
+      axios
+        .post(`${BACK_API_URL}/auth/register`, data)
+        .then(({ data }) => data)
+        .then((data) => {
+          if (data.token !== 'N/A') {
+            console.log('NA');
+            toast.success(`Usuario Creado`);
+            onClose();
+          } else if (data.username === 'El usuario ya se encuentra registrado') {
+            toast.warning(data.username);
+          } else if (data.username === 'El email ya se encuentra registrado') {
+            toast.warning(data.username);
+          }
+          console.log(data);
+          // axios.post(`${BACK_API_URL}/favorites/save`);
+        })
+        .catch((error) => console.log(error)),
+      { error: 'Error al conectar', loading: 'Autentificando' },
+    );
   };
   return (
     <>

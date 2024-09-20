@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu } from 'react-feather';
 import { IoMenu } from 'react-icons/io5';
+import { Toaster } from 'sonner';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 export default function Inicio() {
@@ -52,10 +53,10 @@ export default function Inicio() {
           })
           .catch((error) => console.log(error));
         setTypeData(response?.data);
-        console.log(response.data, 'aqui');
+        // console.log(response.data, 'aqui');
       }
       const userInfo = await JSON.parse(localStorage.user);
-      console.log(userInfo.userId, 'user');
+      // console.log(userInfo.userId, 'user');
       const id = userInfo.userId;
       const response = await axios
         .get(`${BACK_API_URL}/favorites/search/${id}`, {
@@ -66,9 +67,9 @@ export default function Inicio() {
         //   console.log(data, 'Save');
         // })
         .catch((error) => console.log(error));
-      console.log(response?.data, 'save data');
+      // console.log(response?.data, 'save data');
       if (response === undefined) {
-        console.log('no hay nada ');
+        // console.log('no hay nada ');
         const saveInitialization = {
           userId: id,
           name: 'prime',
@@ -82,7 +83,7 @@ export default function Inicio() {
           //   console.log(data, 'Save');
           // })
           .catch((error) => console.log(error));
-        console.log(response?.data, 'save Create');
+        // console.log(response?.data, 'save Create');
       }
       // if (showGlobal) {
       //   setType('list');
@@ -181,12 +182,12 @@ export default function Inicio() {
         <p>Recetas Guardadas</p>
       </div> */}
               <div className="flex flex-row justify-center items-center">
-                <button
+                {/* <button
                   onClick={() => setShowGlobal('list')}
                   className={`${showGlobal ? 'text-[#7DA626] border-b-2 border-[#7DA626] ' : ''} text-[20px]  items-center text-center leading-5   pb-2 w-[170px] pl-2`}
                 >
                   Global
-                </button>
+                </button> */}
                 {/* <button
                   onClick={() => setShowGlobal(false)}
                   className={`${!showGlobal ? 'text-[#7DA626] border-b-2 border-[#7DA626]' : ''} text-[20px]  items-center text-center  leading-5 ml-2 pb-2 pl-2 w-[170px]`}
@@ -212,6 +213,7 @@ export default function Inicio() {
           </div>
         </div>
       </div>
+      <Toaster />
     </main>
   );
 }

@@ -3,14 +3,17 @@ import RatingStars from '../ratingStars/RatingStars';
 import SaveRecipe from '../saveRecipe/SaveRecipe';
 import LikeRecipe from '../likeRecipe/LikeRecipe';
 import { Share2 } from 'react-feather';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ModalRecipeDetail from '../modalRecipeDetail/ModalRecipeDetail';
 import PopupProfile from '../popupProfile/PopupProfile';
 import AnotherProfile from '../anotherProfile/AnotherProfile';
 import Link from 'next/link';
 import ModalAnotherProfile from '../modalAnotherProfile/ModalAnotherProfile';
+import { useRouter } from 'next/navigation';
+import { useUserContext } from '../UserProvider';
 // import rsat from '../ratingStars/rsat';
 const CardRecipe = ({
+  id,
   userId,
   title,
   image,
@@ -28,9 +31,26 @@ const CardRecipe = ({
   const [isVisible, setIsVisible] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isModalAnotherVisible, setIsModalAnotherVisible] = useState(false);
+  const { setToken } = useUserContext();
+  const { user, setUser } = useUserContext();
+  // const { dataRecipes, setDataRecipes } = useUserContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkToken = async () => {
+      if (localStorage.user) {
+        const currentUser = await JSON.parse(localStorage.user);
+        setUser(currentUser);
+      } else {
+        router.push('/');
+      }
+    };
+
+    checkToken();
+  }, [setUser]);
 
   const handleModal = () => {
-    console.log(isVisible);
+    // console.log(isVisible);
     setIsVisible(!isVisible);
   };
   const handleAnotherProfile = () => {
@@ -60,7 +80,8 @@ const CardRecipe = ({
             className="w-full h-full rounded-3xl  object-contain"
           /> */}
           <div className="absolute top-4 right-4 ">
-            <SaveRecipe />
+            {user?.userId !== userId ? <SaveRecipe idRecipe={id} /> : null}
+            {/* <SaveRecipe idRecipe={id} />  */}
           </div>
           <Image
             className="w-full h-[417px] rounded-[20px] object-cover"
@@ -87,6 +108,7 @@ const CardRecipe = ({
             className="text-2xl font-semibold cursor-pointer"
           >
             {title || 'Titulo'}
+            {/* user:{user?.userId} */}
           </h3>
           <p className="text-[13px] h-[40px] items-start">{description || ''}</p>
           <div className="flex justify-between items-center mt-2">
@@ -110,7 +132,7 @@ const CardRecipe = ({
               {/* <div className="fixed">
                 <AnotherProfile user={user} />
               </div> */}
-              <PopupProfile idUser={nameUser} />
+              {/* <PopupProfile idUser={nameUser} /> */}
             </div>
 
             <div className="flex justify-between items-center ">

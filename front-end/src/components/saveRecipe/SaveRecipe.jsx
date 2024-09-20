@@ -1,9 +1,23 @@
 // import './saveRecipe.styles.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './save.css';
+import axios from 'axios';
+
+const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const SaveRecipe = ({ height, idRecipe }) => {
   const [isSave, setIsSave] = useState(false);
+  useEffect(() => {
+    const fetchRecipe = async () => {};
+  });
 
+  const handleSaveRecipe = () => {
+    console.log(idRecipe);
+    axios
+      .post(`${BACK_API_URL}/favorites/1/${idRecipe}`)
+      .then(({ data }) => data)
+      .then((data) => console.log(data));
+  };
   return (
     <>
       {/* <input type="checkbox" id="checkboxInput" />
@@ -19,7 +33,7 @@ const SaveRecipe = ({ height, idRecipe }) => {
       </label> */}
       <label class="containe flex justify-center align-center relative cursor-pointer">
         <input
-          onClick={() => setIsSave(!isSave)}
+          onClick={handleSaveRecipe}
           type="checkbox"
           className="absolute opacity-0 h-0 w-0 "
         />

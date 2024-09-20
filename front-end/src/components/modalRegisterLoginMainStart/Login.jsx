@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import { X } from 'react-feather';
 import { useUserContext } from '../UserProvider';
+import { toast } from 'sonner';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -43,27 +44,37 @@ const Login = ({ onClose, typeModal }) => {
     };
     // console.log(data);
     // console.log(data, 'data');
-    axios
-      .post(`${BACK_API_URL}/auth/login`, data)
-      .then(({ data }) => data)
-      .then((data) => {
-        // console.log(data);
-        const userInfo = {
-          userId: data.userId,
-          username: data.username,
-          // email: data.user.email,
-          rol: data.rol || null,
-          imageUser: data.image || null,
-        };
-        localStorage.setItem('user', JSON.stringify(userInfo));
-        console.log(userInfo);
-        setUser(userInfo);
-        localStorage.setItem('token', data.token);
-        setToken(data.token);
-        console.log(userInfo);
-        router.push('/inicio');
-      })
-      .catch((error) => console.log(error));
+    toast.promise(
+      axios
+        .post(`${BACK_API_URL}/auth/login`, data)
+        .then(({ data }) => data)
+        .then((data) => {
+          console.log(data.username);
+          if (data.username !== 'El usuario no existe.') {
+            const userInfo = {
+              userId: data.userId,
+              username: data.username,
+              // email: data.user.email,
+              rol: data.rol || null,
+              imageUser: data.image || null,
+            };
+            localStorage.setItem('user', JSON.stringify(userInfo));
+            // console.log(userInfo);
+            setUser(userInfo);
+            localStorage.setItem('token', data.token);
+            setToken(data.token);
+            // console.log(userInfo);
+
+            toast.success(`Bienvenido ${data.username}`);
+            router.push('/inicio');
+          } else {
+            console.log('pordiosa');
+            toast.warning(data.username);
+          }
+        })
+        .catch((error) => console.log(error)),
+      { error: 'Error al conectar', loading: 'Autentificando' },
+    );
   };
   return (
     <>
