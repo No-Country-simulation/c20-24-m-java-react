@@ -9,7 +9,7 @@ const UserProfile = ({ onClose }) => {
       <div onClick={onClose} className="fixed top-[12px] left-[30px]">
         <IoArrowBackCircleOutline className="w-[80px] h-[80px] text-white" />
       </div>
-      <div className="mt-1 bg-blue-gray-600 w-[252px] h-[252px] rounded-[50%] shadow-md ">
+      <div className="mt-1 bg-[#fff8f2] w-[252px] h-[252px] rounded-[50%] shadow-md ">
         <Image
           className=" w-[250px] h-[250px] rounded-[50%]"
           width={60}
