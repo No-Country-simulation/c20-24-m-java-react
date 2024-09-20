@@ -65,7 +65,13 @@ const ModalRecipeDetail = ({
             <div className="xl:w-[600px] xl:h-[430px] w-[100] h-[100] ">
               <div className="flex justify-between items-center xl:ml-10 ml-10 mt-2">
                 <p className=" text-sm">
-                  {(category || 'Categoria') +
+                  {(category === 'SWEET'
+                    ? 'Dulce'
+                    : category === 'SAVORY'
+                      ? 'Salado'
+                      : category === 'DRINKS_COCKTAILS'
+                        ? 'Tragos y bebidas'
+                        : 'Category') +
                     ' - ' +
                     (subcategory || 'Subcategoria')}
                 </p>

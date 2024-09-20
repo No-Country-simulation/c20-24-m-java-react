@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Globe, Instagram, MapPin } from 'react-feather';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
 
-const UserProfile = ({ onClose }) => {
+const UserProfile = ({ onClose, userId, username }) => {
   return (
     <div className="flex flex-col justify-center items-center relative">
       <div onClick={onClose} className="fixed top-[12px] left-[30px]">
@@ -20,7 +20,7 @@ const UserProfile = ({ onClose }) => {
       </div>
       <div className="my-5">
         <p className="text-[25px] text-center w-[250px] h-[[calc(var(--vh, 1vh) * 100)]] overflow-hidden text-ellipsis leading-tight font-semibold">
-          Camila Lopez
+          {username || 'Username'}
         </p>
       </div>
       <div className="my-5 ml-5 flex justify-center  items-center w-[250px]">
