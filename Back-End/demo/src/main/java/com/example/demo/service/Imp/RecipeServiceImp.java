@@ -6,6 +6,7 @@ import com.example.demo.exception.UserNotFoundExepcion;
 import com.example.demo.mapper.CalificationMapper1;
 import com.example.demo.mapper.RecipeMapper1;
 import com.example.demo.model.Category;
+import com.example.demo.model.Favorite;
 import com.example.demo.model.Recipe;
 import com.example.demo.User.User;
 import com.example.demo.repository.RecipeRepository;
@@ -141,6 +142,14 @@ public class RecipeServiceImp implements RecipeService {
         recipeRepository.save(recipe);
 
         return imageUrls;
+    }
+
+    @Override
+    public List<RecipeDto> findUserbyID(Long id) {
+        User user = userCommentRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundExepcion("User not found with ID: " + id));
+        List<Recipe> listaR = user.getRecipes();
+        return recipeMapper1.entityListToDtoList(listaR);
     }
 
 }

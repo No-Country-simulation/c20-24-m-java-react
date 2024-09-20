@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.FavoriteDto;
 import com.example.demo.dto.RecipeDto;
 import com.example.demo.model.Category;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,5 +22,7 @@ public interface RecipeService {
     List<RecipeDto> findRecipesByCategory(Category category);
 
     List<String> uploadImages(Long recipeId, List<MultipartFile> images);
+
+    List<RecipeDto> findUserbyID(Long id);
 
 }

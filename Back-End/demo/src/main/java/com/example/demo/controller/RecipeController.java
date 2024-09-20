@@ -202,4 +202,10 @@ public class RecipeController {
         return ResponseEntity.ok(imageUrls);
     }
 
+    @GetMapping("/{id}/recipes")
+    public ResponseEntity<List<RecipeDto>> getRecipesByUserId(@PathVariable Long id) {
+        List<RecipeDto> recipes = recipeService.findUserbyID(id);
+        return ResponseEntity.ok(recipes);
+    }
+
 }
