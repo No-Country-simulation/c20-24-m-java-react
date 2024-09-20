@@ -76,4 +76,14 @@ public class FavoriteServiceImp implements FavoriteService {
         favorite.getRecipeList().remove(recipe);
         favoriteRepository.save(favorite);
     }
+
+    @Override
+    public List<FavoriteDto> findUserbyID(Long id) {
+        User user = userCommentRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundExepcion("User not found with ID: " + id));
+        List<Favorite> listaF = user.getFavorites();
+        return favoriteMapper1.entityListToDtoList(listaF);
+    }
+
+
 }

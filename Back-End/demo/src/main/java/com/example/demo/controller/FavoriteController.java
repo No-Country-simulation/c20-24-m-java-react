@@ -19,6 +19,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "Favorites", description = "Manage all endpoints about Favorites")
 @RestController
 @RequestMapping("/favorites")
@@ -136,5 +138,13 @@ public class FavoriteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<FavoriteDto>> getFavoritesByUserId(@PathVariable Long id) {
+        List<FavoriteDto> favorites = favoriteService.findUserbyID(id);
+        return ResponseEntity.ok(favorites);
+    }
+
+
 }
 

@@ -21,4 +21,6 @@ public interface FavoriteService {
 
     void removeRecipeFromFavorite(Long favoriteId, Long recipeId);
 
+    List<FavoriteDto> findUserbyID(Long id);
+
 }
