@@ -47,7 +47,7 @@ public class RecipeController {
     })
     @PostMapping("/save")
     public ResponseEntity<RecipeDto> createRecipe(@RequestBody RecipeDto recipeDto) {
-        RecipeDto saveRecipe= recipeService.createRecipe(recipeDto);
+        RecipeDto saveRecipe = recipeService.createRecipe(recipeDto);
         return new ResponseEntity<>(saveRecipe, HttpStatus.CREATED);
     }
 
@@ -57,14 +57,14 @@ public class RecipeController {
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "200", description = "recipe found",
+                    responseCode = "200", description = "Recipe found",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = RecipeDto.class))
                     }),
             @ApiResponse(responseCode = "403", description = "Forbidden access to this resource", content = {
                     @Content}),
-            @ApiResponse(responseCode = "404", description = "Recipe  not found", content = {
+            @ApiResponse(responseCode = "404", description = "Recipe not found", content = {
                     @Content}),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
                     @Content})
@@ -85,7 +85,7 @@ public class RecipeController {
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "200", description = "recipes list successfully generated",
+                    responseCode = "200", description = "Recipes list successfully generated",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = RecipeDto.class))
@@ -147,14 +147,13 @@ public class RecipeController {
         return ResponseEntity.ok("The Recipe was eliminated");
     }
 
-
     @Operation(
             summary = "List recipes by category.",
             description = "Retrieves a list of recipes filtered by the specified category."
     )
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "200", description = "recipes list successfully generated",
+                    responseCode = "200", description = "Recipes list successfully generated",
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = RecipeDto.class))
@@ -202,6 +201,30 @@ public class RecipeController {
         return ResponseEntity.ok(imageUrls);
     }
 
+    @Operation(
+            summary = "List recipes by user ID.",
+            description = "Retrieves a list of recipes created by the specified user."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "Recipes retrieved successfully",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = RecipeDto.class))
+                    }),
+            @ApiResponse(responseCode = "403", description = "Forbidden access to this resource", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "404", description = "User not found", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                    @Content})
+    })
+    @Parameter(
+            name = "id",
+            description = "The ID of the user whose recipes are to be retrieved.",
+            required = true,
+            schema = @Schema(type = "long")
+    )
     @GetMapping("/{id}/recipes")
     public ResponseEntity<List<RecipeDto>> getRecipesByUserId(@PathVariable Long id) {
         List<RecipeDto> recipes = recipeService.findUserbyID(id);

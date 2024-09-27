@@ -80,11 +80,18 @@
 		</dependency>
 
 
-		<!-- Dependencia de H2 para pruebas -->
+		<!-- Dependencia de H2 para pruebas
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		-->
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.20</version>
 		</dependency>
 
 		<dependency>
