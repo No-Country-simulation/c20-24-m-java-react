@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import com.example.demo.Jwt.JwtAuthenticationFilter;
+import com.example.demo.User.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,21 +30,21 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authRequest ->
                         authRequest
                                 .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/h2-console/**").permitAll()
+//                                .requestMatchers("/h2-console/**").hasAnyAuthority(Role.ADMIN.name())
                                 .requestMatchers("/api-docs/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
-                                .requestMatchers(HttpMethod.GET).permitAll()
-                                .requestMatchers(HttpMethod.POST).permitAll()
-                                .requestMatchers(HttpMethod.PUT).permitAll()
-                                .requestMatchers(HttpMethod.DELETE).permitAll()
-                                .requestMatchers(HttpMethod.OPTIONS).permitAll()
+//                                .requestMatchers(HttpMethod.GET).permitAll()
+//                                .requestMatchers(HttpMethod.POST).permitAll()
+//                                .requestMatchers(HttpMethod.PUT).permitAll()
+//                                .requestMatchers(HttpMethod.DELETE).permitAll()
+//                                .requestMatchers(HttpMethod.OPTIONS).permitAll()
                                 .anyRequest().authenticated()
                 )
-                .headers(headers -> headers
-                        .addHeaderWriter((request, response) -> {
-                            response.setHeader("X-Frame-Options", "ALLOWALL");  // Permitir que la consola H2 se muestre en un iframe
-                        })
-                )
+//                .headers(headers -> headers
+//                        .addHeaderWriter((request, response) -> {
+//                            response.setHeader("X-Frame-Options", "ALLOWALL");  // Permitir que la consola H2 se muestre en un iframe
+//                        })
+//                )
                 .sessionManagement(sessionManager->
                         sessionManager
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
