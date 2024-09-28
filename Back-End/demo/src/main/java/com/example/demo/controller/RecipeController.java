@@ -6,12 +6,16 @@ import com.example.demo.model.Category;
 import com.example.demo.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -230,5 +234,38 @@ public class RecipeController {
         List<RecipeDto> recipes = recipeService.findUserbyID(id);
         return ResponseEntity.ok(recipes);
     }
+
+    @Operation(
+            summary = "Get all recipes.",
+            description = "Get all recipes in a paginated list. Token is required. Accessible by all users."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "Recipe list successfully generated",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = RecipeDto.class))
+                    }),
+            @ApiResponse(responseCode = "403", description = "Forbidden access to this resource", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "404", description = "Recipes Not Found", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                    @Content})
+    })
+    @Parameters({
+            @Parameter(name = "page", description = "Page number", required = false, example = "0"),
+            @Parameter(name = "size", description = "Size of the page", required = false, example = "10"),
+            @Parameter(name = "sort", description = "Sort the page", required = false, example = "title,asc")
+    })
+
+    @GetMapping("/pages")
+    public ResponseEntity<Page<RecipeDto>> getAllRecipes(@RequestParam(defaultValue = "0") int page,
+                                                         @RequestParam(defaultValue = "3") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<RecipeDto> recipesPage = recipeService.findAll(pageable);
+        return ResponseEntity.ok(recipesPage);
+    }
+
 
 }

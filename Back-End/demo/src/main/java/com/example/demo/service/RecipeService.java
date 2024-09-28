@@ -3,6 +3,8 @@ package com.example.demo.service;
 import com.example.demo.dto.FavoriteDto;
 import com.example.demo.dto.RecipeDto;
 import com.example.demo.model.Category;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -24,5 +26,7 @@ public interface RecipeService {
     List<String> uploadImages(Long recipeId, List<MultipartFile> images);
 
     List<RecipeDto> findUserbyID(Long id);
+
+    Page<RecipeDto> findAll(Pageable pageable);
 
 }

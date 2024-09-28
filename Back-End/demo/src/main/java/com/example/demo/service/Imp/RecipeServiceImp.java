@@ -13,6 +13,8 @@ import com.example.demo.repository.RecipeRepository;
 import com.example.demo.repository.UserCommentRepository;
 import com.example.demo.service.RecipeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.service.ImageService; // Servicio que maneja la subida de imágenes
@@ -123,6 +125,7 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
+    @Transactional
     public List<String> uploadImages(Long recipeId, List<MultipartFile> images) {
         // Subir imágenes y obtener URLs
         List<String> imageUrls = images.stream()
@@ -145,11 +148,19 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
+    @Transactional
     public List<RecipeDto> findUserbyID(Long id) {
         User user = userCommentRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundExepcion("User not found with ID: " + id));
         List<Recipe> listaR = user.getRecipes();
         return recipeMapper1.entityListToDtoList(listaR);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<RecipeDto> findAll(Pageable pageable) {
+        Page<Recipe> recipesPage = recipeRepository.findAll(pageable);
+        return recipesPage.map(recipeMapper1::toDto);
     }
 
 }
