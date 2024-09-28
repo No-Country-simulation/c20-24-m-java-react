@@ -53,6 +53,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Calification> califications;
 
+    @OneToOne
+    @JoinColumn(name = "user_profile_id")
+    private UserProfile userProfile;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority((role.name())));

@@ -6,7 +6,6 @@ import com.example.demo.exception.UserNotFoundExepcion;
 import com.example.demo.mapper.CalificationMapper1;
 import com.example.demo.mapper.RecipeMapper1;
 import com.example.demo.model.Category;
-import com.example.demo.model.Favorite;
 import com.example.demo.model.Recipe;
 import com.example.demo.User.User;
 import com.example.demo.repository.RecipeRepository;
