@@ -1,9 +1,11 @@
 'use client';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 const UserProfileBody = () => {
   const [show, setShow] = useState(true);
+  const pathname = usePathname();
   return (
     <div className="">
       {/* <div>

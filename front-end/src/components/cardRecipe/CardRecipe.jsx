@@ -11,6 +11,9 @@ import Link from 'next/link';
 import ModalAnotherProfile from '../modalAnotherProfile/ModalAnotherProfile';
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '../UserProvider';
+import { useDispatch } from 'react-redux';
+import { setPageScrollPosition } from '@/redux/pageScroll/pageScrollSlice';
+import { FaUser } from 'react-icons/fa6';
 // import rsat from '../ratingStars/rsat';
 const CardRecipe = ({
   id,
@@ -26,6 +29,7 @@ const CardRecipe = ({
   category,
   subcategory,
   nameUser,
+  imageUser,
   dateCreation,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,6 +38,7 @@ const CardRecipe = ({
   const { setToken } = useUserContext();
   const { user, setUser } = useUserContext();
   // const { dataRecipes, setDataRecipes } = useUserContext();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
@@ -49,6 +54,17 @@ const CardRecipe = ({
     checkToken();
   }, [setUser]);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    const currentScroll = window.scrollY;
+    // Guardar la posición actual del scroll en Redux
+    // dispatch(setPageScrollPosition(currentScroll));
+    // console.log(currentScroll, 'currentScrollBooton');
+    // Luego navegar a la nueva página
+    const href = e.currentTarget.getAttribute('href');
+    router.push(href);
+  };
+
   const handleModal = () => {
     // console.log(isVisible);
     setIsVisible(!isVisible);
@@ -59,7 +75,7 @@ const CardRecipe = ({
   // const [isNear, fromRef] = useNearsatcreen();
   return (
     <div>
-      <ModalAnotherProfile
+      {/* <ModalAnotherProfile
         isVisible={isModalAnotherVisible}
         onClose={handleAnotherProfile}
         title={title}
@@ -75,7 +91,7 @@ const CardRecipe = ({
         difficulty={difficulty}
         ingredients={ingredients}
         stepByStep={stepByStep}
-      />
+      /> */}
       <ModalRecipeDetail
         isVisible={isVisible}
         onClose={handleModal}
@@ -144,21 +160,32 @@ const CardRecipe = ({
           <div className="flex justify-between items-center mt-2">
             <div className="flex justify-start items-center -ml-3 ">
               <div className=" ">
-                <Image
-                  onClick={handleAnotherProfile}
-                  className="w-[45px] h-[45px] rounded-full cursor-pointer"
-                  width={300}
-                  height={200}
-                  src="/img/Registro ilustracion.svg"
-                  alt="picture"
-                />
+                {imageUser ? (
+                  <Image
+                    onClick={handleAnotherProfile}
+                    className="w-[45px] h-[45px] rounded-full cursor-pointer"
+                    width={300}
+                    height={200}
+                    src="/img/Registro ilustracion.svg"
+                    alt="picture"
+                  />
+                ) : (
+                  <FaUser className="rounded-full w-[40px] h-[40px]" />
+                )}
               </div>
-              <p
-                onClick={handleAnotherProfile}
-                className="cursor-pointer ml-2 text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold"
+              <Link
+                href={`/perfil/${nameUser}`}
+                // href={{
+                //   pathname: `/perfil/${nameUser}`,
+                //   query: { secreto: 'informacion_oculta' },
+                // }}
+                scroll={false}
+                // onClick={handleClick}
               >
-                {nameUser}
-              </p>
+                <p className="cursor-pointer ml-2 text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
+                  {nameUser}
+                </p>
+              </Link>
               {/* <div className="fixed">
                 <AnotherProfile user={user} />
               </div> */}

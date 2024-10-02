@@ -149,9 +149,10 @@ const UploadRecipe = ({ isVisible, onClose }) => {
             // window.location.reload();
             // e.reset();
           }
-        }),
+        })
+        .catch((error) => console.log(error)),
       {
-        error: 'Error al publicar',
+        error: 'Error al conectar',
         loading: 'Publicando...',
         success: 'Receta publicada',
       },

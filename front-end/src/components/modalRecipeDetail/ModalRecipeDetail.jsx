@@ -217,6 +217,7 @@ const ModalRecipeDetail = ({
             <div className="w-auto h-auto mx-1 flex flex-col justify-center items-center rounded-3xl bg-[#fff8f2] my-1">
               <h3 className="text-2xl mt-5 font-semibold">Paso a paso</h3>
               <Image
+                alt="Descripción de la imagen"
                 sizes="(max-width: 380px) 50vw,400px"
                 height={100}
                 width={100}
@@ -229,6 +230,7 @@ const ModalRecipeDetail = ({
                   <p>{stepByStep}</p>
                 </li>
                 <Image
+                  alt="Descripción de la imagen"
                   sizes="(max-width: 380px) 50vw,400px"
                   height={100}
                   width={100}

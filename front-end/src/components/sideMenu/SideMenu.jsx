@@ -10,7 +10,22 @@ import UploadRecipe from '../uploadRecipe/UploadRecipe';
 import { MdOutlineLogout } from 'react-icons/md';
 import ButtonLogOut from '../buttonLogOut/ButtonLogOut';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  resetsetPageScroll,
+  resetsetPageScrollInitialState,
+  setPageScrollTypeList,
+} from '@/redux/pageScroll/pageScrollSlice';
+import { useRouter } from 'next/navigation';
+import { resetsetPegeScrollGeneric } from '@/redux/pegeScrollGeneric/pegeScrollGenericSlice';
+import { setResetState } from '@/redux/resetStatePage/resetStatePageSlice';
 const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
+  const { items, scrollPosition, currentPage } = useSelector(
+    (state) => state.pageScrollSlice,
+  );
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const { user, setUser } = useUserContext();
   const [activeAccordion, setActiveAccordion] = useState('');
   const [showUploadRecipe, setShowUploadRecipe] = useState(false);
@@ -26,7 +41,29 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
 
   const handleShowUploadRecipe = () => {
     // console.log(showMenu, 'showMenu');
+
     setShowUploadRecipe(!showUploadRecipe);
+  };
+
+  const handleTypeList = (e) => {
+    e.preventDefault();
+    // const path =
+    //   typeList === 'SWEET'
+    //     ? 'list/SWEET'
+    //     : typeList === 'SAVORY'
+    //       ? 'list/SAVORY'
+    //       : typeList === 'DRINKS_COCKTAILS'
+    //         ? 'list/DRINKS_COCKTAILS'
+    //         : 'list';
+    // dispatch(setPageScrollTypeList(path));
+    // console.log(items, 'itemshandleShowUploadRecipe');
+    // console.log(currentPage, 'currentPagehandleShowUploadRecipe');
+    dispatch(resetsetPegeScrollGeneric());
+    dispatch(setResetState(true));
+    // console.log(items, 'itemsNada');
+    // console.log(currentPage, 'currentNada');
+    const href = e.currentTarget.getAttribute('href');
+    router.push(href);
   };
   const data = user;
   return (
@@ -39,30 +76,33 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
         className="select-none bg-white w-[280px] h-[calc(var(--vh, 1vh) * 100)] p-1 overflow-auto shadow-md fixed   top-0"
       >
         <div className="flex flex-col justify-center items-center mt-5 mb-7">
-          <Image
-            onClick={() => setTypeGeneric('list')}
-            width={130}
-            height={130}
-            src="/img/Logo.svg"
-            alt="picture"
-          />
-
+          <Link href={'/inicio'}>
+            <Image
+              onClick={() => setTypeGeneric('list')}
+              width={130}
+              height={130}
+              src="/img/Logo.svg"
+              alt="picture"
+            />
+          </Link>
           {/* <h1 className="font-abril font-bold text-[28px]">Foodies</h1> */}
         </div>
         <div
-          onClick={() => setTypeGeneric('list')}
+          // onClick={() => handleTypeList('list')}
           className="flex justify-start items-center ml-4 text-[18px] font-semibold text-center"
         >
           <ul>
-            <li className=" my-1 flex justify-start items-center w-f cursor-pointer">
-              <Image
-                width={30}
-                height={30}
-                src="/icons/ion--home.svg"
-                alt="picture"
-              />
-              <p className="ml-1  ">Inicio</p>
-            </li>
+            <Link href={'/inicio'} onClick={handleTypeList}>
+              <li className=" my-1 flex justify-start items-center w-f cursor-pointer">
+                <Image
+                  width={30}
+                  height={30}
+                  src="/icons/ion--home.svg"
+                  alt="picture"
+                />
+                <p className="ml-1  ">Inicio</p>
+              </li>
+            </Link>
             <li className="flex justify-start items-center  my-1 cursor-pointer">
               <Image
                 width={30}
@@ -158,52 +198,54 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
               </li>
             </ul>
           </Accordion> */}
-          <div
-            onClick={() => setTypeGeneric('SWEET')}
-            className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer"
-          >
-            <Image
-              width={30}
-              height={30}
-              src="/icons/hugeicons--apple-pie.svg"
-              alt="picture"
-            />
-            <p className="ml-1">Dulce</p>
-          </div>
-          <div
-            onClick={() => setTypeGeneric('SAVORY')}
-            className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer"
-          >
-            <Image
-              width={30}
-              height={30}
-              src="/icons/mdi--food-italian (1).svg"
-              alt="picture"
-            />
-            <p className="ml-1">Salado</p>
-          </div>
-          <div
-            onClick={() => setTypeGeneric('DRINKS_COCKTAILS')}
-            className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer"
-          >
-            <Image
-              width={30}
-              height={30}
-              src="/icons/entypo--drink.svg"
-              alt="picture"
-            />
-            <p className="ml-1">Tragos y bebidas</p>
-          </div>
-          <div className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer">
-            <Image
-              className="mr-1"
-              width={30}
-              height={30}
-              src="/icons/hugeicons--cook-book.svg"
-              alt="picture"
-            />
-            <p>Recetas Guardadas</p>
-          </div>
+          <Link href={'/categoria/dulce'} onClick={handleTypeList}>
+            <div className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer">
+              <Image
+                width={30}
+                height={30}
+                src="/icons/hugeicons--apple-pie.svg"
+                alt="picture"
+              />
+              <p className="ml-1">Dulce</p>
+            </div>
+          </Link>
+          <Link href={'/categoria/salado'} onClick={handleTypeList}>
+            <div className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer">
+              <Image
+                width={30}
+                height={30}
+                src="/icons/mdi--food-italian (1).svg"
+                alt="picture"
+              />
+              <p className="ml-1">Salado</p>
+            </div>
+          </Link>
+          <Link href={'/categoria/tragos_y_bebidas'} onClick={handleTypeList}>
+            <div
+              // onClick={() => setTypeGeneric('DRINKS_COCKTAILS')}
+              className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer"
+            >
+              <Image
+                width={30}
+                height={30}
+                src="/icons/entypo--drink.svg"
+                alt="picture"
+              />
+              <p className="ml-1">Tragos y bebidas</p>
+            </div>
+          </Link>
+          <Link href={'/recetas_guardadas'} onClick={handleTypeList}>
+            <div className="flex justify-start items-center ml-4 mt-2  font-semibold cursor-pointer">
+              <Image
+                className="mr-1"
+                width={30}
+                height={30}
+                src="/icons/hugeicons--cook-book.svg"
+                alt="picture"
+              />
+              <p>Recetas Guardadas</p>
+            </div>
+          </Link>
         </div>
         <div className="flex justify-center pt-11">
           <button
