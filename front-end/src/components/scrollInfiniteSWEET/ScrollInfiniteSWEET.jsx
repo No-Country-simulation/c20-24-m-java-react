@@ -1,10 +1,17 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import CardRecipe from '../cardRecipe/CardRecipe';
 import axios from 'axios';
 import { useUserContext } from '../UserProvider';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import {
+  addPageScrollItem,
+  setPageScrollCurrentPage,
+  setPageScrollPosition,
+} from '@/redux/pageScroll/pageScrollSlice';
 const foodArray = [
   {
     name: 'Pizza',
@@ -554,17 +561,25 @@ const foodArray = [
   },
 ];
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
-const ScrollInfiniteSWEET = ({ dataExternal, type }) => {
-  const [asType, setAsType] = useState(type);
+const ScrollInfiniteSWEET = () => {
+  const { items, scrollPosition, currentPage } = useSelector(
+    (state) => state.pageScrollSlice,
+  );
+  const dispatch = useDispatch();
+  const pathname = usePathname();
+
   const [dataRecipes, setDataRecipes] = useState([]);
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [offSet, setOffSet] = useState(0);
-  const itemsPerPage = 10;
-  const [currentPage, setCurrentPage] = useState(1);
+  const [scrollPositions, setScrollPositions] = useState(0);
+
+  const itemsPerPage = 1;
+  // const [currentPage, setCurrentPage] = useState(1);
   const elementRef = useRef(null);
+  const scrollYRef = useRef(0);
   const { setToken } = useUserContext();
   const { setUser } = useUserContext();
+
   // const { dataRecipes, setDataRecipes } = useUserContext();
   const router = useRouter();
 
@@ -574,72 +589,77 @@ const ScrollInfiniteSWEET = ({ dataExternal, type }) => {
         const currentUser = await JSON.parse(localStorage.user);
         setUser(currentUser);
       } else {
-        router.push('/ingreso');
+        router.push('/');
       }
     };
 
     checkToken();
   }, [setUser]);
 
+  // useEffect(() => {
+  //   // this.forceUpdate();
+  //   console.log(scrollPosition, 'pageScrollView');
+  //   // dispatch(setPageScrollPosition(2));
+  //   const fetchRecipe = async () => {
+  //     const stoken = await localStorage.getItem('token');
+  //     setToken(stoken);
+
+  //     const response = await axios.get(`${BACK_API_URL}/recipes/list`, {
+  //       headers: {
+  //         Authorization: `Bearer ${stoken}`,
+  //       },
+  //     });
+
+  //     setDataRecipes(response.data);
+  //     console.log(response.data, 'data');
+  //   };
+  //   fetchRecipe();
+  // }, [setToken]);
+
+  // Cargar productos al montar el componente o cambiar de página
   useEffect(() => {
-    console.log(type, 'type');
-    setAsType(type);
-    console.log(asType, 'asType');
-    // this.forceUpdate();
-    const fetchRecipe = async () => {
-      const stoken = await localStorage.getItem('token');
-      setToken(stoken);
-      // console.log(stoken);
-      // if (type === 'SWEET') {
-      // }
-      const path =
-        type === 'SWEET' ? 'list/SWEET' : type === 'SAVORY' ? 'list/SAVORY' : 'list';
-      console.log(path, 'path');
-      const response = await axios.get(`${BACK_API_URL}/recipes/list/SWEET`, {
-        headers: {
-          Authorization: `Bearer ${stoken}`,
-        },
-      });
+    if (items.length === 0) {
+      // console.log('avers');
+      // fetchProducts(); // Si no hay productos, cargarlos
+      // const data = loadData();
+      // setDataRecipes(data);
+    } else {
+      console.log(scrollPosition, 'pageScrollView');
+      console.log(items, 'items');
+      console.log(currentPage, 'currentPage');
+      setTimeout(() => {}, 0); // Restaurar el scroll
+      window.scrollTo(0, scrollPosition); // Restaurar el scroll
+    }
+  }, []);
 
-      // if (dataRecipes?.length == 0) {
-      //   setDataRecipes(response.data);
-      // }
-      setDataRecipes(response.data);
-
-      console.log(response.data, 'que onda');
-      console.log(dataRecipes, 'dataRecipes');
-      // console.log(data, 'data');
-      // console.log(dataExternal, 'dataExternal');
-
-      // setDataRecipes(response.data);
-      // console.log(response.data);
-      // console.log(showGlobal);
-      // console.log(typeData, 'typeData');
-      // try {
-      //   const response = await fetch(`${BACK_API_URL}/recipes/list`, {
-      //     method: 'get',
-      //     headers: {
-      //       Authorization: `Bearer ${stoken}`,
-      //       'Content-Type': 'application/json',
-      //     },
-      //     mode: 'cors',
-      //     cache: 'default',
-      //   })
-      //     .then((response) => response.json())
-      //     .then((data) => console.log(JSON.stringify(data)))
-      //     .catch((error) => console.log(error));
-      //   const data = await response.json();
-      //   console.log(data);
-      // } catch (error) {
-      //   console.log(error);
-      // }
-      // console.log(dataRecipes);
+  // Guardar la posición del scroll en Redux
+  useLayoutEffect(() => {
+    // console.log(pathname, 'pathname');
+    const handleScroll = () => {
+      // const currentScroll = window.scrollY;
+      // setScrollPositions(currentScroll);
+      // console.log(scrollPositions, 'scrollPositions');
+      // dispatch(setPageScrollPosition(scrollPositions));
+      // console.log(window.scrollY, 'scroll'); // Guardar la posición actual
+      scrollYRef.current = window.scrollY;
     };
-    fetchRecipe();
-  }, [setToken, type, setDataRecipes, setAsType, asType]);
+    // handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    // router.events.on('routeChangeStart', handleScroll);
+    return () => {
+      // console.log(window.scrollY, 'scroll demontado');
+      // const currentScroll = window.scrollY;
+      // dispatch(setPageScrollPosition(currentScroll));
+      dispatch(setPageScrollPosition(scrollYRef.current));
+      console.log(window.scrollY, 'scroll demontado');
+      window.removeEventListener('scroll', handleScroll);
+      // router.events.off('routeChangeStart', handleScroll);
+      // console.log('se demonta');
+    };
+  }, [pathname, dispatch]);
 
   useEffect(() => {
-    console.log(dataRecipes);
+    // console.log(dataRecipes);
 
     const observer = new IntersectionObserver(OnIntersection);
     if (observer && elementRef.current) {
@@ -661,59 +681,77 @@ const ScrollInfiniteSWEET = ({ dataExternal, type }) => {
     const endIndex = startIndex + itemsPerPage;
     return data.slice(startIndex, endIndex);
   };
-  const getData = () => {
+
+  const loadData = async () => {
+    const stoken = await localStorage.getItem('token');
+    setToken(stoken);
+
+    const response = await axios.get(`${BACK_API_URL}/recipes/list`, {
+      headers: {
+        Authorization: `Bearer ${stoken}`,
+      },
+    });
+    return response.data;
+    // setDataRecipes(response.data);
+    // console.log(response.data, 'data');
+  };
+  const getData = async () => {
     // axios.get(``);
     // console.log('asdas');
-    const view = getPaginatedData(dataRecipes);
-    // console.log(view, 'adasda');
+    // if (dataRecipes.length === 0) {
+    //   loadData();
+    // }
+    const data = await loadData();
+    const view = getPaginatedData(data);
+    // console.log(dataRecipes, 'adasda');
     // console.log(view);
     if (view.length === 0) {
       setHasMore(false);
     } else {
       setData([...data, ...view]);
+      dispatch(addPageScrollItem(view));
       // console.log(data);
       // setDataRecipes([...dataRecipes, ...view]);
       // console.log(dataRecipes);
-      setCurrentPage((currentPage) => currentPage + 1);
+      // setCurrentPage((currentPage) => currentPage + 1);
+      dispatch(setPageScrollCurrentPage(currentPage + 1));
     }
   };
   return (
     <>
-      {dataRecipes?.length > 0 ? (
-        <>
-          <div>
-            {data.map((food) => (
-              <CardRecipe
-                key={food.id}
-                title={food.title}
-                image={food.imageUrls[0]}
-                user={food.userId}
-                description={food.description}
-                category={food.category}
-                subcategory={food.subcategory}
-                nameUser={food.nombreDelUsuario}
-                dateCreation={food.dateCreation}
-                time={food.time}
-                commensal={food.commensal}
-                difficulty={food.difficulty}
-                ingredients={food.ingredients}
-                stepByStep={food.instructions}
-                userId={food.userId}
-              />
-            ))}
-          </div>
+      <>
+        <div>
+          {/* {console.log(items, 'items')}
+          {console.log(data, 'dataaXX')} */}
+          {items.map((food) => (
+            <CardRecipe
+              key={food.id}
+              title={food.title}
+              image={food.imageUrls[0]}
+              user={food.userId}
+              description={food.description}
+              category={food.category}
+              subcategory={food.subcategory}
+              nameUser={food.nombreDelUsuario}
+              dateCreation={food.dateCreation}
+              time={food.time}
+              commensal={food.commensal}
+              difficulty={food.difficulty}
+              ingredients={food.ingredients}
+              stepByStep={food.instructions}
+              userId={food.userId}
+            />
+          ))}
+        </div>
 
-          {hasMore && (
-            <div className="" ref={elementRef}>
-              {' '}
-              Cargando Recetas
-            </div>
-          )}
-          {/*  */}
-        </>
-      ) : (
-        <p> No hay recetas</p>
-      )}
+        {hasMore && (
+          <div className="" ref={elementRef}>
+            {' '}
+            Cargando Recetas
+          </div>
+        )}
+        {/*  */}
+      </>
     </>
   );
 };

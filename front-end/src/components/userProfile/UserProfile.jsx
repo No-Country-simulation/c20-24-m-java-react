@@ -1,22 +1,40 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 import { Globe, Instagram, MapPin } from 'react-feather';
+import { FaUser } from 'react-icons/fa6';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
 
-const UserProfile = ({ onClose, userId, username }) => {
+const UserProfile = ({ onClose, userId, username, imageUser }) => {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  if (!isMounted) return null; // Evitar renderizar en el lado del servidor
+  const router = useRouter();
   return (
     <div className="flex flex-col justify-center items-center relative">
-      <div onClick={onClose} className="fixed top-[12px] left-[30px]">
+      <div
+        onClick={() => router.back()}
+        className="fixed top-[12px] left-[30px] cursor-pointer"
+      >
         <IoArrowBackCircleOutline className="w-[80px] h-[80px] text-white" />
       </div>
-      <div className="mt-1 bg-[#fff8f2] w-[252px] h-[252px] rounded-[50%] shadow-md ">
-        <Image
-          className=" w-[250px] h-[250px] rounded-[50%]"
-          width={60}
-          height={60}
-          src="/img/Registro ilustracion.svg"
-          alt="picture"
-        />
+      <div className="flex justify-center items-center  mt-1 bg-[#fff8f2] w-[252px] h-[252px] rounded-[50%] shadow-md ">
+        {imageUser ? (
+          <Image
+            className=" w-[250px] h-[250px] rounded-[50%]"
+            width={60}
+            height={60}
+            src="/img/Registro ilustracion.svg"
+            alt="picture"
+          />
+        ) : (
+          <FaUser className="rounded-full w-[240px] h-[240px]" />
+        )}
       </div>
       <div className="my-5">
         <p className="text-[25px] text-center w-[250px] h-[[calc(var(--vh, 1vh) * 100)]] overflow-hidden text-ellipsis leading-tight font-semibold">

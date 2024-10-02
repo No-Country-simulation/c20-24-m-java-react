@@ -7,7 +7,6 @@ import ScrollInfiniteRedux from '@/components/scrollInfiniteRedux/ScrollInfinite
 import ScrollInfiniteSWEET from '@/components/scrollInfiniteSWEET/ScrollInfiniteSWEET';
 import SideMenu from '@/components/sideMenu/SideMenu';
 import { useUserContext } from '@/components/UserProvider';
-import { resetsetPageScroll } from '@/redux/pageScroll/pageScrollSlice';
 import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,7 +14,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu } from 'react-feather';
 import { IoMenu } from 'react-icons/io5';
-import { useDispatch } from 'react-redux';
 import { Toaster } from 'sonner';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -23,9 +21,6 @@ export default function Inicio() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const dispatch = useDispatch();
-
-  const [hasMore, setHasMore] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(null);
   const [showGlobal, setShowGlobal] = useState('list');

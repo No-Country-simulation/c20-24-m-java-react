@@ -3,6 +3,7 @@ import './globals.css';
 import global from './globalsStyle.css';
 import { UserProvider } from '@/components/UserProvider';
 import { Toaster } from 'sonner';
+import { Providers } from '@/redux/providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -14,7 +15,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className + global.body}>
-        <UserProvider>{children}</UserProvider> <Toaster richColors />
+        <Providers>
+          <UserProvider>{children}</UserProvider> <Toaster richColors />
+        </Providers>
       </body>
     </html>
   );

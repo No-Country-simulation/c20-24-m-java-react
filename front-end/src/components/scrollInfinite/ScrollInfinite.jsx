@@ -560,7 +560,7 @@ const ScrollInfinite = ({ dataExternal, type }) => {
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [offSet, setOffSet] = useState(0);
-  const itemsPerPage = 10;
+  const itemsPerPage = 1;
   const [currentPage, setCurrentPage] = useState(1);
   const elementRef = useRef(null);
   const { setToken } = useUserContext();
@@ -592,14 +592,28 @@ const ScrollInfinite = ({ dataExternal, type }) => {
       // console.log(stoken);
       // if (type === 'SWEET') {
       // }
+      console.log(type);
+      console.log(asType, 'astype');
+      // const path =
+      //   type === 'SWEET'
+      //     ? 'list/SWEET'
+      //     : type === 'SAVORY'
+      //       ? 'list/SAVORY'
+      //       : type === 'DRINKS_COCKTAILS'
+      //         ? 'list/DRINKS_COCKTAILS'
+      //         : 'list';
       const path =
-        asType === 'SWEET'
+        type === '/categoria/SWEET'
           ? 'list/SWEET'
-          : asType === 'SAVORY'
+          : type === '/categoria/SAVORY'
             ? 'list/SAVORY'
-            : 'list';
-      // console.log(path, 'path');
-      const response = await axios.get(`${BACK_API_URL}/recipes/list`, {
+            : type === 'DRINKS_COCKTAILS'
+              ? 'list/DRINKS_COCKTAILS'
+              : type === '/inicio'
+                ? 'list'
+                : 'list';
+      console.log(path, 'path');
+      const response = await axios.get(`${BACK_API_URL}/recipes/${path}`, {
         headers: {
           Authorization: `Bearer ${stoken}`,
         },
@@ -609,42 +623,20 @@ const ScrollInfinite = ({ dataExternal, type }) => {
       //   setDataRecipes(response.data);
       // }
       setDataRecipes(response.data);
-
-      // console.log(response.data, 'que onda');
-      // console.log(dataRecipes, 'dataRecipes');
-      // console.log(data, 'data');
-      // console.log(dataExternal, 'dataExternal');
-
-      // setDataRecipes(response.data);
-      // console.log(response.data);
-      // console.log(showGlobal);
-      // console.log(typeData, 'typeData');
-      // try {
-      //   const response = await fetch(`${BACK_API_URL}/recipes/list`, {
-      //     method: 'get',
-      //     headers: {
-      //       Authorization: `Bearer ${stoken}`,
-      //       'Content-Type': 'application/json',
-      //     },
-      //     mode: 'cors',
-      //     cache: 'default',
-      //   })
-      //     .then((response) => response.json())
-      //     .then((data) => console.log(JSON.stringify(data)))
-      //     .catch((error) => console.log(error));
-      //   const data = await response.json();
-      //   console.log(data);
-      // } catch (error) {
-      //   console.log(error);
-      // }
-      // console.log(dataRecipes);
+      // const aver = getPaginatedData(dataRecipes);
+      // console.log(data, 'data1');
+      setCurrentPage(1);
+      setHasMore(true);
+      // setCurrentPage((currentPage) => currentPage + 1);
+      setData([]);
     };
     fetchRecipe();
-  }, [setToken, type, setDataRecipes, setAsType]);
+  }, [setToken, type]);
 
   useEffect(() => {
     // console.log(dataRecipes);
-
+    console.log(currentPage, 'currentPage');
+    // if (currentPage > 1) {
     const observer = new IntersectionObserver(OnIntersection);
     if (observer && elementRef.current) {
       observer.observe(elementRef.current);
@@ -652,7 +644,8 @@ const ScrollInfinite = ({ dataExternal, type }) => {
     return () => {
       if (observer) observer.disconnect();
     };
-  }, [data, dataRecipes, setDataRecipes]);
+    // }
+  }, [data, dataRecipes, setDataRecipes, type]);
 
   const OnIntersection = (entries) => {
     const firstEntry = entries[0];
@@ -669,7 +662,7 @@ const ScrollInfinite = ({ dataExternal, type }) => {
     // axios.get(``);
     // console.log('asdas');
     const view = getPaginatedData(dataRecipes);
-    // console.log(view, 'adasda');
+    console.log(view, 'view');
     // console.log(view);
     if (view.length === 0) {
       setHasMore(false);

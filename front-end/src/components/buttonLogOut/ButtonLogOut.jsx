@@ -2,8 +2,12 @@ import { useEffect } from 'react';
 import { MdOutlineLogout } from 'react-icons/md';
 import { useUserContext } from '../UserProvider';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { resetsetPageScroll } from '@/redux/pageScroll/pageScrollSlice';
+import { resetsetPegeScrollGeneric } from '@/redux/pegeScrollGeneric/pegeScrollGenericSlice';
 
 const ButtonLogOut = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { token, setToken, setUser } = useUserContext();
 
@@ -20,6 +24,7 @@ const ButtonLogOut = () => {
     localStorage.clear();
     setToken(null);
     setUser(null);
+    dispatch(resetsetPegeScrollGeneric());
     router.push('/');
   };
   return (

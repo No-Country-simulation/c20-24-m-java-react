@@ -1,0 +1,80 @@
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  pages: {},
+};
+
+export const pegeScrollGenericSlice = createSlice({
+  name: 'pegeScrollGeneric',
+  initialState,
+  reducers: {
+    setPegeScrollGenericItems: (state, action) => {
+      const { pageKey, products } = action.payload;
+      if (!state.pages[pageKey]) {
+        state.pages[pageKey] = {
+          items: [],
+          scrollPosition: 0,
+          currentPage: 1,
+          reset: true,
+        };
+      }
+      state.pages[pageKey].items = products;
+    },
+    changePegeScrollGenericReset: (state, action) => {
+      const { pageKey, products } = action.payload;
+      if (!state.pages[pageKey]) {
+        state.pages[pageKey] = {
+          items: [],
+          scrollPosition: 0,
+          currentPage: 1,
+          reset: true,
+        };
+      }
+      state.pages[pageKey].items = products;
+    },
+    addPegeScrollGenericItems: (state, action) => {
+      const { pageKey, products } = action.payload;
+      if (!state.pages[pageKey]) {
+        state.pages[pageKey] = { items: [], scrollPosition: 0, currentPage: 1 };
+      }
+      // Filtrar productos duplicados
+      const newProducts = products.filter(
+        (newProduct) =>
+          !state.pages[pageKey].items.some(
+            (existingProduct) => existingProduct.id === newProduct.id,
+          ),
+      );
+      state.pages[pageKey].items = [...state.pages[pageKey].items, ...newProducts];
+      // console.log(state.pages[pageKey].items, 'state.pages[pageKey].items');
+    },
+    setPegeScrollGenericScrollPosition: (state, action) => {
+      const { pageKey, scrollPosition } = action.payload;
+      if (!state.pages[pageKey]) {
+        state.pages[pageKey] = { items: [], scrollPosition: 0, currentPage: 1 };
+      }
+      state.pages[pageKey].scrollPosition = scrollPosition;
+    },
+    setPegeScrollGenericCurrentPage: (state, action) => {
+      const { pageKey, currentPage } = action.payload;
+      if (!state.pages[pageKey]) {
+        state.pages[pageKey] = { items: [], scrollPosition: 0, currentPage: 1 };
+      }
+      state.pages[pageKey].currentPage = currentPage;
+      // console.log(
+      //   state.pages[pageKey].currentPage,
+      //   'state.pages[pageKey].currentPage',
+      // );
+    },
+    resetsetPegeScrollGeneric: () => initialState,
+  },
+});
+
+export const {
+  setPegeScrollGenericItems,
+  addPegeScrollGenericItems,
+  setPegeScrollGenericScrollPosition,
+  setPegeScrollGenericCurrentPage,
+  resetsetPegeScrollGeneric,
+} = pegeScrollGenericSlice.actions;
+
+export default pegeScrollGenericSlice.reducer;
