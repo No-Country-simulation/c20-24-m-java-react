@@ -6,7 +6,7 @@ export const registerFormDataInputs = [
   },
   {
     name: 'email',
-    type: 'email',
+    type: 'text',
     placeholder: 'Correo eletronico',
   },
   {

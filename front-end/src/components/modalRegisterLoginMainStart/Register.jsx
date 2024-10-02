@@ -1,12 +1,13 @@
+/* global process */
 import Image from 'next/image';
 import { useState } from 'react';
 import { registerFormDataInputs } from './helpers/registerFormDataInputs';
 import validateRegister from './helpers/validateRegister';
 import axios from 'axios';
 import { X } from 'react-feather';
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
 
-const REGISTER_USER_URL = process.env.NEXT_PUBLIC_API_URL;
+const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const Register = ({ onClose, typeModal }) => {
   const initialStateDataInput = {
@@ -17,7 +18,7 @@ const Register = ({ onClose, typeModal }) => {
   };
   const [userDataInputs, setUserDataInputs] = useState(initialStateDataInput);
   const [errorDataInputs, setErrorDataInputs] = useState(initialStateDataInput);
-  const router = useRouter();
+  //const router = useRouter();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -28,12 +29,12 @@ const Register = ({ onClose, typeModal }) => {
     });
 
     setErrorDataInputs(validateRegister({ ...userDataInputs, [name]: value }));
-    console.log(errorDataInputs);
+    // console.log(errorDataInputs);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userDataInputs);
+    // console.log(userDataInputs);
     const data = {
       username: userDataInputs.name,
       email: userDataInputs.email,
@@ -41,9 +42,13 @@ const Register = ({ onClose, typeModal }) => {
     };
     console.log(data);
     axios
-      .post(`${REGISTER_USER_URL}/auth/register`, data)
+      .post(`${BACK_API_URL}/auth/register`, data)
       .then(({ data }) => data)
-      .then(() => router.push('/inicio'))
+      .then((data) => {
+        console.log('Usuario creado');
+        console.log(data);
+        // axios.post(`${BACK_API_URL}/favorites/save`);
+      })
       .catch((error) => console.log(error));
   };
   return (
@@ -105,6 +110,7 @@ const Register = ({ onClose, typeModal }) => {
             Registrarse
           </button>
         </form>
+
         <p className="mb-4 mt-2">o registrate con </p>
         <button
           type="button"
