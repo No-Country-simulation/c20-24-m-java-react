@@ -1,5 +1,6 @@
 package com.example.demo.service.Imp;
 
+import com.example.demo.User.UserRepository;
 import com.example.demo.dto.RecipeDto;
 import com.example.demo.exception.RecipeNotFoundExepcion;
 import com.example.demo.exception.UserNotFoundExepcion;
@@ -33,6 +34,7 @@ public class RecipeServiceImp implements RecipeService {
     private final CalificationMapper1 calificationMapper1;
     private final UserCommentRepository userCommentRepository;
     private final ImageService imageService;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
@@ -160,6 +162,14 @@ public class RecipeServiceImp implements RecipeService {
     public Page<RecipeDto> findAll(Pageable pageable) {
         Page<Recipe> recipesPage = recipeRepository.findAll(pageable);
         return recipesPage.map(recipeMapper1::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<RecipeDto> findRecipeByUserName(String userName) {
+        User user = userRepository.findByUsername(userName).orElseThrow(() -> new RecipeNotFoundExepcion("This Recipe Does Not Exist with that UserName: " + userName));
+        List<Recipe> recipeList = user.getRecipes();
+        return recipeMapper1.entityListToDtoList(recipeList);
     }
 
 }

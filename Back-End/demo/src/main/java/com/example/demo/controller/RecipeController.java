@@ -267,5 +267,39 @@ public class RecipeController {
         return ResponseEntity.ok(recipesPage);
     }
 
+    @Operation(
+            summary = "List recipes by UserName.",
+            description = "Retrieves a list of recipes created by the specified user."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "Recipes retrieved successfully",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = RecipeDto.class))
+                    }),
+            @ApiResponse(responseCode = "403", description = "Forbidden access to this resource", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "404", description = "User not found", content = {
+                    @Content}),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                    @Content})
+    })
+    @Parameter(
+            name = "Username",
+            description = "The UserName of the user whose recipes are to be retrieved.",
+            required = true,
+            schema = @Schema(type = "long")
+    )
+    @GetMapping("/find/{userName}")
+    public ResponseEntity<?> findRecipeByUserName(@PathVariable("userName") String userName) {
+        try {
+            List<RecipeDto> recipeDtoList = recipeService.findRecipeByUserName(userName);
+            return ResponseEntity.ok(recipeDtoList);
+        } catch (RecipeNotFoundExepcion ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+    }
+
 
 }

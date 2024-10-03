@@ -2,6 +2,7 @@ package com.example.demo.service.Imp;
 
 import com.example.demo.dto.FavoriteDto;
 import com.example.demo.exception.FavoriteNotFoundExepcion;
+import com.example.demo.exception.RecipeAlreadyExistsException;
 import com.example.demo.exception.RecipeNotFoundExepcion;
 import com.example.demo.exception.UserNotFoundExepcion;
 import com.example.demo.mapper.FavoriteMapper1;
@@ -63,9 +64,15 @@ public class FavoriteServiceImp implements FavoriteService {
     @Override
     @Transactional
     public void addRecipeToFavorite(Long favoriteId, Recipe recipe) {
-        Favorite favorite = favoriteRepository.findById(favoriteId).orElseThrow(() -> new FavoriteNotFoundExepcion("This Favorite Does Not Exist with that ID: " + favoriteId));
-        favorite.getRecipeList().add(recipe);
-        favoriteRepository.save(favorite);
+        Favorite favorite = favoriteRepository.findById(favoriteId)
+                .orElseThrow(() -> new FavoriteNotFoundExepcion("This Favorite Does Not Exist with that ID: " + favoriteId));
+
+        if (!favorite.getRecipeList().contains(recipe)) {
+            favorite.getRecipeList().add(recipe);
+            favoriteRepository.save(favorite);
+        } else {
+            throw new RecipeAlreadyExistsException("This Recipe is already in the Favorite list.");
+        }
     }
 
     @Override
