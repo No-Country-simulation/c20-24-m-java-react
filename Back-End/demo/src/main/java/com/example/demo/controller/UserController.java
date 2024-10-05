@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.User.User;
+import com.example.demo.dto.UserDto;
 import com.example.demo.exception.RecipeNotFoundExepcion;
 import com.example.demo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,8 +47,8 @@ public class UserController {
     @GetMapping("/search/{userName}")
     public ResponseEntity<?> findRecipeByUserName(@PathVariable("userName") String userName) {
         try {
-            User user = userService.findByUsername(userName);
-            return ResponseEntity.ok(user);
+            UserDto userDto = userService.findByUsername(userName);
+            return ResponseEntity.ok(userDto);
         } catch (RecipeNotFoundExepcion ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
