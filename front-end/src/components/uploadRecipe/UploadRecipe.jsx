@@ -75,11 +75,18 @@ const UploadRecipe = ({ isVisible, onClose }) => {
     // console.log(errorDataInputs);
   };
 
+  // const armArrayIngredients = () => {
+  //   for (let i = 0; i < steps; i++) {
+  //     const key = `ingredients${i}`;
+  //     console.log(userDataInputs.key);
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await localStorage.getItem('token');
     const user = await localStorage.getItem('user');
     console.log(user, 'Useraaa');
+
     const data = {
       userId: JSON.parse(user).userId,
       title: userDataInputs.title,

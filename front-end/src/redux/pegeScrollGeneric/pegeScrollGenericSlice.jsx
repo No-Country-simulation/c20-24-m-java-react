@@ -22,15 +22,17 @@ export const pegeScrollGenericSlice = createSlice({
     },
     changePegeScrollGenericReset: (state, action) => {
       const { pageKey, products } = action.payload;
-      if (!state.pages[pageKey]) {
-        state.pages[pageKey] = {
-          items: [],
-          scrollPosition: 0,
-          currentPage: 1,
-          reset: true,
-        };
+      // if (!state.pages[pageKey]) {
+      //   state.pages[pageKey] = {
+      //     items: [],
+      //     scrollPosition: 0,
+      //     currentPage: 1,
+      //     reset: true,
+      //   };
+      // }
+      if (state.pages[pageKey]) {
+        state.pages[pageKey].items = products;
       }
-      state.pages[pageKey].items = products;
     },
     addPegeScrollGenericItems: (state, action) => {
       const { pageKey, products } = action.payload;
@@ -49,21 +51,34 @@ export const pegeScrollGenericSlice = createSlice({
     },
     setPegeScrollGenericScrollPosition: (state, action) => {
       const { pageKey, scrollPosition } = action.payload;
-      if (!state.pages[pageKey]) {
-        state.pages[pageKey] = { items: [], scrollPosition: 0, currentPage: 1 };
+      // if (!state.pages[pageKey]) {
+      //   state.pages[pageKey] = { items: [], scrollPosition: 0, currentPage: 1 };
+      // }
+      if (state.pages[pageKey]) {
+        state.pages[pageKey].scrollPosition = scrollPosition;
       }
-      state.pages[pageKey].scrollPosition = scrollPosition;
     },
     setPegeScrollGenericCurrentPage: (state, action) => {
       const { pageKey, currentPage } = action.payload;
-      if (!state.pages[pageKey]) {
-        state.pages[pageKey] = { items: [], scrollPosition: 0, currentPage: 1 };
+      // if (!state.pages[pageKey]) {
+      //   state.pages[pageKey] = { items: [], scrollPosition: 0, currentPage: 1 };
+      // }
+      if (state.pages[pageKey]) {
+        state.pages[pageKey].currentPage = currentPage;
       }
-      state.pages[pageKey].currentPage = currentPage;
+
       // console.log(
       //   state.pages[pageKey].currentPage,
       //   'state.pages[pageKey].currentPage',
       // );
+    },
+    deletePageKeyPegeScrollGeneric: (state, action) => {
+      const { pageKey } = action.payload;
+      // console.log(pageKey, 'deletePageKeyPegeScrollGeneric');
+      if (state.pages[pageKey]) {
+        // console.log('entro');
+        delete state.pages[pageKey];
+      }
     },
     resetsetPegeScrollGeneric: () => initialState,
   },
@@ -75,6 +90,7 @@ export const {
   setPegeScrollGenericScrollPosition,
   setPegeScrollGenericCurrentPage,
   resetsetPegeScrollGeneric,
+  deletePageKeyPegeScrollGeneric,
 } = pegeScrollGenericSlice.actions;
 
 export default pegeScrollGenericSlice.reducer;

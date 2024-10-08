@@ -263,7 +263,7 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
           )}
         </div>
         <div className="flex flex-col justify-between items-center mt-12">
-          <Link href="/perfil">
+          <Link href={`/${data?.username}`}>
             <div className="mx-2 w-[60px] h-[60px] icon_profile flex justify-center items-center">
               {data?.imageUser ? (
                 <Image
@@ -278,7 +278,7 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
               )}
             </div>
           </Link>
-          <Link href="/perfil">
+          <Link href={`/${data?.username}`}>
             <p className="mt-2 text-center w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
               {data?.username || 'UsuarioError'}
             </p>

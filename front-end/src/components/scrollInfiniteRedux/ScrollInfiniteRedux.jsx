@@ -6,14 +6,7 @@ import { useUserContext } from '../UserProvider';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  addPageScrollItem,
-  resetsetPageScroll,
-  setPageScrollCurrentPage,
-  setPageScrollItem,
-  setPageScrollPosition,
-  setPageScrollTypeList,
-} from '@/redux/pageScroll/pageScrollSlice';
+
 import {
   addPegeScrollGenericItems,
   resetsetPegeScrollGeneric,
@@ -23,7 +16,7 @@ import {
 import { setResetState } from '@/redux/resetStatePage/resetStatePageSlice';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
-const ScrollInfiniteRedux = ({ type }) => {
+const ScrollInfiniteRedux = ({ type, pathFather }) => {
   // const { items, scrollPosition, currentPage, typeList } = useSelector(
   //   (state) => state.pageScrollSlice,
   // );
@@ -31,6 +24,11 @@ const ScrollInfiniteRedux = ({ type }) => {
   // console.log(plus, 'averadasda');
   const dispatch = useDispatch();
   const pathname = usePathname();
+  const userPath = pathname.split('/');
+  // console.log(userPath[1], 'pat');
+  if (!pathFather) {
+    pathFather = [];
+  }
   const pat =
     pathname === '/categoria/dulce'
       ? 'SWEET'
@@ -42,12 +40,21 @@ const ScrollInfiniteRedux = ({ type }) => {
             ? 'list'
             : pathname === '/recetas_guardadas'
               ? 'recetas_guardadas'
-              : 'list';
-  // console.log(pat, 'pat');
+              : pathFather[1] === 'guardados'
+                ? `${pathFather[0]}Guardados`
+                : pathFather[0];
+
+  console.log(pat, 'pat');
+
   const { items, scrollPosition, currentPage } = useSelector(
     (state) => state.pegeScrollGenericSlice.pages[pat],
   ) || { items: [], scrollPosition: 0, currentPage: 1 };
-  // console.log(items, 'av');
+  const aver = useSelector((state) => state.pegeScrollGenericSlice.pages) || {
+    items: [],
+    scrollPosition: 0,
+    currentPage: 1,
+  };
+  console.log(aver, 'av');
   const [asType, setAsType] = useState(type);
   const [dataRecipes, setDataRecipes] = useState([]);
   const [data, setData] = useState([]);
@@ -120,7 +127,7 @@ const ScrollInfiniteRedux = ({ type }) => {
 
     if (items.length === 0) {
       // console.log('avers');
-      dispatch(resetsetPegeScrollGeneric());
+      // dispatch(resetsetPegeScrollGeneric());
       setHasMore(true);
       dispatch(setResetState(true));
       // fetchProducts(); // Si no hay productos, cargarlos
@@ -165,7 +172,7 @@ const ScrollInfiniteRedux = ({ type }) => {
       // router.events.off('routeChangeStart', handleScroll);
       // console.log('se demonta');
     };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     // console.log(dataRecipes);
@@ -196,7 +203,8 @@ const ScrollInfiniteRedux = ({ type }) => {
     const user = JSON.parse(localStorage.user);
     const stoken = await localStorage.getItem('token');
     setToken(stoken);
-    if (pathname === '/recetas_guardadas') {
+    if (pathname === '/recetas_guardadas' || pathFather[1] === 'guardados') {
+      console.log('pasas oir aqi');
       const response = await axios.get(
         `${BACK_API_URL}/favorites/user/${user.userId}`,
         { signal },
@@ -213,6 +221,7 @@ const ScrollInfiniteRedux = ({ type }) => {
         return [];
       }
     } else {
+      console.log('pasas oir aqi');
       const path =
         pathname === '/categoria/dulce'
           ? 'list/SWEET'
@@ -222,22 +231,38 @@ const ScrollInfiniteRedux = ({ type }) => {
               ? 'list/DRINKS_COCKTAILS'
               : pathname === '/inicio'
                 ? 'list'
-                : 'list';
+                : null;
       // console.log(pathname, 'type');
-      // console.log(path, 'path');
+      console.log(path, 'path');
       // dispatch(resetsetPageScroll());
-      const response = await axios.get(
-        `${BACK_API_URL}/recipes/${path}`,
-        { signal },
-        {
-          headers: {
-            Authorization: `Bearer ${stoken}`,
+      if (path) {
+        // console.log(path, 'path');
+        const response = await axios.get(
+          `${BACK_API_URL}/recipes/${path}`,
+          { signal },
+          {
+            headers: {
+              Authorization: `Bearer ${stoken}`,
+            },
           },
-        },
-      );
-      // console.log(response.data, 'data');
-      return response.data;
-      // setDataRecipes(response.data);
+        );
+        // console.log(response.data, 'data');
+        return response.data;
+        // setDataRecipes(response.data);
+      } else {
+        const response = await axios.get(
+          `${BACK_API_URL}/recipes/find/${pat}`,
+          { signal },
+          {
+            headers: {
+              Authorization: `Bearer ${stoken}`,
+            },
+          },
+        );
+        // console.log(response?.data, 'data');
+        return response.data;
+        // setDataRecipes(response.data);
+      }
     }
   };
   const getData = async () => {
@@ -251,7 +276,7 @@ const ScrollInfiniteRedux = ({ type }) => {
     try {
       const dato = await loadData(signal);
       const view = getPaginatedData(dato);
-      // console.log(dataRecipes, 'adasda');
+      console.log(dataRecipes, 'adasda');
       // console.log(view);
       if (view.length === 0) {
         setHasMore(false);
