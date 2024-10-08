@@ -174,7 +174,7 @@ const CardRecipe = ({
                 )}
               </div>
               <Link
-                href={`/perfil/${nameUser}`}
+                href={`/${nameUser}`}
                 // href={{
                 //   pathname: `/perfil/${nameUser}`,
                 //   query: { secreto: 'informacion_oculta' },

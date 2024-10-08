@@ -175,7 +175,7 @@ export default function Inicio() {
             )} */}
 
             {/* {showGlobal && <ScrollInfinite />} */}
-            {pathname}
+            {/* {pathname} */}
             {/* <ScrollInfinite type={pathname} /> */}
             <ScrollInfiniteRedux type={pathname} />
             {/*  */}
