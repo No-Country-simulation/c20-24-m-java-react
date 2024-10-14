@@ -23,20 +23,25 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
     @EqualsAndHashCode.Include
     private String title;
     private String description;
     private String ingredients;
     private String instructions;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime dateCreation;
+
     @Enumerated(EnumType.STRING)
     private Category category;
+
     private String time;
     private String difficulty;
     private String commensal;
     private String amount;
+
     @ElementCollection
     @CollectionTable(name = "recipe_images", joinColumns = @JoinColumn(name = "recipe_id"))
     @Column(name = "image_url")
@@ -50,5 +55,8 @@ public class Recipe {
     private User user;
 
     private String nombreDelUsuario;
-}
 
+    @OneToMany(mappedBy = "recipe")
+    private List<Like> likes = new ArrayList<>();
+
+}
