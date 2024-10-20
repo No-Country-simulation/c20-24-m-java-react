@@ -156,6 +156,7 @@ const UploadRecipe = ({ isVisible, onClose }) => {
             // window.location.reload();
             // e.reset();
           }
+          onClose();
         })
         .catch((error) => console.log(error)),
       {

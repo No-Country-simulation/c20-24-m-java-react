@@ -7,6 +7,9 @@ import RatingStars from '../ratingStars/RatingStars';
 import { FaCircleArrowRight } from 'react-icons/fa6';
 import { FaComments } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
+import { useEffect } from 'react';
+import { useUserContext } from '../UserProvider';
+import { useRouter } from 'next/navigation';
 const ModalRecipeDetail = ({
   isVisible,
   onClose,
@@ -23,7 +26,25 @@ const ModalRecipeDetail = ({
   subcategory,
   nameUser,
   dateCreation,
+  userIdLogin,
+  idRecipe,
 }) => {
+  // const { user, setUser } = useUserContext();
+
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   const checkToken = async () => {
+  //     if (localStorage.user) {
+  //       const currentUser = await JSON.parse(localStorage.user);
+  //       setUser(currentUser);
+  //     } else {
+  //       router.push('/');
+  //     }
+  //   };
+
+  //   checkToken();
+  // }, [setUser]);
   return (
     <div
       id="modal_main"
@@ -105,9 +126,9 @@ const ModalRecipeDetail = ({
                         <g
                           fill="none"
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="0.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="0.8"
                           color="currentColor"
                         >
                           <path d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12" />
@@ -155,9 +176,9 @@ const ModalRecipeDetail = ({
                         <g
                           fill="none"
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="0.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="0.8"
                           color="currentColor"
                         >
                           <path d="M7 18v-2m5 2v-3m5 3v-5M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12" />
@@ -198,8 +219,12 @@ const ModalRecipeDetail = ({
                   <p className="mt-2 text-center">Compartir</p>
                 </div>
                 <div className="flex flex-col justify-center items-center mx-5">
-                  <SaveRecipe height={23} />
-                  <p className="mt-2 text-center">Guardar</p>
+                  {userIdLogin !== userId ? (
+                    <>
+                      <SaveRecipe height={23} idRecipe={idRecipe} />
+                      <p className="mt-2 text-center">Guardar</p>
+                    </>
+                  ) : null}
                 </div>
                 <div className="flex flex-col justify-center items-center mx-5">
                   <LikeRecipe height={23} />
@@ -225,7 +250,7 @@ const ModalRecipeDetail = ({
                 src="/img/test.svg"
               />
 
-              <ol class="list-decimal my-3 mx-3  ">
+              <ol className="list-decimal my-3 mx-3  ">
                 <li className="mx-2 my-2">
                   <p>{stepByStep}</p>
                 </li>

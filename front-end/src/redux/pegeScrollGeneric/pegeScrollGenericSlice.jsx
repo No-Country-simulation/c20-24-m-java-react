@@ -37,7 +37,12 @@ export const pegeScrollGenericSlice = createSlice({
     addPegeScrollGenericItems: (state, action) => {
       const { pageKey, products } = action.payload;
       if (!state.pages[pageKey]) {
-        state.pages[pageKey] = { items: [], scrollPosition: 0, currentPage: 1 };
+        state.pages[pageKey] = {
+          items: [],
+          scrollPosition: 0,
+          currentPage: 1,
+          reset: true,
+        };
       }
       // Filtrar productos duplicados
       const newProducts = products.filter(
@@ -80,6 +85,14 @@ export const pegeScrollGenericSlice = createSlice({
         delete state.pages[pageKey];
       }
     },
+    deletePSGItemFromPage: (state, action) => {
+      const { pageKey, itemId } = action.payload;
+      if (state.pages[pageKey]) {
+        state.pages[pageKey].items = state.pages[pageKey].items.filter(
+          (item) => item.id !== itemId,
+        );
+      }
+    },
     resetsetPegeScrollGeneric: () => initialState,
   },
 });
@@ -91,6 +104,7 @@ export const {
   setPegeScrollGenericCurrentPage,
   resetsetPegeScrollGeneric,
   deletePageKeyPegeScrollGeneric,
+  deletePSGItemFromPage,
 } = pegeScrollGenericSlice.actions;
 
 export default pegeScrollGenericSlice.reducer;
