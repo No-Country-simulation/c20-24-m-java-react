@@ -44,17 +44,17 @@ const ScrollInfiniteRedux = ({ type, pathFather }) => {
                 ? `${pathFather[0]}Guardados`
                 : pathFather[0];
 
-  console.log(pat, 'pat');
+  // console.log(pat, 'pat');
 
   const { items, scrollPosition, currentPage } = useSelector(
     (state) => state.pegeScrollGenericSlice.pages[pat],
   ) || { items: [], scrollPosition: 0, currentPage: 1 };
-  const aver = useSelector((state) => state.pegeScrollGenericSlice.pages) || {
-    items: [],
-    scrollPosition: 0,
-    currentPage: 1,
-  };
-  console.log(aver, 'av');
+  // const aver = useSelector((state) => state.pegeScrollGenericSlice.pages) || {
+  //   items: [],
+  //   scrollPosition: 0,
+  //   currentPage: 1,
+  // };
+  // console.log(aver, 'av');
   const [asType, setAsType] = useState(type);
   const [dataRecipes, setDataRecipes] = useState([]);
   const [data, setData] = useState([]);
@@ -221,7 +221,7 @@ const ScrollInfiniteRedux = ({ type, pathFather }) => {
         return [];
       }
     } else {
-      console.log('pasas oir aqi');
+      // console.log('pasas oir aqi');
       const path =
         pathname === '/categoria/dulce'
           ? 'list/SWEET'
@@ -233,7 +233,7 @@ const ScrollInfiniteRedux = ({ type, pathFather }) => {
                 ? 'list'
                 : null;
       // console.log(pathname, 'type');
-      console.log(path, 'path');
+      // console.log(path, 'path');
       // dispatch(resetsetPageScroll());
       if (path) {
         // console.log(path, 'path');
@@ -246,7 +246,7 @@ const ScrollInfiniteRedux = ({ type, pathFather }) => {
             },
           },
         );
-        // console.log(response.data, 'data');
+        // console.log(response.data, 'data de user');
         return response.data;
         // setDataRecipes(response.data);
       } else {
@@ -276,7 +276,7 @@ const ScrollInfiniteRedux = ({ type, pathFather }) => {
     try {
       const dato = await loadData(signal);
       const view = getPaginatedData(dato);
-      console.log(dataRecipes, 'adasda');
+      // console.log(dataRecipes, 'adasda');
       // console.log(view);
       if (view.length === 0) {
         setHasMore(false);

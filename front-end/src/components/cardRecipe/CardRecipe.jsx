@@ -108,6 +108,8 @@ const CardRecipe = ({
         difficulty={difficulty}
         ingredients={ingredients}
         stepByStep={stepByStep}
+        userIdLogin={user?.userId}
+        idRecipe={id}
       />
       <div className="m-3 w-[39rem] h-[37rem] bg-white rounded-3xl shadow-md">
         <div className="relative bg-black w-full h-[417px] rounded-3xl">

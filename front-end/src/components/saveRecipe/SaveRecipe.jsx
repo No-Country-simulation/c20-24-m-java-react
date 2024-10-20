@@ -2,18 +2,23 @@
 import { useEffect, useRef, useState } from 'react';
 import './save.css';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import logOutHelper from '../helper/logOutHelper';
 import { toast } from 'sonner';
 import { CiSaveDown2 } from 'react-icons/ci';
 import { BookmarkIcon } from '@heroicons/react/24/outline';
 import { BookmarkSlashIcon } from '@heroicons/react/24/solid';
+import { useDispatch } from 'react-redux';
+import { deletePSGItemFromPage } from '@/redux/pegeScrollGeneric/pegeScrollGenericSlice';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const SaveRecipe = ({ height, idRecipe }) => {
   const [isSave, setIsSave] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
+  const pathname = usePathname();
   const abortControllerRef = useRef(null);
 
   useEffect(() => {
@@ -42,6 +47,7 @@ const SaveRecipe = ({ height, idRecipe }) => {
   // }, [isSave]);
 
   const handleSaveRecipe = async (e) => {
+    console.log(pathname, 'pathname');
     e.preventDefault();
     // console.log(idRecipe, 'idRecipe');
     // Si ya hay una petición en curso, cancelarla
@@ -154,6 +160,15 @@ const SaveRecipe = ({ height, idRecipe }) => {
       //   .then((data) => console.log(data))
       //   .catch((error) => console.log(error));
       try {
+        // quitar la receta de /recetas-guardadas
+        if (pathname === '/recetas_guardadas') {
+          dispatch(
+            deletePSGItemFromPage({
+              pageKey: 'recetas_guardadas',
+              itemId: idRecipe,
+            }),
+          );
+        }
         await axios
           .delete(`${BACK_API_URL}/favorites/1/removeRecipe/${idRecipe}`, {
             signal,

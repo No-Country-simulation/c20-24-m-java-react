@@ -24,7 +24,7 @@ const UserProfileBody = ({ params }) => {
       if (!user || !token) {
         router.push('/');
       }
-      console.log(params, 'userProfile');
+      // console.log(params, 'userProfile');
       if (params[0] === user.username) {
         // console.log(params === user.username);
         setSetUserSavedRecipes(true);
