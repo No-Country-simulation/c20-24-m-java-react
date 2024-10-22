@@ -19,6 +19,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { resetsetPegeScrollGeneric } from '@/redux/pegeScrollGeneric/pegeScrollGenericSlice';
 import { setResetState } from '@/redux/resetStatePage/resetStatePageSlice';
+import ButtonUploadRecipe from '../buttonUploadRecipe/buttonUploadRecipe';
 const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
   const { items, scrollPosition, currentPage } = useSelector(
     (state) => state.pageScrollSlice,
@@ -28,7 +29,6 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
 
   const { user, setUser } = useUserContext();
   const [activeAccordion, setActiveAccordion] = useState('');
-  const [showUploadRecipe, setShowUploadRecipe] = useState(false);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -38,12 +38,6 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
 
     checkToken();
   }, [setUser]);
-
-  const handleShowUploadRecipe = () => {
-    // console.log(showMenu, 'showMenu');
-
-    setShowUploadRecipe(!showUploadRecipe);
-  };
 
   const handleTypeList = (e) => {
     e.preventDefault();
@@ -248,19 +242,7 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
           </Link>
         </div>
         <div className="flex justify-center pt-11">
-          <button
-            onClick={handleShowUploadRecipe}
-            type="submit"
-            className=" my-5  w-[183px] h-[48px] bg-[#7DA626] hover:bg-[#160852] hover:shadow-xl text-black font-semibold hover:text-white  px-4 border hover:border-transparent rounded-2xl"
-          >
-            SUBIR RECETA
-          </button>
-          {showUploadRecipe && (
-            <UploadRecipe
-              onClose={handleShowUploadRecipe}
-              isVisible={showUploadRecipe}
-            />
-          )}
+          <ButtonUploadRecipe />
         </div>
         <div className="flex flex-col justify-between items-center mt-12">
           <Link href={`/${data?.username}`}>

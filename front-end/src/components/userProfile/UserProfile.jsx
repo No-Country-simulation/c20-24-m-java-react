@@ -12,6 +12,8 @@ import { userLocalStorage } from '../helper/userLocalStorage';
 import { useDispatch } from 'react-redux';
 import { deletePageKeyPegeScrollGeneric } from '@/redux/pegeScrollGeneric/pegeScrollGenericSlice';
 import { setResetState } from '@/redux/resetStatePage/resetStatePageSlice';
+import ButtonUploadRecipe from '../buttonUploadRecipe/buttonUploadRecipe';
+import { useUserContext } from '../UserProvider';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -19,6 +21,8 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+
+  const { user, setUser } = useUserContext();
 
   useEffect(() => {
     const fetchUserName = async () => {
@@ -35,7 +39,11 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
       // console.log(response?.data);
     };
     dispatch(setResetState(true));
-    fetchUserName();
+    // const user = username;
+    // const userPath = user.split('/');
+    // console.log(username, 'userPath');
+    // fetchUserName();
+    // console.log(username, 'user');
   }, [username]);
 
   const handleBackDeletePage = (e) => {
@@ -49,7 +57,7 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center relative">
+    <div className="flex flex-col justify-center items-center ">
       <div
         onClick={handleBackDeletePage}
         className="fixed top-[12px] left-[30px] cursor-pointer"
@@ -103,6 +111,11 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
           <p className="text-[14px]">Seguidores</p>
         </div>
       </div>
+      {username === user.username ? (
+        <div className="flex justify-center pt-11">
+          <ButtonUploadRecipe />
+        </div>
+      ) : null}
     </div>
   );
 };
