@@ -112,18 +112,14 @@ const CardRecipe = ({
         idRecipe={id}
       />
       <div className="m-3 w-[39rem] h-[37rem] bg-white rounded-3xl shadow-md">
-        <div className="relative bg-black w-full h-[417px] rounded-3xl">
-          {/* <img
-            src={image}
-            alt="image"
-            className="w-full h-full rounded-3xl  object-contain"
-          /> */}
-          <div className="absolute top-4 right-4 ">
-            {user?.userId !== userId ? <SaveRecipe idRecipe={id} /> : null}
-            {/* <SaveRecipe idRecipe={id} />  */}
+        <div className=" bg-black w-full h-[417px] rounded-3xl">
+          <div className="relative  ">
+            <div className="absolute   top-4 right-4 ">
+              {user?.userId !== userId ? <SaveRecipe idRecipe={id} /> : null}
+            </div>
           </div>
           <Image
-            className="w-full h-[417px] rounded-[20px] object-cover"
+            className=" w-full h-[417px] rounded-[20px] object-cover"
             width={80}
             height={80}
             src={image}

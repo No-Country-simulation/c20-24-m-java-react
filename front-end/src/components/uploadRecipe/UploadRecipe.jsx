@@ -204,17 +204,17 @@ const UploadRecipe = ({ isVisible, onClose }) => {
     <div
       id="modal_main"
       onClick={onClose}
-      className={`fixed z-10  inset-0 flex justify-start items-center transition-colors  ${isVisible ? 'visible bg-black/55  inset-0  backdrop-blur-md  ' : 'invisible'}  `}
+      className={`fixed  inset-0 flex justify-start items-center transition-colors  ${isVisible ? 'visible bg-black/55  inset-0  backdrop-blur-md  ' : 'invisible'}  `}
     >
       <div
         id="modal_container"
         onClick={(e) => e.stopPropagation()}
-        className={`w-[28rem] overflow-auto xl:h-[800px] p-2 fixed right-[15%] xl:w-[900px] xl:max-w-screen-xl bg-white rounded-md   shadow transition-all ${isVisible ? 'scale-100 opacity-100' : 'scale-125 opacity-0'}`}
+        className={`w-[28rem] overflow-auto xl:h-[800px] p-2 fixed  right-[15%] xl:w-[900px] xl:max-w-screen-xl bg-white rounded-md   shadow transition-all ${isVisible ? 'scale-100 opacity-100' : 'scale-125 opacity-0'}`}
       >
         <div
           id=""
           //onClick={(e) => e.stopPropagation()}
-          className={`flex flex-col   bg-white rounded-md p-10 `}
+          className={`flex flex-col   rounded-md p-10 `}
         >
           <h2 className="text-4xl font-bold mb-8">Compartir receta</h2>
           <p>Publicar una foto del plato terminado </p>

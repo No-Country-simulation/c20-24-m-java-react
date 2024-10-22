@@ -236,7 +236,7 @@ const ScrollInfiniteRedux = ({ type, pathFather }) => {
       // console.log(path, 'path');
       // dispatch(resetsetPageScroll());
       if (path) {
-        // console.log(path, 'path');
+        // console.log(path, 'pathasa');
         const response = await axios.get(
           `${BACK_API_URL}/recipes/${path}`,
           { signal },
@@ -250,6 +250,7 @@ const ScrollInfiniteRedux = ({ type, pathFather }) => {
         return response.data;
         // setDataRecipes(response.data);
       } else {
+        // console.log(pat, 'pathasa');
         const response = await axios.get(
           `${BACK_API_URL}/recipes/find/${pat}`,
           { signal },
