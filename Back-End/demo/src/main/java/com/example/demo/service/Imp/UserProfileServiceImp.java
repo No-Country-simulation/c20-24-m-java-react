@@ -29,13 +29,11 @@ public class UserProfileServiceImp implements UserProfileService {
 
     @Override
     @Transactional
-    public UserProfileDto addUserProfile(UserProfileDto userProfileDto) {
-        // Recuperar el usuario asociado por ID
-        User user = userCommentRepository.findById(userProfileDto.userId())
-                .orElseThrow(() -> new UserNotFoundExepcion("User not found with ID: " + userProfileDto.userId()));
+    public void addUserProfile(Long userId) {
+        User user = userCommentRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundExepcion("User not found with ID: " + userId));
 
-        UserProfile userProfile = userProfileMapper1.toEntity(userProfileDto);
-
+        UserProfile userProfile = new UserProfile();
         userProfile.setUserImage("https://res.cloudinary.com/dfvwqsrnj/image/upload/v1727538674/206898_k79j1b.png");
         userProfile.setDescription("");
         userProfile.setLocation("");
@@ -46,7 +44,7 @@ public class UserProfileServiceImp implements UserProfileService {
         user.setUserProfile(userProfile);
 
         UserProfile userProfileSaved = userProfileRepository.save(userProfile);
-        return userProfileMapper1.toDto(userProfileSaved);
+        userProfileMapper1.toDto(userProfileSaved);
     }
 
 

@@ -23,27 +23,27 @@ public class UserProfileController {
 
     private final UserProfileService userProfileService;
 
-    @Operation(
-            summary = "Create a new user profile.",
-            description = "Creates a new user profile with the provided details."
-    )
-    @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200", description = "User profile created successfully",
-                    content = {
-                            @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = UserProfileDto.class))
-                    }),
-            @ApiResponse(responseCode = "400", description = "Invalid request body", content = {
-                    @Content}),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                    @Content})
-    })
-    @PostMapping("/add")
-    public ResponseEntity<UserProfileDto> addUserProfile(@RequestBody UserProfileDto userProfileDto) {
-        UserProfileDto createdProfile = userProfileService.addUserProfile(userProfileDto);
-        return ResponseEntity.ok(createdProfile);
-    }
+//    @Operation(
+//            summary = "Create a new user profile.",
+//            description = "Creates a new user profile with the provided details."
+//    )
+//    @ApiResponses(value = {
+//            @ApiResponse(
+//                    responseCode = "200", description = "User profile created successfully",
+//                    content = {
+//                            @Content(mediaType = "application/json",
+//                                    schema = @Schema(implementation = UserProfileDto.class))
+//                    }),
+//            @ApiResponse(responseCode = "400", description = "Invalid request body", content = {
+//                    @Content}),
+//            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+//                    @Content})
+//    })
+//    @PostMapping("/add")
+//    public ResponseEntity<UserProfileDto> addUserProfile(@RequestBody Long userId) {
+//        UserProfileDto createdProfile = userProfileService.addUserProfile(userId);
+//        return ResponseEntity.ok(createdProfile);
+//    }
 
     @Operation(
             summary = "Get a user profile by ID.",

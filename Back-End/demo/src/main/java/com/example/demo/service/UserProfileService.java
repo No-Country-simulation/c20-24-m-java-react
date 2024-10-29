@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface UserProfileService {
 
-    UserProfileDto addUserProfile(UserProfileDto userProfileDto);
+    void addUserProfile(Long userId);
     UserProfileDto findUserProfileById(Long id);
     String upDateImagesUser(Long userProfileId, MultipartFile images);
     String upDateImagesBanner(Long userProfileId, MultipartFile images);

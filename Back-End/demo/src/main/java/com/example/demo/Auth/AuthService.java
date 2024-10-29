@@ -4,6 +4,7 @@ import com.example.demo.Jwt.JwtService;
 import com.example.demo.User.Role;
 import com.example.demo.User.User;
 import com.example.demo.User.UserRepository;
+import com.example.demo.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +22,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager autenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final UserProfileService userProfileService;
 
 
 
@@ -68,8 +70,8 @@ public class AuthService {
                         .role(Role.USER)
                         .build();
 
-
         userRepository.save(user);
+        userProfileService.addUserProfile(user.getId());
 
         return AuthResponse.builder().token(jwtService.getToken(user)).build();
     }
