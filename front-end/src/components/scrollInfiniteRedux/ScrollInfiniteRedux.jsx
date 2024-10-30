@@ -215,7 +215,7 @@ const ScrollInfiniteRedux = ({ type, pathFather }) => {
         },
       );
       if (response?.data.length !== 0) {
-        // console.log(response.data[0].recipeList, 'data');
+        console.log(response.data[0].recipeList, 'data de guardado');
         return response.data[0].recipeList;
       } else {
         return [];

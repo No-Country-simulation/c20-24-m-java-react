@@ -18,8 +18,10 @@ const SaveRecipe = ({ height, idRecipe }) => {
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
-  const pathname = usePathname();
+
   const abortControllerRef = useRef(null);
+  const pathname = usePathname();
+  const path = pathname.split('/');
 
   useEffect(() => {
     const fetchSave = async () => {
@@ -128,6 +130,7 @@ const SaveRecipe = ({ height, idRecipe }) => {
                     style: { background: '#ffb74d' },
                     icon: <BookmarkIcon />,
                   });
+                  console.log('mensaje de guardado');
                 })
                 .catch((error) => console.log(error));
             }
@@ -161,35 +164,79 @@ const SaveRecipe = ({ height, idRecipe }) => {
       //   .catch((error) => console.log(error));
       try {
         // quitar la receta de /recetas-guardadas
-        if (pathname === '/recetas_guardadas') {
+        if (path[1] === 'recetas_guardadas' || path[2] === 'guardados') {
           dispatch(
             deletePSGItemFromPage({
-              pageKey: 'recetas_guardadas',
+              pageKey:
+                path[1] === 'recetas_guardadas'
+                  ? 'recetas_guardadas'
+                  : path[2] === 'guardados'
+                    ? `${path[1]}Guardados`
+                    : '',
               itemId: idRecipe,
             }),
           );
         }
         await axios
-          .delete(`${BACK_API_URL}/favorites/1/removeRecipe/${idRecipe}`, {
+          .get(`${BACK_API_URL}/favorites/user/${userInfo.userId}`, {
             signal,
             headers: { Authorization: `Bearer ${stoken}` },
           })
           .then(({ data }) => data)
           .then((data) => {
             // console.log(data, 'guardo en falso?');
-            toast('Se quito la receta', {
-              // position: 'bottom-center',
-              style: { background: '#ffb74d' },
-              icon: <BookmarkSlashIcon />,
-            });
-          })
-          .catch((error) => {
-            // console.log(error);
-            console.log(error, 'error.status');
-            if (error.status === 500) {
-              logOutHelper();
+            if (data?.length === 0) {
+              console.log('no hay favoritos');
+            } else {
+              console.log(data[0].id, 'id');
+              axios
+                .delete(
+                  `${BACK_API_URL}/favorites/${data[0].id}/removeRecipe/${idRecipe}`,
+                  {
+                    signal,
+                    headers: { Authorization: `Bearer ${stoken}` },
+                  },
+                )
+                .then(({ data }) => data)
+                .then((data) => {
+                  // console.log(data, 'guardo en falso BOrrado');
+                  toast('Se quito la receta', {
+                    // position: 'bottom-center',
+                    style: { background: '#ffb74d' },
+                    icon: <BookmarkSlashIcon />,
+                  });
+                })
+                .catch((error) => {
+                  // console.log(error);
+                  console.log(error, 'error.status');
+                  if (error.status === 500) {
+                    logOutHelper();
+                  }
+                });
             }
           });
+
+        // await axios
+        //   .delete(`${BACK_API_URL}/favorites/1/removeRecipe/${idRecipe}`, {
+        //     signal,
+        //     headers: { Authorization: `Bearer ${stoken}` },
+        //   })
+        //   .then(({ data }) => data)
+        //   .then((data) => {
+        //     // console.log(data, 'guardo en falso?');
+        //     toast('Se quito la receta', {
+        //       // position: 'bottom-center',
+        //       style: { background: '#ffb74d' },
+        //       icon: <BookmarkSlashIcon />,
+        //     });
+        //   })
+        //   .catch((error) => {
+        //     // console.log(error);
+        //     console.log(error, 'error.status');
+        //     if (error.status === 500) {
+        //       logOutHelper();
+        //     }
+        //   });
         // console.log(response?.data, 'guardo en falso?');
         // Si todo va bien, limpiar el AbortController
         abortControllerRef.current = null;

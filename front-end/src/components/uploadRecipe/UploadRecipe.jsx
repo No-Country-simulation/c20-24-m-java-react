@@ -204,7 +204,7 @@ const UploadRecipe = ({ isVisible, onClose }) => {
     <div
       id="modal_main"
       onClick={onClose}
-      className={`fixed  inset-0 flex justify-start items-center transition-colors  ${isVisible ? 'visible bg-black/55  inset-0  backdrop-blur-md  ' : 'invisible'}  `}
+      className={`fixed z-50  inset-0 flex justify-start items-center transition-colors  ${isVisible ? 'visible bg-black/55  inset-0  backdrop-blur-md  ' : 'invisible'}  `}
     >
       <div
         id="modal_container"

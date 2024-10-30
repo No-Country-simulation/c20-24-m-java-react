@@ -1,0 +1,24 @@
+import { useState } from 'react';
+import UploadRecipe from '../uploadRecipe/UploadRecipe';
+
+const ButtonEditProfile = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleModal = () => {
+    // console.log(isVisible);
+    setIsVisible(!isVisible);
+  };
+  return (
+    <>
+      <button
+        onClick={handleModal}
+        type="submit"
+        className=" my-5  w-[132px] h-[48px] bg-[#F27B13] hover:bg-[#160852] hover:shadow-xl text-black font-semibold hover:text-white  px-4 border border-transparent hover:border-transparent rounded-[8px]"
+      >
+        Editar Perfil
+      </button>
+      {isVisible && <UploadRecipe onClose={handleModal} isVisible={isVisible} />}
+    </>
+  );
+};
+export default ButtonEditProfile;
