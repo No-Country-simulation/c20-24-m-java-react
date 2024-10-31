@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import './cardRecipe.style.css';
 import RatingStars from '../ratingStars/RatingStars';
 import SaveRecipe from '../saveRecipe/SaveRecipe';
 import LikeRecipe from '../likeRecipe/LikeRecipe';
@@ -14,6 +15,8 @@ import { useUserContext } from '../UserProvider';
 import { useDispatch } from 'react-redux';
 import { setPageScrollPosition } from '@/redux/pageScroll/pageScrollSlice';
 import { FaUser } from 'react-icons/fa6';
+import ButtonOptionsRecipe from '../buttonOptionsRecipe/ButtonOptionsRecipe';
+
 // import rsat from '../ratingStars/rsat';
 const CardRecipe = ({
   id,
@@ -154,7 +157,9 @@ const CardRecipe = ({
             {title || 'Titulo'}
             {/* user:{user?.userId} */}
           </h3>
-          <p className="text-[13px] h-[40px] items-start">{description || ''}</p>
+          <p className="text-[13px] h-[40px] items-start w-[500px] text-ellipsis        overflow-hidden  ">
+            {description || ''}
+          </p>
           <div className="flex justify-between items-center mt-2">
             <div className="flex justify-start items-center -ml-3 ">
               <div className=" ">
@@ -190,7 +195,7 @@ const CardRecipe = ({
               {/* <PopupProfile idUser={nameUser} /> */}
             </div>
 
-            <div className="flex justify-between items-center ">
+            <div className="flex justify-between items-center -mr-2">
               <LikeRecipe />
               <Image
                 className=" rounded-full mx-2"
@@ -200,6 +205,7 @@ const CardRecipe = ({
                 alt="picture"
               />
               <Share2 className="w-[2em] h-[2em]" />
+              <ButtonOptionsRecipe idRecipe={id} />
             </div>
           </div>
         </div>

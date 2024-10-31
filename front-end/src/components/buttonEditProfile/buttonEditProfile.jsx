@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import UploadRecipe from '../uploadRecipe/UploadRecipe';
+import ModalEditProfile from '../modalEditProfile/ModalEditProfile';
 
 const ButtonEditProfile = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +18,7 @@ const ButtonEditProfile = () => {
       >
         Editar Perfil
       </button>
-      {isVisible && <UploadRecipe onClose={handleModal} isVisible={isVisible} />}
+      {isVisible && <ModalEditProfile onClose={handleModal} isVisible={isVisible} />}
     </>
   );
 };

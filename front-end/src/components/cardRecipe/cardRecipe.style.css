@@ -1,0 +1,7 @@
+.descriptionCardRecipe {
+  width: 200px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Número máximo de líneas */
+  overflow: hidden;
+}
