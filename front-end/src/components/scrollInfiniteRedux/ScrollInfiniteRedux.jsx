@@ -49,12 +49,12 @@ const ScrollInfiniteRedux = ({ type, pathFather }) => {
   const { items, scrollPosition, currentPage } = useSelector(
     (state) => state.pegeScrollGenericSlice.pages[pat],
   ) || { items: [], scrollPosition: 0, currentPage: 1 };
-  // const aver = useSelector((state) => state.pegeScrollGenericSlice.pages) || {
-  //   items: [],
-  //   scrollPosition: 0,
-  //   currentPage: 1,
-  // };
-  // console.log(aver, 'av');
+  const aver = useSelector((state) => state.pegeScrollGenericSlice.pages) || {
+    items: [],
+    scrollPosition: 0,
+    currentPage: 1,
+  };
+  console.log(aver, 'av');
   const [asType, setAsType] = useState(type);
   const [dataRecipes, setDataRecipes] = useState([]);
   const [data, setData] = useState([]);

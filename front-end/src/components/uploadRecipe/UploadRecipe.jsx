@@ -97,27 +97,27 @@ const UploadRecipe = ({ isVisible, onClose }) => {
       commensal: userDataInputs.diners,
       ingredients:
         userDataInputs.ingredients0 +
-        ' ' +
+        '_' +
         userDataInputs.amount0 +
-        ' ' +
+        '_' +
         userDataInputs.measurement0 +
         '|' +
         userDataInputs.ingredients1 +
-        ' ' +
+        '_' +
         userDataInputs.amount1 +
-        ' ' +
+        '_' +
         userDataInputs.measurement1 +
         '|' +
         userDataInputs.ingredients2 +
-        ' ' +
+        '_' +
         userDataInputs.amount2 +
-        ' ' +
+        '_' +
         userDataInputs.measurement2 +
         '|' +
         userDataInputs.ingredients3 +
-        ' ' +
+        '_' +
         userDataInputs.amount3 +
-        ' ' +
+        '_' +
         userDataInputs.measurement3,
       instructions: userDataInputs.step,
     };
@@ -156,13 +156,16 @@ const UploadRecipe = ({ isVisible, onClose }) => {
             // window.location.reload();
             // e.reset();
           }
+          toast.success('Receta Creada');
           onClose();
         })
-        .catch((error) => console.log(error)),
+        .catch((error) => {
+          console.log(error);
+          toast.warning('No se pudo Crear la Receta');
+        }),
       {
         error: 'Error al conectar',
         loading: 'Publicando...',
-        success: 'Receta publicada',
       },
     );
     // axios
@@ -419,19 +422,22 @@ const UploadRecipe = ({ isVisible, onClose }) => {
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#7da626] "
                         id="categoria"
                       >
-                        <option value="">Seleccionar opción...</option>
-                        <option value="Taza">Taza</option>
-                        <option value="Milimetros">Milimetros</option>
-                        <option value="Centimetros Cubicos">
-                          Centimetros Cubicos
+                        <option value="-">Seleccionar opción...</option>
+                        <option value="Taza-tz">Taza (tz) </option>
+                        <option value="Milimetros-mm">Milimetros (mm)</option>
+                        <option value="Centimetros Cubicos-cm3">
+                          <p>
+                            Centimetros Cubicos (cm
+                            <sup className="align-super">3</sup>)
+                          </p>
                         </option>
-                        <option value="Litro">Litro</option>
-                        <option value="Cucharada">Cucharada</option>
-                        <option value="Cucharadita">Cucharadita</option>
-                        <option value="Gramos">Gramos</option>
-                        <option value="kilo">kilo</option>
-                        <option value="Onza">Onza</option>
-                        <option value="Libra">Libra</option>
+                        <option value="Litro-l">Litro (l)</option>
+                        <option value="Cucharada-cda">Cucharada (cda)</option>
+                        <option value="Cucharadita-cdta">Cucharadita (cdta)</option>
+                        <option value="Gramos-gr">Gramos (gr)</option>
+                        <option value="kilo-kg">Kilo (kg)</option>
+                        <option value="Onza-oz">Onza (oz)</option>
+                        <option value="Libra-lb">Libra (lb)</option>
                       </select>
                     </div>
                   </div>

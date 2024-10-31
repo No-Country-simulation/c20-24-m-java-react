@@ -87,7 +87,9 @@ export const pegeScrollGenericSlice = createSlice({
     },
     deletePSGItemFromPage: (state, action) => {
       const { pageKey, itemId } = action.payload;
+      console.log(pageKey, 'deletePSGItemFromPage');
       if (state.pages[pageKey]) {
+        console.log(state.pages[pageKey].items, 'state.pages[pageKey].items');
         state.pages[pageKey].items = state.pages[pageKey].items.filter(
           (item) => item.id !== itemId,
         );

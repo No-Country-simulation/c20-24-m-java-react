@@ -45,6 +45,15 @@ const ModalRecipeDetail = ({
 
   //   checkToken();
   // }, [setUser]);
+  const splitIngredients = ingredients.split('|');
+  // const elem = splitIngredients.split('_');
+  const ingObj = {};
+  splitIngredients.forEach((ingredient, index) => {
+    const elem = ingredient.split('_');
+    const ingName = `ingredients${index}`;
+    ingObj[ingName] = { name: elem[0], quantity: elem[1], unit: elem[2] };
+  });
+  console.log(ingObj, 'ingObj');
   return (
     <div
       id="modal_main"
@@ -56,9 +65,10 @@ const ModalRecipeDetail = ({
         onClick={(e) => e.stopPropagation()}
         className={` h-[calc(var(--vh, 1vh) * 100)] flex flex-col overflow-auto h-[800px] w-[80rem] xl:ml-72 xl:mr-40  xl:max-w-screen  lg:mx-5 mx-5  bg-white rounded-md  shadow transition-all ${isVisible ? 'scale-100 opacity-100' : 'scale-125 opacity-0'}`}
       >
-        <div className={`flex flex-col justify-center items-center my-5`}>
-          <div className="flex flex-col justify-center items-center rounded-3xl w-auto h-auto my-auto mx-1  md:flex md:flex-row-reverse xl:flex xl:justify-center xl:items-center xl:w-full xl:h-auto xl:mx-10 xl:p-8  bg-[#fff8f2]   md:w-auto md:h-auto md:mx-2 sm:w-auto sm:h-auto sm:mx-1 sm:flex sm:flex-col sm:justify-center sm:items-center ">
-            <div className="mb-1 mx-10 bg-blue-gray-800 w-auto h-auto rounded-3xl my-5 ">
+        <div className={`flex flex-col justify-center items-center m-1`}>
+          {/* flex flex-col justify-center items-center rounded-3xl w-auto h-auto my-auto mx-1  md:flex md:flex-row-reverse xl:flex xl:justify-center xl:items-center xl:w-full xl:h-auto xl:mx-10 xl:p-3  bg-[#fff8f2]   md:w-auto md:h-auto md:mx-2 sm:w-auto sm:h-auto sm:mx-1 sm:flex sm:flex-col sm:justify-center sm:items-center  */}
+          <div className="flex flex-row-reverse justify-center items-center rounded-3xl bg-[#fff8f2] w-full mx-1 p-4 ">
+            <div className="ml-10 mx-1 bg-blue-gray-800 w-auto h-auto rounded-3xl my-1 ">
               {/* <img
                 src={image}
                 alt="image"
@@ -66,7 +76,7 @@ const ModalRecipeDetail = ({
               /> */}
               {image ? (
                 <Image
-                  className="w-full h-full rounded-[20px] object-cover"
+                  className="w-[520px] h-[500px] rounded-[20px] object-cover shadow-[0_5px_6px_1px_rgba(0,0,0,0.2)]"
                   width={80}
                   height={80}
                   src={image}
@@ -83,8 +93,8 @@ const ModalRecipeDetail = ({
               )}
             </div>
 
-            <div className="xl:w-[600px] xl:h-[430px] w-[100] h-[100] ">
-              <div className="flex justify-between items-center xl:ml-10 ml-10 mt-2">
+            <div className="xl:w-[600px] xl:h-[500px] w-[100] h-[100] xl:mr-11">
+              <div className="flex justify-between items-center xl:ml-10 ml-10 mt-4 ">
                 <p className=" text-sm">
                   {(category === 'SWEET'
                     ? 'Dulce'
@@ -97,10 +107,10 @@ const ModalRecipeDetail = ({
                     (subcategory || 'Subcategoria')}
                 </p>
               </div>
-              <h3 className="text-[45px] w-56 font-semibold cursor-pointer ml-10">
+              <h3 className="text-[40px] w-[500px] font-semibold leading-[40px] ml-10 ">
                 {title || 'Titulo'}
               </h3>
-              <p className="text-[17px] overflow-auto  h-[100px] items-start leading-5 ml-10 ">
+              <p className="text-[17px] overflow-auto  h-[100px] items-start leading-5 mt-2 ml-10 ">
                 {description || ''}
               </p>
               <div className="flex justify-center items-center  ">
@@ -164,7 +174,7 @@ const ModalRecipeDetail = ({
                   </div>
                   <div className="flex flex-col justify-center items-center">
                     <div
-                      className={`${difficulty ? 'bg-[#7DA626]' : 'bg-[#696968]'}  xl:w-[110px] xl:h-[110px] md:w-[110px] md:h-[110px] sm:w-[110px] sm:h-[110px] w-[90px] h-[90px] flex flex-col justify-center items-center rounded-xl`}
+                      className={`${difficulty ? (difficulty === 'Dificil' ? 'bg-deep-orange-600' : difficulty === 'Intermedia' ? 'bg-orange-600' : 'bg-[#7DA626]') : 'bg-[#696968]'}  xl:w-[110px] xl:h-[110px] md:w-[110px] md:h-[110px] sm:w-[110px] sm:h-[110px] w-[90px] h-[90px] flex flex-col justify-center items-center rounded-xl`}
                     >
                       <svg
                         className="mb-1 text-white"
@@ -194,7 +204,7 @@ const ModalRecipeDetail = ({
                 </div>
               </div>
               {/* user */}
-              <div className="flex justify-start items-center mx-10 my-10">
+              <div className="flex justify-start items-center mx-10 mt-[80px]">
                 <div className=" ">
                   <Image
                     className=" w-[45px] h-[45px] rounded-full"
@@ -204,7 +214,7 @@ const ModalRecipeDetail = ({
                     alt="picture"
                   />
                 </div>
-                <p className="mx-auto text-start w-[160px] overflow-hidden text-ellipsis leading-tight font-semibold">
+                <p className="text-start w-[260px]  text-ellipsis leading-tight font-semibold ml-2">
                   {nameUser || 'Anonimo'}
                 </p>
               </div>
@@ -212,71 +222,96 @@ const ModalRecipeDetail = ({
           </div>
           {/*  */}
           <div className="flex justify-center items-center w-full">
-            <div className="my-3 mx-1 flex justify-center items-center p-3 rounded-3xl  h-auto xl:w-[90rem] md:w-full sm:w-full bg-[#fff8f2]">
-              <div className="grid grid-cols-3 gap-4 justify-center items-center">
-                <div className="flex flex-col justify-center items-center mx-5">
+            <div className="my-3 mx-1 flex justify-around items-center p-3 rounded-3xl  h-auto xl:w-[90rem] md:w-full sm:w-full bg-[#fff8f2]">
+              <div
+                className={`grid ${userIdLogin !== userId ? 'grid-cols-3' : 'grid-cols-2'}  gap-4 justify-center items-center`}
+              >
+                <div className="flex flex-row justify-center items-center mx-5">
                   <Share2 height={23} />
-                  <p className="mt-2 text-center">Compartir</p>
+                  <p className=" text-center ml-2">Compartir</p>
                 </div>
-                <div className="flex flex-col justify-center items-center mx-5">
-                  {userIdLogin !== userId ? (
-                    <>
+                {userIdLogin !== userId ? (
+                  <>
+                    <div className="flex flex-row justify-center items-center mx-5">
                       <SaveRecipe height={23} idRecipe={idRecipe} />
-                      <p className="mt-2 text-center">Guardar</p>
-                    </>
-                  ) : null}
-                </div>
-                <div className="flex flex-col justify-center items-center mx-5">
+                      <p className=" text-center">Guardar</p>
+                    </div>
+                  </>
+                ) : null}
+
+                <div className="flex flex-row justify-center items-center mx-5">
                   <LikeRecipe height={23} />
-                  <p className="mt-2 text-center">Me gusta</p>
+                  <p className="text-center ml-2">Me gusta</p>
                 </div>
               </div>
-              <div className="flex flex-col justify-center items-center mx-5">
-                <p className="text-[17px] text-center">Calificación:</p>
+              <div className="flex flex-row justify-center items-center mx-5">
+                <p className="text-[17px] text-center mr-2">Calificación:</p>
                 <RatingStars className="mt-2 flex justify-center items-center" />
               </div>
             </div>
           </div>
-
+          {/*  */}
           <div className="xl:flex xl:flex-row md:flex md:flex-row sm:flex sm:flex-col justify-between items-start mx-1">
-            <div className="w-auto h-auto mx-1 flex flex-col justify-center items-center rounded-3xl bg-[#fff8f2] my-1">
+            <div className="w-[772px] h-auto mx-1  rounded-3xl bg-[#fff8f2] my-1 flex  flex-col  items-center ">
               <h3 className="text-2xl mt-5 font-semibold">Paso a paso</h3>
-              <Image
+              {/* <Image
                 alt="Descripción de la imagen"
                 sizes="(max-width: 380px) 50vw,400px"
                 height={100}
                 width={100}
                 className=" pt-5 mb-5 top-[5px] w-auto mx-auto"
                 src="/img/test.svg"
-              />
+              /> */}
 
               <ol className="list-decimal my-3 mx-3  ">
                 <li className="mx-2 my-2">
                   <p>{stepByStep}</p>
                 </li>
-                <Image
+                {/* <Image
                   alt="Descripción de la imagen"
                   sizes="(max-width: 380px) 50vw,400px"
                   height={100}
                   width={100}
                   className=" pt-5 mb-5 top-[5px] w-auto mx-auto"
                   src="/img/test.svg"
-                />
-                <li className="mx-2 my-2">
+                /> */}
+                {/* <li className="mx-2 my-2">
                   <p>
                     <p>{stepByStep}</p>
                   </p>
-                </li>
+                </li> */}
               </ol>
             </div>
-            <div className="">
-              <div className="flex flex-col  xl:w-auto w-auto h-auto my-2 mx-1 p-3 rounded-2xl  bg-[#fff8f2]">
-                <h3 className="flex text-2xl font-semibold ml-5 mt-5">
+            <div className=" w-[500px]">
+              <div className="w-[500px] flex flex-col   h-auto my-2 mx-1 p-3 rounded-2xl  bg-[#fff8f2]">
+                <h3 className="flex text-2xl font-semibold ml-5 mt-2">
                   Ingredientes
                 </h3>
-                <div className="flex justify-center items-center pt-5 ml-5 pb-5">
-                  <FaCircleArrowRight className="w-[23px] h-[23px]" />
-                  <p className="px-60 leading-[500%] flex ">{ingredients}</p>
+                {/* {console.log(splitIngredients)} */}
+                <div className="w-[300px] m-auto mt-5">
+                  {Object.entries(ingObj).map(([key, value]) => {
+                    const type = value.unit.split('-');
+                    console.log(value.unit, 'type');
+                    return (
+                      <div
+                        key={key}
+                        className="flex justify-between items-center mb-2"
+                      >
+                        <div className="flex justify-start items-center">
+                          <FaCircleArrowRight className="w-[23px] h-[23px]" />
+                          <p className="ml-2"> {value.name}</p>
+                        </div>
+                        <div className="flex justify-end items-center">
+                          <p className="ml-5 w-[50px] flex justify-center items-center ">
+                            {value.quantity}
+                          </p>
+                          <p className="ml-2 w-[50px] flex justify-center items-center">
+                            {type[1]}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 

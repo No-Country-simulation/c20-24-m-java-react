@@ -49,7 +49,7 @@ const SaveRecipe = ({ height, idRecipe }) => {
   // }, [isSave]);
 
   const handleSaveRecipe = async (e) => {
-    console.log(pathname, 'pathname');
+    // console.log(pathname, 'pathname');
     e.preventDefault();
     // console.log(idRecipe, 'idRecipe');
     // Si ya hay una petición en curso, cancelarla
