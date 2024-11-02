@@ -1,6 +1,6 @@
 import UserProfile from '@/components/userProfile/UserProfile';
 import UserProfileBody from '@/components/userProfileBody/UserProfileBody';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 export default function Page({ params }) {
   return (

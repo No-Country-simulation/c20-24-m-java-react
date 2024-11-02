@@ -25,6 +25,7 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
+  const [isUserProfile, setUserProfile] = useState();
   const { user, setUser } = useUserContext();
 
   useEffect(() => {
@@ -34,18 +35,25 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
         router.push('/');
       }
 
-      // const response = await axios.get(`${BACK_API_URL}/users/search/${username}`, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // });
-      // console.log(response?.data);
+      const response = await axios
+        .get(`${BACK_API_URL}/users/search/${username}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .catch((error) => console.log(error));
+      console.log(response?.data.userProfile, 'userProfile');
+
+      if (response?.data) {
+        setUserProfile(response?.data.userProfile);
+        console.log(isUserProfile, 'isUserProfile');
+      }
     };
     dispatch(setResetState(true));
     // const user = username;
     // const userPath = user.split('/');
     // console.log(username, 'userPath');
-    // fetchUserName();
+    fetchUserName();
     // console.log(username, 'user');
   }, [username]);
 
@@ -62,7 +70,15 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
   return (
     <>
       <div className=" h-[270px] bg-black ">
-        <h1>Hola</h1>
+        {isUserProfile ? (
+          <Image
+            className=" h-[270px] w-full object-cover"
+            width={60}
+            height={60}
+            src={isUserProfile.bannerImage}
+            alt="picture"
+          />
+        ) : null}
       </div>
       {username === user?.username ? (
         <div className="absolute z-100 top-[12px] right-[30px] cursor-pointer">
@@ -80,12 +96,12 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
           </div>
 
           <div className="flex justify-center items-center  mt-1 bg-[#fff8f2] w-[252px] h-[252px] rounded-[50%] shadow-md ">
-            {imageUser ? (
+            {isUserProfile ? (
               <Image
                 className=" w-[250px] h-[250px] rounded-[50%]"
                 width={60}
                 height={60}
-                src="/img/Registro ilustracion.svg"
+                src={isUserProfile.userImage}
                 alt="picture"
               />
             ) : (
