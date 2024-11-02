@@ -17,18 +17,23 @@ const ModalEditProfile = ({ isVisible, onClose }) => {
         <div className=" h-[170px] bg-black ">
           <h1>Hola</h1>
         </div>
-        <div className="absolute top-[100px] flex justify-center items-center  mt-1 bg-[#fff8f2] w-[252px] h-[252px] rounded-[50%] shadow-md ">
+        <div className="absolute top-[100px] left-[30px] flex justify-center items-center  mt-1 bg-[#fff8f2] w-[152px] h-[152px] rounded-[50%] shadow-md ">
           {imageUser ? (
             <Image
-              className=" w-[250px] h-[250px] rounded-[50%]"
+              className=" w-[150px] h-[150px] rounded-[50%]"
               width={60}
               height={60}
               src="/img/Registro ilustracion.svg"
               alt="picture"
             />
           ) : (
-            <FaUser className="rounded-full w-[240px] h-[240px]" />
+            <FaUser className="rounded-full w-[140px] h-[140px]" />
           )}
+        </div>
+        <div>
+          <form action="">
+            <button type="submit">Guardar</button>
+          </form>
         </div>
       </div>
     </div>
