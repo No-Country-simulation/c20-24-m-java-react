@@ -1,32 +1,13 @@
-'use client';
 import Button from '@/components/button/Button';
 import HeaderLogo from '@/components/headerLogo/HeaderLogo';
 // import Loading from '@/components/loading/Loading';
 import MainStart from '@/components/mainStart/MainStart';
-import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
 
 import Image from 'next/image';
 
-import { useState } from 'react';
 import { AlertCircle } from 'react-feather';
 
 export default function Home() {
-  const stateInitial = {
-    modal: false,
-    typeModal: '',
-  };
-  const [isModalVisible, setIsModalVisible] = useState(stateInitial);
-
-  const handleOpenModal = (event) => {
-    const target = event.target;
-    const id = target.id;
-    console.log(isModalVisible);
-    setIsModalVisible({ ...isModalVisible, modal: true, typeModal: id });
-  };
-
-  const handleCloseModal = () => {
-    setIsModalVisible({ ...isModalVisible, modal: false, typeModal: '' });
-  };
   return (
     <main className="">
       <HeaderLogo />
@@ -42,7 +23,6 @@ export default function Home() {
       </div>
       <div className="flex justify-center items-center text-center mr-auto p-10 gap-10 ">
         <Button
-          stateModal={handleOpenModal}
           typeBotton={'register'}
           className="top-2 w-40 h-14  bg-[#7da626] rounded-xl hover:bg-[#160852]  md:w-52 md:h-10 sm:w-40 "
         >
@@ -54,7 +34,6 @@ export default function Home() {
           </p>
         </Button>
         <Button
-          stateModal={handleOpenModal}
           typeBotton={'login'}
           className="w-40 h-14 bg-[#160852] rounded-xl hover:bg-[#7da626] hover:text-black md:w-52 md:h-10 sm:w-40"
         >
@@ -63,11 +42,7 @@ export default function Home() {
           </p>
         </Button>
       </div>
-      <ModalRegisterLoginMainStart
-        isVisible={isModalVisible}
-        onClose={handleCloseModal}
-        typeModal={handleOpenModal}
-      />
+
       <div className=" flex justify-center h-auto w-[100%] ">
         <div className=" w-[100%] md:sticky  md:grid md:grid-cols-5  md:gap-x-5 md:gap-y-3 md:justify-center md:items-center md:mx-1 md:m-auto md:px-2  lg:gap-x-15 lg:gap-y-5 md:p-2   ">
           <Image

@@ -249,7 +249,7 @@ const SideMenu = ({ showMenu, handleShowMenu, setType, setTypeGeneric }) => {
             <div className="mx-2 w-[60px] h-[60px] icon_profile flex justify-center items-center">
               {data?.imageUser ? (
                 <Image
-                  className="icon_profile flex items-center"
+                  className="icon_profile flex items-center shadow-[0_2px_5px_-3px_rgba(0,0,0,0.5),0_10px_20px_-2px_rgba(0,0,0,0.04)] rounded-full"
                   width={60}
                   height={60}
                   src={data.imageUser}

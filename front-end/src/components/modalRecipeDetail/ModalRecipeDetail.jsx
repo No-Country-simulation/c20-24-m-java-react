@@ -53,7 +53,7 @@ const ModalRecipeDetail = ({
     const ingName = `ingredients${index}`;
     ingObj[ingName] = { name: elem[0], quantity: elem[1], unit: elem[2] };
   });
-  console.log(ingObj, 'ingObj');
+  // console.log(ingObj, 'ingObj');
   return (
     <div
       id="modal_main"
@@ -291,7 +291,7 @@ const ModalRecipeDetail = ({
                 <div className="w-[300px] m-auto mt-5">
                   {Object.entries(ingObj).map(([key, value]) => {
                     const type = value.unit.split('-');
-                    console.log(value.unit, 'type');
+                    // console.log(value.unit, 'type');
                     return (
                       <div
                         key={key}
