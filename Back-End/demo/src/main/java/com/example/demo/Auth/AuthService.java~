@@ -4,7 +4,6 @@ import com.example.demo.Jwt.JwtService;
 import com.example.demo.User.Role;
 import com.example.demo.User.User;
 import com.example.demo.User.UserRepository;
-import com.example.demo.exception.UserNotFoundExepcion;
 import com.example.demo.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,11 +34,11 @@ public class AuthService {
         Optional<User> usernameRepository = userRepository.findByUsername(username);
 
         if (usernameRepository.isEmpty()) {
-            return new AuthResponse(0L,"El usuario no existe.", "N/A", "N/A", "N/A");
+            return new AuthResponse(0L,"El usuario no existe.", "N/A");
         }
 
         if (!passwordEncoder.matches(password, usernameRepository.orElseThrow().getPassword())) {
-            return new AuthResponse(0L, "N/A","La contraseña es incorrecta", "N/A", "N/A");
+            return new AuthResponse(0L, "N/A","La contraseña es incorrecta");
         }
 
 
@@ -47,12 +46,9 @@ public class AuthService {
                                                                                   password));
 
         UserDetails user = userRepository.findByUsername(username).orElseThrow();
-        User userProfile = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundExepcion("This Recipe Does Not Exist with that UserName: " + username));
         String token = jwtService.getToken(user);
         return AuthResponse.builder().userId(userRepository.findByUsername(username).orElseThrow().getId())
                .username(userRepository.findByUsername(username).orElseThrow().getUsername())
-                .description(userProfile.getUserProfile().getDescription())
-                .userImage(userProfile.getUserProfile().getUserImage())
                .token(token).build();
 
     }
@@ -60,11 +56,11 @@ public class AuthService {
     public AuthResponse register(RegisterRequest request) {
 
         if(userRepository.existsByUsername(request.getUsername())) {
-            return new AuthResponse(0L,"El usuario ya se encuentra registrado", "N/A", "N/A",  "N/A");
+            return new AuthResponse(0L,"El usuario ya se encuentra registrado", "N/A");
         }
 
         if(userRepository.existsByEmail(request.getEmail())) {
-            return new AuthResponse(0L, "El email ya se encuentra registrado", "N/A", "N/A", "N/A");
+            return new AuthResponse(0L, "El email ya se encuentra registrado", "N/A");
         }
 
         User user = User.builder()

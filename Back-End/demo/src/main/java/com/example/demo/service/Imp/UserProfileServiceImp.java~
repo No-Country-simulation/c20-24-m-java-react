@@ -35,7 +35,7 @@ public class UserProfileServiceImp implements UserProfileService {
 
         UserProfile userProfile = new UserProfile();
         userProfile.setUserImage("https://res.cloudinary.com/dfvwqsrnj/image/upload/v1727538674/206898_k79j1b.png");
-        userProfile.setDescription("Usuario apasionado por la cocina, listo para descubrir y compartir recetas deliciosas.");
+        userProfile.setDescription("");
         userProfile.setLocation("");
         userProfile.setBannerImage("https://res.cloudinary.com/dfvwqsrnj/image/upload/v1727543272/cook_qpozke.webp");
         userProfile.setSocialLinks(List.of());
