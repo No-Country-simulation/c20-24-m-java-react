@@ -2,7 +2,15 @@ import { useState } from 'react';
 import UploadRecipe from '../uploadRecipe/UploadRecipe';
 import ModalEditProfile from '../modalEditProfile/ModalEditProfile';
 
-const ButtonEditProfile = () => {
+const ButtonEditProfile = ({
+  bannerImage,
+  userImage,
+  desc,
+  name,
+  socialLink,
+  loc,
+  setUserProfile,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleModal = () => {
@@ -18,7 +26,19 @@ const ButtonEditProfile = () => {
       >
         Editar Perfil
       </button>
-      {isVisible && <ModalEditProfile onClose={handleModal} isVisible={isVisible} />}
+      {isVisible && (
+        <ModalEditProfile
+          onClose={handleModal}
+          isVisible={isVisible}
+          imgBanner={bannerImage}
+          imgUser={userImage}
+          desc={desc}
+          name={name}
+          socialUrl={socialLink}
+          loc={loc}
+          setUserProfile={setUserProfile}
+        />
+      )}
     </>
   );
 };

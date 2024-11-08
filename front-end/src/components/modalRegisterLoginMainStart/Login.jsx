@@ -56,7 +56,7 @@ const Login = ({ onClose, typeModal }) => {
               username: data.username,
               // email: data.user.email,
               rol: data.rol || null,
-              imageUser: data.image || null,
+              imageUser: data.userImage || null,
             };
             localStorage.setItem('user', JSON.stringify(userInfo));
             // console.log(userInfo);

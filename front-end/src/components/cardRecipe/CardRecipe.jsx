@@ -166,14 +166,14 @@ const CardRecipe = ({
                 {imageUser ? (
                   <Image
                     onClick={handleAnotherProfile}
-                    className="w-[45px] h-[45px] rounded-full cursor-pointer"
+                    className="w-[45px] h-[45px] rounded-full cursor-pointer shadow-[0_2px_5px_-3px_rgba(0,0,0,0.5),0_10px_20px_-2px_rgba(0,0,0,0.04)]"
                     width={300}
                     height={200}
                     src="/img/Registro ilustracion.svg"
                     alt="picture"
                   />
                 ) : (
-                  <FaUser className="rounded-full w-[40px] h-[40px]" />
+                  <FaUser className="rounded-full w-[40px] h-[40px] shadow-[0_2px_5px_-3px_rgba(0,0,0,0.5),0_10px_20px_-2px_rgba(0,0,0,0.04)]" />
                 )}
               </div>
               <Link

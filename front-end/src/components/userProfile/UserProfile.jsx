@@ -25,7 +25,12 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  const [isUserProfile, setUserProfile] = useState();
+  const userData = {
+    nameUser: username,
+    location: '',
+    socialLinks: [],
+  };
+  const [isUserProfile, setUserProfile] = useState(userData);
   const { user, setUser } = useUserContext();
 
   useEffect(() => {
@@ -34,7 +39,7 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
       if (!user || !token) {
         router.push('/');
       }
-
+      console.log(user, 'userProfile');
       const response = await axios
         .get(`${BACK_API_URL}/users/search/${username}`, {
           headers: {
@@ -45,8 +50,8 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
       console.log(response?.data.userProfile, 'userProfile');
 
       if (response?.data) {
-        setUserProfile(response?.data.userProfile);
-        console.log(isUserProfile, 'isUserProfile');
+        const dt = response?.data.userProfile;
+        setUserProfile({ ...isUserProfile, ...dt });
       }
     };
     dispatch(setResetState(true));
@@ -69,12 +74,14 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
 
   return (
     <>
+      {console.log(isUserProfile, 'isUserProfile')}
       <div className=" h-[270px] bg-black ">
-        {isUserProfile ? (
+        {isUserProfile?.bannerImage ? (
           <Image
             className=" h-[270px] w-full object-cover"
-            width={60}
+            width={1600}
             height={60}
+            sizes=""
             src={isUserProfile.bannerImage}
             alt="picture"
           />
@@ -82,7 +89,15 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
       </div>
       {username === user?.username ? (
         <div className="absolute z-100 top-[12px] right-[30px] cursor-pointer">
-          <ButtonEditProfile />
+          <ButtonEditProfile
+            bannerImage={isUserProfile?.bannerImage}
+            userImage={isUserProfile?.userImage}
+            desc={isUserProfile?.description}
+            name={isUserProfile?.nameUser}
+            socialLink={isUserProfile?.socialLinks}
+            loc={isUserProfile?.location}
+            setUserProfile={setUserProfile}
+          />
         </div>
       ) : null}
 
@@ -96,11 +111,12 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
           </div>
 
           <div className="flex justify-center items-center  mt-1 bg-[#fff8f2] w-[252px] h-[252px] rounded-[50%] shadow-md ">
-            {isUserProfile ? (
+            {isUserProfile?.userImage ? (
               <Image
                 className=" w-[250px] h-[250px] rounded-[50%]"
-                width={60}
-                height={60}
+                width={80}
+                height={80}
+                sizes="(max-width: 1080px) 50vw,400px"
                 src={isUserProfile.userImage}
                 alt="picture"
               />
@@ -113,37 +129,45 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
               {username || 'Username'}
             </p>
           </div>
-          <div className="my-5 ml-5 flex justify-center  items-center w-[250px]">
+          <div className="my-5 ml-5 flex justify-start  items-center w-[250px]">
             <MapPin />
-            <p className="flex items-center ml-1 text-[14px] text-start w-[150px] h-[[calc(var(--vh, 1vh) * 100)]]  text-ellipsis leading-tight ">
-              Rosario, Argentina
-            </p>
+            {isUserProfile?.location !== '' ? (
+              <p className="flex items-center ml-1 text-[14px] text-start  h-[[calc(var(--vh, 1vh) * 100)]]  text-ellipsis leading-tight ">
+                {isUserProfile?.location}
+              </p>
+            ) : (
+              <p className="flex items-center ml-3 text-[14px] text-start w-[50px] h-[[calc(var(--vh, 1vh) * 100)]]  text-ellipsis leading-tight ">
+                -
+              </p>
+            )}
           </div>
           <div>
-            <p className="text-[14px] text-center w-[300px] h-[[calc(var(--vh, 1vh) * 100)]]  text-ellipsis leading-tight ">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis
-              harum sit libero quia deserunt vitae praesentium saepe culpa provident
-              quos! Dolores fugit perspiciatis tempore sint provident voluptatum vero
-              expedita excepturi.
-            </p>
+            {isUserProfile?.description ? (
+              <p className="text-[14px] text-center w-[300px] h-[[calc(var(--vh, 1vh) * 100)]]  text-ellipsis leading-tight ">
+                {isUserProfile?.description}
+              </p>
+            ) : null}
           </div>
-          <div className="my-5 flex flex-row justify-center items-center">
-            <Instagram className="mx-1" />
-            <Image
-              alt="facebook"
-              width={24}
-              height={24}
-              src="/icons/bi--facebook.svg"
-            />
-            <Globe className="mx-1" />
-          </div>
-          <div className="flex flex-row justify-center items-center bg-white rounded-3xl border-[1px] border-green-400 border-solid shadow-md p-2">
+          {isUserProfile?.socialLinks.length > 0 ? (
+            <div className="my-5 flex flex-row justify-center items-center">
+              <Instagram className="mx-1" />
+              <Image
+                alt="facebook"
+                width={24}
+                height={24}
+                src="/icons/bi--facebook.svg"
+              />
+              <Globe className="mx-1" />
+            </div>
+          ) : null}
+
+          <div className="flex flex-row justify-center items-center bg-white rounded-3xl border-[1px] border-green-400 border-solid shadow-md mt-2 p-2">
             <div className="mx-1 text-center w-[100px] ">
-              <p className="font-semibold h-4">50</p>
+              <p className="font-semibold h-4">0</p>
               <p className="text-[14px]">Seguiendo</p>
             </div>
             <div className="mx-1 text-center w-[100px] ">
-              <p className="font-semibold h-4">50</p>
+              <p className="font-semibold h-4">0</p>
               <p className="text-[14px]">Seguidores</p>
             </div>
           </div>

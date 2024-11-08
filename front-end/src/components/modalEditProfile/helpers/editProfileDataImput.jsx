@@ -1,17 +1,17 @@
-export const registerFormDataInputs = [
+export const dataImput = [
   {
-    name: 'name',
+    name: 'description',
     type: 'text',
-    placeholder: 'Nombre',
+    placeholder: 'Descripción',
   },
   {
-    name: 'email',
+    name: 'location',
     type: 'text',
-    placeholder: 'Correo eletronico',
+    placeholder: 'Ubicación',
   },
   {
-    name: 'password',
-    type: 'password',
-    placeholder: 'Contraseña',
+    name: 'socialLinks',
+    type: 'text',
+    placeholder: 'Redes Sociales',
   },
 ];
