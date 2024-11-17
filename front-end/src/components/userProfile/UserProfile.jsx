@@ -9,7 +9,7 @@ import { Globe, Instagram, MapPin } from 'react-feather';
 import { FaUser } from 'react-icons/fa6';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
 import { userLocalStorage } from '../helper/userLocalStorage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deletePageKeyPegeScrollGeneric } from '@/redux/pegeScrollGeneric/pegeScrollGenericSlice';
 import { setResetState } from '@/redux/resetStatePage/resetStatePageSlice';
 import ButtonUploadRecipe from '../buttonUploadRecipe/buttonUploadRecipe';
@@ -17,6 +17,7 @@ import { useUserContext } from '../UserProvider';
 import ButtonEditProfile from '../buttonEditProfile/buttonEditProfile';
 import { Button } from '@material-tailwind/react';
 import ButtonFollow from '../buttonFollow/ButtonFollow';
+import { addUsersProfilesGenericProfile } from '@/redux/usersProfilesGeneric/usersProfilesGeneric';
 
 const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -33,6 +34,10 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
   const [isUserProfile, setUserProfile] = useState(userData);
   const { user, setUser } = useUserContext();
 
+  const data =
+    useSelector((state) => state.usersProfilesGenericSlice.profiles[username]) ||
+    userData;
+  console.log(data, 'data');
   useEffect(() => {
     const fetchUserName = async () => {
       const { user, token } = userLocalStorage();
@@ -52,6 +57,12 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
       if (response?.data) {
         const dt = response?.data.userProfile;
         setUserProfile({ ...isUserProfile, ...dt });
+        dispatch(
+          addUsersProfilesGenericProfile({
+            profileKey: username,
+            profile: { ...isUserProfile, ...dt },
+          }),
+        );
       }
     };
     dispatch(setResetState(true));
@@ -76,7 +87,7 @@ const UserProfile = ({ onClose, userId, username, imageUser }) => {
     <>
       {console.log(isUserProfile, 'isUserProfile')}
       <div className=" h-[270px] bg-black ">
-        {isUserProfile?.bannerImage ? (
+        {data?.bannerImage ? (
           <Image
             className=" h-[270px] w-full object-cover"
             width={1600}
