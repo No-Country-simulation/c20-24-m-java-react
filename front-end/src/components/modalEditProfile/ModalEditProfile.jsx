@@ -75,6 +75,14 @@ const ModalEditProfile = ({
     e.preventDefault();
     const { user, token } = userLocalStorage();
     setUserProfile({ ...isUserData });
+    // const userInfo = {
+    //   userId: data.userId,
+    //   username: data.username,
+    //   // email: data.user.email,
+    //   rol: data.rol || null,
+    //   imageUser: data.userImage || null,
+    // };
+    // localStorage.setItem('user', JSON.stringify(userInfo));
     axios
       .put(
         `${BACK_API_URL}/userProfile/${user.userId}/update-user-profile
