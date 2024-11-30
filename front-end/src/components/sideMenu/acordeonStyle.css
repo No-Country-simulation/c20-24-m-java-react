@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.icon_profile {
+  /* clip-path: circle(33%); */
+  /* margin-right: 10px; */
+  border-radius: 80%;
+  background-size: cover;
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+}
