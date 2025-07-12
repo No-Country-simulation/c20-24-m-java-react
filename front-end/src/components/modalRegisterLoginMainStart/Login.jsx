@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -5,6 +6,9 @@ import { registerFormDataInputs } from './helpers/registerFormDataInputs';
 import axios from 'axios';
 
 import { X } from 'react-feather';
+import { useUserContext } from '../UserProvider';
+
+const BACK_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const Login = ({ onClose, typeModal }) => {
   const initialStateDataInput = {
@@ -15,6 +19,7 @@ const Login = ({ onClose, typeModal }) => {
   };
   const [userDataInputs, setUserDataInputs] = useState(initialStateDataInput);
   const [errorDataInputs, setErrorDataInputs] = useState(initialStateDataInput);
+  const { setUser, setToken } = useUserContext();
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -24,13 +29,41 @@ const Login = ({ onClose, typeModal }) => {
       ...userDataInputs,
       [name]: value,
     });
+    // console.log(userDataInputs);
   };
 
   const handleSubmit = (e) => {
+    // console.log(userDataInputs);
     e.preventDefault();
-    axios.get('https://rickandmortyapi.com/api/character/5').then((res) => {
-      console.log(res.data);
-    });
+    // console.log(userDataInputs);
+    const data = {
+      username: userDataInputs.name,
+      email: userDataInputs.name,
+      password: userDataInputs.password,
+    };
+    // console.log(data);
+    // console.log(data, 'data');
+    axios
+      .post(`${BACK_API_URL}/auth/login`, data)
+      .then(({ data }) => data)
+      .then((data) => {
+        // console.log(data);
+        const userInfo = {
+          userId: data.userId,
+          username: data.username,
+          // email: data.user.email,
+          rol: data.rol || null,
+          imageUser: data.image || null,
+        };
+        localStorage.setItem('user', JSON.stringify(userInfo));
+        console.log(userInfo);
+        setUser(userInfo);
+        localStorage.setItem('token', data.token);
+        setToken(data.token);
+        console.log(userInfo);
+        router.push('/inicio');
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <>
@@ -46,9 +79,9 @@ const Login = ({ onClose, typeModal }) => {
         >
           <X />
         </button>
-        <form onSubmit={handleSubmit} action="" className=" ">
+        <form onSubmit={handleSubmit}>
           {registerFormDataInputs
-            .filter((input) => input.name !== 'name')
+            .filter((input) => input.name !== 'email')
             .map(({ name, type, placeholder }) => {
               return (
                 <div key={name} className="relative z-0  mb-6 group ">

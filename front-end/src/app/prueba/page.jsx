@@ -1,10 +1,14 @@
 'use client';
 
+import LikeRecipe from '@/components/likeRecipe/LikeRecipe';
+// import Loading from '@/components/loading/Loading';
 // import Button from '@/components/button/Button';
 import ModalRegisterLoginMainStart from '@/components/modalRegisterLoginMainStart/ModalRegisterLoginMainStart';
+import RatingStars from '@/components/ratingStars/RatingStars';
+import SaveRecipe from '@/components/saveRecipe/SaveRecipe';
 
 // import ModalLoginMainStart from "@/components/modalLoginMainStart/ModalLoginMainStart";
-
+import { Input } from '@material-tailwind/react';
 import { useState } from 'react';
 
 export default function Prueba() {
@@ -52,12 +56,25 @@ export default function Prueba() {
           Registrarse
         </p>
       </Button> */}
-
+      <div className="flex w-72 flex-col gap-6">
+        <Input variant="static" label="Static" placeholder="Static" />
+        <Input variant="standard" label="Standard" placeholder="Standard" />
+        <Input variant="outlined" label="Outlined" placeholder="Outlined" />
+      </div>
       <ModalRegisterLoginMainStart
         isVisible={isModalVisible}
         onClose={handleCloseModal}
         typeModal={handleOpenModal}
       />
+      <div className="flex flex-col">
+        <RatingStars rating={3} />
+        <RatingStars rating={2} />
+        <RatingStars rating={1} />
+      </div>
+      <SaveRecipe />
+      <LikeRecipe />
+
+      {/* <Loading /> */}
     </div>
   );
 }
